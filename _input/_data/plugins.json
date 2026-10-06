@@ -10,24 +10,9 @@
     "idPrefix": "llm"
   },
   {
-    "label": "Condition",
-    "description": "Evaluates a value against a chosen operator and halts the workflow if the condition is not met.",
-    "idPrefix": "condition"
-  },
-  {
-    "label": "Set Variable",
-    "description": "Set a global variable that can be accessed across workflows using the syntax <code>{{globals.key}}</code>",
-    "idPrefix": "global"
-  },
-  {
     "label": "Trello Create Card",
     "description": "Creates a new card on a Trello board list.",
     "idPrefix": "trello_card"
-  },
-  {
-    "label": "Action",
-    "description": "Perform an action on the current browser page.",
-    "idPrefix": "action"
   },
   {
     "label": "Confluence Page",
@@ -83,11 +68,6 @@
     "label": "Microsoft Word",
     "description": "Append or read content from a Microsoft Word document.",
     "idPrefix": "ms_word"
-  },
-  {
-    "label": "Run Workflow",
-    "description": "Executes another saved workflow and merges its results into the current pipeline.",
-    "idPrefix": "run_workflow"
   },
   {
     "label": "Slack Notification",

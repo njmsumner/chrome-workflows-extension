@@ -4,23 +4,23 @@ The **Condition** plugin compares a configured value with a selected condition. 
 
 ## Plugin Overview
 
-| Property               | Value                                  |
-| :--------------------- | :------------------------------------- |
-| **Plugin Label**       | `Condition`                            |
-| **Step Type (`type`)** | `condition`                            |
-| **Variable ID Prefix** | `condition` (e.g., `condition_1`)      |
-| **Group / Category**   | Not specified                          |
-| **Authentication**     | None                                   |
+| Property               | Value                             |
+| :--------------------- | :-------------------------------- |
+| **Plugin Label**       | `Condition`                       |
+| **Step Type (`type`)** | `condition`                       |
+| **Variable ID Prefix** | `condition` (e.g., `condition_1`) |
+| **Group / Category**   | Not specified                     |
+| **Authentication**     | None                              |
 
 ---
 
 ## Configuration Fields
 
-| Field Key (`config.*`) | Form Label           | Type     | Required                                         | Description & Token Examples                                                                                             |
-| :--------------------- | :------------------- | :------- | :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `value`                | **Value**            | `text`   | **Yes**                                          | Value to test; defaults to an empty string. Supports workflow tokens, such as `{{extract_1.title}}`.                      |
-| `operator`             | **Condition**        | `select` | **Yes**                                          | Comparison to apply: Is empty, Is not empty, Contains, Does not contain, Equals, Does not equal, Starts with, Ends with. |
-| `comparisonValue`      | **Comparison value** | `text`   | **Yes for comparison operators**                 | Value compared with `value`; supports workflow tokens, such as `{{globals.expected_status}}`. Required for Contains, Does not contain, Equals, Does not equal, Starts with, and Ends with. |
+| Field Key (`config.*`) | Form Label           | Type     | Required                         | Description & Token Examples                                                                                                                                                               |
+| :--------------------- | :------------------- | :------- | :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`                | **Value**            | `text`   | **Yes**                          | Value to test; defaults to an empty string. Supports workflow tokens, such as `{{extract_1.title}}`.                                                                                       |
+| `operator`             | **Condition**        | `select` | **Yes**                          | Comparison to apply: Is empty, Is not empty, Contains, Does not contain, Equals, Does not equal, Starts with, Ends with.                                                                   |
+| `comparisonValue`      | **Comparison value** | `text`   | **Yes for comparison operators** | Value compared with `value`; supports workflow tokens, such as `{{globals.expected_status}}`. Required for Contains, Does not contain, Equals, Does not equal, Starts with, and Ends with. |
 
 ---
 
@@ -30,7 +30,7 @@ The **Condition** plugin compares a configured value with a selected condition. 
 
 The **Value** and **Comparison value** fields support workflow tokens, which the runner resolves before this step executes. For example, compare `{{extract_1.title}}` with a configured string using **Contains**.
 
-### Output State (`{{condition_1.*}}`)
+### Output State
 
 When the condition passes, the step returns an object containing:
 
