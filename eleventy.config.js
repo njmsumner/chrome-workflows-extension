@@ -21,7 +21,7 @@ export default async function eleventy(eleventyConfig) {
 	return {
 		dir: {
 			input: '_input',
-			output: '_site',
+			output: 'docs',
 			includes: '_includes',
 			layouts: '_layouts',
 			data: '_data',
