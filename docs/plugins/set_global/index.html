@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="/chrome-workflows-extension/">Home</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/steps/">Steps</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/settings/">Settings</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/create/">Create</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>Set Variable (<code>setGlobal</code>)</h1>
+<p>The <strong>Set Variable</strong> plugin creates or updates a global variable that workflows can reuse. It stores the value in extension storage and updates the current workflow state so later steps can access it immediately.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>Set Variable</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>setGlobal</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>global</code> (e.g., <code>global_1</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Not specified</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">None; uses the extension's global-variable storage</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>key</code></td>
+<td style="text-align:left"><strong>Variable Key</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Global variable name. Must contain only letters, numbers, and underscores (for example, <code>workflow_title</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>value</code></td>
+<td style="text-align:left"><strong>Variable Value / Template</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left"><strong>Yes (form)</strong></td>
+<td style="text-align:left">Value to store; defaults to an empty string. Supports workflow tokens, such as ``. The form requires a value, though execution can store an empty string.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>The <strong>Variable Value / Template</strong> field supports workflow tokens. The plugin resolves tokens before evaluating the resulting text as a Jexl expression. If expression evaluation fails, it stores the resolved text as-is. The plugin also registers the <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code> Jexl functions.</p>
+<h3>Output State</h3>
+<p>After execution, the step returns an object containing:</p>
+<ul>
+<li>``: The trimmed variable key.</li>
+<li>``: The value stored as a string.</li>
+</ul>
+<p>The same value is also available to this and later workflows through the global token `` (replace <code>workflow_title</code> with the configured key).</p>
+<h2>Sidebar UI Actions</h2>
+<p>No sidebar action is provided.</p>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;global_1&quot;,
+	&quot;type&quot;: &quot;setGlobal&quot;,
+	&quot;config&quot;: {
+		&quot;key&quot;: &quot;workflow_title&quot;,
+		&quot;value&quot;: &quot;&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

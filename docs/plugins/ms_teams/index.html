@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="/chrome-workflows-extension/">Home</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/steps/">Steps</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/settings/">Settings</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/create/">Create</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>Microsoft Teams (<code>microsoftTeams</code>)</h1>
+<p>The <strong>Microsoft Teams</strong> plugin sends a message through an incoming webhook or Microsoft Graph. Graph modes can post to a team channel or group/direct chat, with plain-text or HTML message content.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>Microsoft Teams</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>microsoftTeams</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>ms_teams</code> (e.g., <code>ms_teams_1</code>, <code>ms_teams_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Microsoft</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">Incoming Webhook for webhook mode; Microsoft OAuth 2.0 for Graph modes</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>sendMode</code></td>
+<td style="text-align:left"><strong>Integration Mode</strong></td>
+<td style="text-align:left"><code>select</code></td>
+<td style="text-align:left">No (defaults to <code>webhook</code>)</td>
+<td style="text-align:left">Choose Incoming Webhook (<code>webhook</code>), Team Channel (<code>channel</code>), or Group / Direct Chat (<code>chat</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>webhookUrl</code></td>
+<td style="text-align:left"><strong>Webhook URL</strong></td>
+<td style="text-align:left"><code>url</code></td>
+<td style="text-align:left"><strong>Yes for webhook mode</strong></td>
+<td style="text-align:left">Incoming Webhook URL; required and shown only in webhook mode. Supports tokens such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>teamId</code></td>
+<td style="text-align:left"><strong>Team ID</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes for channel mode</strong></td>
+<td style="text-align:left">Microsoft Teams team ID; required with <code>channelId</code> in channel mode. Supports workflow tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>channelId</code></td>
+<td style="text-align:left"><strong>Channel ID</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes for channel mode</strong></td>
+<td style="text-align:left">Channel ID; required with <code>teamId</code> in channel mode. Supports workflow tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>chatId</code></td>
+<td style="text-align:left"><strong>Chat ID</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes for chat mode</strong></td>
+<td style="text-align:left">Microsoft Teams chat ID; required in chat mode. Supports workflow tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>contentType</code></td>
+<td style="text-align:left"><strong>Content Format</strong></td>
+<td style="text-align:left"><code>select</code></td>
+<td style="text-align:left">No (defaults to <code>text</code>)</td>
+<td style="text-align:left">Choose Plain Text (<code>text</code>) or HTML (<code>html</code>). Used for Graph channel/chat messages; webhook mode sends the message as <code>text</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>message</code></td>
+<td style="text-align:left"><strong>Message Content</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Message text or HTML, depending on mode and content format. Defaults to a template containing ``; supports workflow tokens.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>The form exposes token insertion for <strong>Webhook URL</strong>, <strong>Team ID</strong>, <strong>Channel ID</strong>, <strong>Chat ID</strong>, and <strong>Message Content</strong>. For example, use <code>for the webhook or</code> in the message.</p>
+<h3>Output State</h3>
+<p>On success, webhook mode returns:</p>
+<ul>
+<li>``: <code>success</code>.</li>
+<li>``: <code>webhook</code>.</li>
+<li>``: Message length in characters.</li>
+<li>``: Completion time in ISO 8601 format.</li>
+</ul>
+<p>Graph channel/chat modes return <code>status</code>, <code>sendMode</code>, <code>messageId</code> (if Graph returns a string ID), and <code>timestamp</code>.</p>
+<h2>Sidebar UI Actions</h2>
+<ul>
+<li><strong>Open Teams</strong>: Opens the Microsoft Teams web app, regardless of the selected send mode.</li>
+</ul>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;ms_teams_1&quot;,
+	&quot;type&quot;: &quot;microsoftTeams&quot;,
+	&quot;config&quot;: {
+		&quot;sendMode&quot;: &quot;webhook&quot;,
+		&quot;webhookUrl&quot;: &quot;&quot;,
+		&quot;message&quot;: &quot;Automated update: &quot;,
+		&quot;contentType&quot;: &quot;text&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

@@ -7,7 +7,7 @@
   {
     "label": "OpenAI/LLM",
     "description": "Send a prompt to an OpenAI-compatible API and return the completion text",
-    "idPrefix": "llm"
+    "idPrefix": "openai"
   },
   {
     "label": "Trello Create Card",
@@ -42,7 +42,7 @@
   {
     "label": "Jira Comment",
     "description": "Adds a comment to the Jira issue.",
-    "idPrefix": "jira"
+    "idPrefix": "jira_comment"
   },
   {
     "label": "Jira Create Issue",

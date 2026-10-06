@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="/chrome-workflows-extension/">Home</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/steps/">Steps</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/settings/">Settings</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/create/">Create</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>Microsoft Outlook Email (<code>microsoftEmail</code>)</h1>
+<p>The <strong>Microsoft Outlook Email</strong> plugin sends an email through Microsoft Graph or saves it as a draft. It supports dynamic recipients, subjects, and message bodies, with plain-text or HTML content.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>Microsoft Outlook Email</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>microsoftEmail</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>ms_email</code> (e.g., <code>ms_email_1</code>, <code>ms_email_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Microsoft</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">Microsoft OAuth 2.0; uses global <code>ms_client_id</code> and optional <code>ms_tenant_id</code> (defaults to <code>common</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>action</code></td>
+<td style="text-align:left"><strong>Action</strong></td>
+<td style="text-align:left"><code>select</code></td>
+<td style="text-align:left">No (defaults to <code>send</code>)</td>
+<td style="text-align:left">Choose <strong>Send Email</strong> (<code>send</code>) or <strong>Save as Draft</strong> (<code>draft</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>to</code></td>
+<td style="text-align:left"><strong>Recipient (To)</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Recipient email addresses, separated by commas or semicolons. Empty entries are ignored. Supports tokens such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>subject</code></td>
+<td style="text-align:left"><strong>Subject</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Email subject; defaults to <code>Automated Update from AI Extension</code>. Supports tokens such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>contentType</code></td>
+<td style="text-align:left"><strong>Body Content Type</strong></td>
+<td style="text-align:left"><code>select</code></td>
+<td style="text-align:left">No (defaults to <code>Text</code>)</td>
+<td style="text-align:left">Choose <strong>Plain Text</strong> (<code>Text</code>) or <strong>HTML</strong> (<code>HTML</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>body</code></td>
+<td style="text-align:left"><strong>Email Body</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Message content; defaults to a templated greeting containing ``. Supports workflow tokens.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>The form exposes token insertion for <strong>Recipient (To)</strong>, <strong>Subject</strong>, and <strong>Email Body</strong>. For example, use <code>for a recipient and</code> in the message body.</p>
+<h3>Output State</h3>
+<p>On success, both actions return <code>status</code>, <code>action</code>, <code>to</code>, and <code>subject</code>:</p>
+<ul>
+<li>``: <code>success</code>.</li>
+<li>``: <code>send</code> or <code>draft</code>.</li>
+<li>``: Configured recipient string.</li>
+<li>``: Email subject.</li>
+</ul>
+<p>Draft actions also return:</p>
+<ul>
+<li>``: Draft message ID from Microsoft Graph.</li>
+<li>``: Draft web link from Microsoft Graph, when returned.</li>
+</ul>
+<h2>Sidebar UI Actions</h2>
+<ul>
+<li><strong>Open Outlook</strong>: Opens Outlook Web Mail when the action is <code>send</code> (or not <code>draft</code>).</li>
+<li><strong>View Drafts</strong>: Opens the Outlook drafts folder when the action is <code>draft</code>.</li>
+</ul>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;ms_email_1&quot;,
+	&quot;type&quot;: &quot;microsoftEmail&quot;,
+	&quot;config&quot;: {
+		&quot;action&quot;: &quot;send&quot;,
+		&quot;to&quot;: &quot;&quot;,
+		&quot;subject&quot;: &quot;Workflow summary: &quot;,
+		&quot;body&quot;: &quot;Hi,\n\n&quot;,
+		&quot;contentType&quot;: &quot;Text&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

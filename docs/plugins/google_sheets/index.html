@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="/chrome-workflows-extension/">Home</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/steps/">Steps</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/settings/">Settings</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/create/">Create</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="content">
+			<h2>Google Sheets Plugin (<code>googleSheets</code>)</h2>
+<p>The <strong>Google Sheets</strong> plugin integrates with Google Sheets REST API v4 (<code>https://sheets.googleapis.com/v4/spreadsheets/</code>). It provides bidirectional capabilities: appending structured rows of data to a spreadsheet or reading cell range values with optional exact row filtering.</p>
+<h3>Plugin Overview</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>Google Sheets</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>googleSheets</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>google_sheets</code> (e.g., <code>google_sheets_1</code>, <code>google_sheets_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left"><code>Google</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">OAuth2 Bearer Token (<code>chrome.identity.getAuthToken</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>API Endpoints</strong></td>
+<td style="text-align:left"><code>https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{sheetRange}</code><br/><code>https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{sheetRange}:append?valueInputOption=USER_ENTERED</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Configuration Fields</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>action</code></td>
+<td style="text-align:left"><strong>Action</strong></td>
+<td style="text-align:left"><code>select</code> (<code>'append'</code> | <code>'read'</code>)</td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Specifies whether to append a row (<code>'append'</code>) or read cell/range content (<code>'read'</code>). Default: <code>'append'</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>spreadsheetId</code></td>
+<td style="text-align:left"><strong>Spreadsheet ID</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">ID string from Google Sheets URL (<code>docs.google.com/spreadsheets/d/[ID]/edit</code>). Supports tokens (e.g., ``).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sheetRange</code></td>
+<td style="text-align:left"><strong>Sheet Name / Cell Range</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Target worksheet and range (e.g., <code>Sheet1!A1</code>, <code>Sheet1!A:E</code>, or <code>Sheet1</code>). Default: <code>Sheet1!A1</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>rowValues</code></td>
+<td style="text-align:left"><strong>Row Values (JSON Array)</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong> (when <code>action: 'append'</code>)</td>
+<td style="text-align:left">JSON array string representing column cell values. Scalar strings are auto-wrapped. Example: <code>[&quot;&quot;, &quot;&quot;]</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>filter</code></td>
+<td style="text-align:left"><strong>Find Row Value</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left">No (when <code>action: 'read'</code>)</td>
+<td style="text-align:left">Exact string filter. When set, only rows where at least one cell matches this exact string are returned.</td>
+</tr>
+</tbody>
+</table>
+<h3>Template Tokens &amp; State Output</h3>
+<h4>Available Input Tokens</h4>
+<p>All input fields support token replacement, e.g.:</p>
+<ul>
+<li><strong>Workflow Outputs:</strong> <code>, </code>, <code>, </code></li>
+<li><strong>Global Variables:</strong> ``</li>
+<li><strong>System Variables:</strong> <code>, </code>, ``</li>
+</ul>
+<h4>Output State</h4>
+<ul>
+<li>
+<p><strong>For Read Action (<code>action: 'read'</code>):</strong></p>
+<ul>
+<li>``: <code>&quot;success&quot;</code></li>
+<li>``: Target spreadsheet ID.</li>
+<li>``: Resolved sheet range.</li>
+<li>``: Formatted text representation (single cell scalar or tab-delimited multiline rows).</li>
+<li>``: Raw 2D array of row cells (<code>string[][]</code>).</li>
+<li>``: Array of cells for the filtered row (<code>string[] | null</code>), if <code>filter</code> was provided.</li>
+</ul>
+</li>
+<li>
+<p><strong>For Append Action (<code>action: 'append'</code>):</strong></p>
+<ul>
+<li>``: <code>&quot;success&quot;</code></li>
+<li>``: Range updated by Google Sheets API (e.g., <code>'Sheet1!A5:E5'</code>).</li>
+<li>``: Count of appended rows (typically <code>1</code>).</li>
+<li>``: ISO 8601 execution timestamp.</li>
+</ul>
+</li>
+</ul>
+<h3>Sidebar UI Actions</h3>
+<ul>
+<li><strong>View Sheet</strong>: Renders an action button in the sidebar panel. Clicking it opens <code>https://docs.google.com/spreadsheets/d/{resolvedSpreadsheetId}/edit</code> in a new browser tab.</li>
+</ul>
+<h3>Example Workflow Configurations</h3>
+<h4>Example 1: Save Extracted Web Metadata to Google Sheet</h4>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;google_sheets_1&quot;,
+	&quot;type&quot;: &quot;googleSheets&quot;,
+	&quot;config&quot;: {
+		&quot;action&quot;: &quot;append&quot;,
+		&quot;spreadsheetId&quot;: &quot;&quot;,
+		&quot;sheetRange&quot;: &quot;Sheet1!A:C&quot;,
+		&quot;rowValues&quot;: &quot;[\&quot;\&quot;, \&quot;\&quot;, \&quot;\&quot;]&quot;
+	}
+}
+</code></pre>
+<h4>Example 2: Read Google Sheet Row Matching Jira Issue Key</h4>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;google_sheets_1&quot;,
+	&quot;type&quot;: &quot;googleSheets&quot;,
+	&quot;config&quot;: {
+		&quot;action&quot;: &quot;read&quot;,
+		&quot;spreadsheetId&quot;: &quot;&quot;,
+		&quot;sheetRange&quot;: &quot;Sheet1!A1:F50&quot;,
+		&quot;filter&quot;: &quot;&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

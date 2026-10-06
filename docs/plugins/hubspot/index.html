@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="/chrome-workflows-extension/">Home</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/steps/">Steps</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/settings/">Settings</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/create/">Create</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>HubSpot Blog Post (<code>hubspotBlog</code>)</h1>
+<p>The <strong>HubSpot Blog Post</strong> plugin creates a HubSpot CMS blog post as a draft or publishes it immediately. It sends the configured title, HTML body, and optional metadata to the HubSpot CMS Blogs API.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>HubSpot Blog Post</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>hubspotBlog</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>hubspot</code> (e.g., <code>hubspot_1</code>, <code>hubspot_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Not specified</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">HubSpot Private App access token with content scope enabled</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>accessToken</code></td>
+<td style="text-align:left"><strong>App Access Token</strong></td>
+<td style="text-align:left"><code>password</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">HubSpot Private App credential used to authenticate CMS API requests. Supports workflow tokens, such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>blogId</code></td>
+<td style="text-align:left"><strong>Blog ID (contentGroupId)</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">HubSpot blog ID sent as <code>contentGroupId</code>. Supports workflow tokens, such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>authorId</code></td>
+<td style="text-align:left"><strong>Author ID (Optional)</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional HubSpot blog author ID.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>postName</code></td>
+<td style="text-align:left"><strong>Post Title</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Title for the blog post. Supports tokens, such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>postBody</code></td>
+<td style="text-align:left"><strong>Post Body (HTML template)</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">HTML content for the post. Supports workflow tokens, such as <code>or</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>postState</code></td>
+<td style="text-align:left"><strong>Post State</strong></td>
+<td style="text-align:left"><code>select</code></td>
+<td style="text-align:left">No (defaults to <code>DRAFT</code>)</td>
+<td style="text-align:left">Choose <strong>Draft</strong> (<code>DRAFT</code>) or <strong>Published Immediately</strong> (<code>PUBLISHED</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>featuredImage</code></td>
+<td style="text-align:left"><strong>Featured Image URL (Optional)</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional featured-image URL. When set, the request enables the featured image.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>metaDescription</code></td>
+<td style="text-align:left"><strong>Meta Description (Optional)</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional SEO meta description.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>slug</code></td>
+<td style="text-align:left"><strong>Custom Slug (Optional)</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional post slug; execution trims it, lowercases it, and replaces whitespace with hyphens.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>The form marks <strong>App Access Token</strong>, <strong>Blog ID</strong>, <strong>Author ID</strong>, <strong>Post Title</strong>, and <strong>Post Body</strong> as tokenizable. The workflow runner resolves template tokens before the plugin executes; for example, use <code>in the post title or</code> for the access token.</p>
+<h3>Output State</h3>
+<p>On success, the step returns the parsed HubSpot API response object directly. Downstream steps can reference properties returned by that response, including:</p>
+<ul>
+<li>``: HubSpot post ID.</li>
+<li>``: Post slug.</li>
+<li>``: Post URL.</li>
+</ul>
+<p>The available properties depend on the API response.</p>
+<h2>Sidebar UI Actions</h2>
+<ul>
+<li><strong>View Blog</strong>: Opens the HubSpot blog page for the configured <code>blogId</code>. The action is shown only when the blog ID resolves to a value without an unresolved template token.</li>
+</ul>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;hubspot_1&quot;,
+	&quot;type&quot;: &quot;hubspotBlog&quot;,
+	&quot;config&quot;: {
+		&quot;accessToken&quot;: &quot;&quot;,
+		&quot;blogId&quot;: &quot;&quot;,
+		&quot;postName&quot;: &quot;&quot;,
+		&quot;postBody&quot;: &quot;&lt;p&gt;&lt;/p&gt;&quot;,
+		&quot;postState&quot;: &quot;DRAFT&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>
