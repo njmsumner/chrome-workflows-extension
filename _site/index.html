@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/">AI Workflows Chrome Extension Documentation</a>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>Chrome Workflows Extension Documentation</h1>
+<h2>Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#get-started">Get Started</a></li>
+<li><a href="#what-is-a-workflow">What is a Workflow</a></li>
+<li><a href="#steps">Steps</a></li>
+</ul>
+<h2>Overview</h2>
+<p>The Chrome Workflows Extension allows you to automate repetitive tasks within your browser by creating workflows composed of various steps.
+These workflows can interact with web pages, APIs, and popular services like Google Workspace, Microsoft Office, Slack, and more.</p>
+<h2>Get Started</h2>
+<p>To get started with the Chrome Workflows Extension:</p>
+<ol>
+<li>Install the extension from the Chrome Web Store.</li>
+<li>Click on the extension icon in the Chrome toolbar to open the extension sidebar.</li>
+<li>A default workflow will be displayed, and you can start configuring it according to your needs.</li>
+<li>You can also use any of the sample template Workflows by clicking 'Create' in the top menu.</li>
+</ol>
+<h2>What is a Workflow</h2>
+<p>A workflow is a sequence of steps that automate tasks within the Chrome Workflows Extension.
+Each step performs a specific action, such as updating fields or clicking elements in the current tab, making an API or LLM request, updating a Google Doc or sending an email.
+Workflows allow you to streamline repetitive tasks and integrate various services seamlessly.</p>
+<h2>Steps</h2>
+<h3>Standard Steps</h3>
+<p>The following are the types of steps you can include in a workflow:</p>
+<p><strong>Action</strong> - Perform an action on the current browser page.</p>
+<ul>
+<li>Show in Sidebar</li>
+<li>Append Content</li>
+<li>Switch Tab</li>
+<li>Navigate URL</li>
+<li>Update Field</li>
+<li>Update Fields</li>
+<li>Click Element</li>
+<li>Wait</li>
+<li>Wait For Selector</li>
+<li>Key Press</li>
+<li>Refresh Tab</li>
+</ul>
+<p><strong>Extract</strong> - Extracts data from the current browser page, such as text content or attribute values.</p>
+<p><strong>Condition</strong> - Evaluates the specified value against a chosen operator and halts the workflow if the condition is not met.</p>
+<p><strong><a href="plugins/set-global">Set Variable</a></strong> - Set a global variable that can be accessed across workflows using the syntax .</p>
+<p><strong>Run Workflow</strong> - Executes another saved workflow and merges its results into the current pipeline.</p>
+<h3>Integration Steps</h3>
+<p><strong><a href="plugins/api">API/Webhook</a></strong> (api) - Executes an HTTP request to an API endpoint or webhook
+Properties: config
+Config: method, url, headers, body</p>
+<p><strong>OpenAI/LLM</strong> (openai) - Send a prompt to an OpenAI-compatible API and return the completion text
+Properties: config
+Config: openaiApiKey, openaiBaseUrl, openaiModel, useDefaultSettings, prompt, context</p>
+<p><strong><a href="plugins/confluence">Confluence Page</a></strong> (confluence) - Updates Confluence page via the REST API
+Properties: config
+Config: baseUrl, pageId, titleTemplate, contentTemplate, authType, email, apiToken</p>
+<p><strong><a href="plugins/gmail">Gmail</a></strong> (gmail) - Sends emails or saves drafts to Gmail.
+Properties: config
+Config: action, to, subject, body, contentType</p>
+<p><strong><a href="plugins/google-docs">Google Docs</a></strong> (googleDocs) - Append text to or reads content from a Google Doc
+Properties: config
+Config: action, documentId, textTemplate</p>
+<p><strong><a href="plugins/google-sheets">Google Sheets</a></strong> (googleSheets) - Append a row to or reads content from a Google Sheet
+Properties: config
+Config: action, spreadsheetId, sheetRange, rowValues, filter</p>
+<p><strong>HubSpot Blog Post</strong> (hubspotBlog) - Update HubSpot CMS blog posts via the CMS API
+Properties: config
+Config: accessToken, blogId, authorId, postName, postBody, postState, featuredImage, metaDescription, slug</p>
+<p><strong>Jira Comment</strong> (jiraComment) - Adds a comment to the Jira issue.
+Properties: config
+Config: domainUrl, issueKey, commentText, apiVers, authMethod, email, apiToken</p>
+<p><strong>Jira Create Issue</strong> (jiraIssue) - Creates a new issue in Jira (e.g. Task, Bug, Story).
+Properties: config
+Config: domainUrl, projectKey, summary, issueType, description, apiVers, authMethod, email, apiToken</p>
+<p><strong>Microsoft Outlook Email</strong> (microsoftEmail) - Sends an email or saves a draft using Microsoft Outlook.
+Properties: config
+Config: action, to, subject, body, contentType</p>
+<p><strong>Microsoft Excel</strong> (microsoftExcel) - Append rows to an Excel table/worksheet and retrieve cell/range content.
+Properties: config
+Config: action, workbookId, sheetRange, tableName, rowValues</p>
+<p><strong>Microsoft Teams</strong> (microsoftTeams) - Send messages to Microsoft Teams.
+Properties: config
+Config: sendMode, webhookUrl, teamId, channelId, chatId, message, contentType</p>
+<p><strong>Microsoft Word</strong> (microsoftWord) - Append or read content from a Microsoft Word document.
+Properties: config
+Config: action, documentId, textTemplate</p>
+<p><strong><a href="plugins/slack">Slack Notification</a></strong> (slack) - Sends webhook messages to Slack channels
+Properties: config
+Config: webhookUrl, channelUrl, message</p>
+<p><strong><a href="plugins/trello-create-card">Trello Create Card</a></strong> (trelloCreateCard) - Creates a new card on a Trello board list.
+Properties: config
+Config: apiKey, apiToken, idList, name, desc, pos</p>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

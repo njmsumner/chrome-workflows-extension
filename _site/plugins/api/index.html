@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/">AI Workflows Chrome Extension Documentation</a>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>API/Webhook (<code>api</code>)</h1>
+<p>The <strong>API/Webhook</strong> plugin sends an HTTP request to an API endpoint or webhook and returns the response body. It supports common HTTP methods, configurable JSON headers and payloads, and workflow template values.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>API/Webhook</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>api</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>api</code> (e.g., <code>api_1</code>, <code>api_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Not specified</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">No built-in authentication; configure headers as needed</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>method</code></td>
+<td style="text-align:left"><strong>Method</strong></td>
+<td style="text-align:left"><code>select</code> (<code>GET</code> | <code>POST</code> | <code>PUT</code> | <code>PATCH</code> | <code>DELETE</code>)</td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">HTTP request method. Default: <code>POST</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>url</code></td>
+<td style="text-align:left"><strong>API Endpoint</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Request URL; must be a valid HTTP or HTTPS URL. Template values are resolved at runtime, e.g. ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>headers</code></td>
+<td style="text-align:left"><strong>HTTP Headers (JSON)</strong></td>
+<td style="text-align:left"><code>string</code> (JSON object)</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional JSON object of string-valued headers. Defaults to <code>{&quot;Content-Type&quot;:&quot;application/json&quot;}</code>. Header values can use tokens, e.g. <code>{&quot;X-Workflow-Value&quot;:&quot;&quot;}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>body</code></td>
+<td style="text-align:left"><strong>Payload Body (JSON)</strong></td>
+<td style="text-align:left"><code>string</code> (JSON)</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">JSON request payload. Defaults to <code>{&quot;message&quot;:&quot;Result from AI extraction: &quot;}</code>. Supports tokens such as ``. An empty body uses the most recent non-global step output as the payload, with <code>userInput</code> included when present.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>Template values in the endpoint, headers, and body are resolved against workflow state. For example, use <code>or</code>. The workflow's <code>userInput</code> is also added to a non-GET request body when present; for GET requests it is added as a <code>userInput</code> query parameter.</p>
+<h3>Output State</h3>
+<p>The step output is the response body, not a wrapper object:</p>
+<ul>
+<li>For a JSON response, the output is the parsed JSON value. Reference it directly with <code>or reference returned properties, such as</code> when the response contains an <code>id</code> property.</li>
+<li>For a non-JSON response, the output is the response text and can be referenced with ``.</li>
+</ul>
+<hr>
+<h2>Sidebar UI Actions</h2>
+<p>No sidebar action is provided.</p>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;api_1&quot;,
+	&quot;type&quot;: &quot;api&quot;,
+	&quot;config&quot;: {
+		&quot;method&quot;: &quot;POST&quot;,
+		&quot;url&quot;: &quot;https://api.example.com/v1/data&quot;,
+		&quot;headers&quot;: &quot;{\&quot;Content-Type\&quot;:\&quot;application/json\&quot;}&quot;,
+		&quot;body&quot;: &quot;{\&quot;message\&quot;:\&quot;\&quot;}&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

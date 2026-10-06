@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/">AI Workflows Chrome Extension Documentation</a>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>Confluence Page (<code>confluence</code>)</h1>
+<p>The <strong>Confluence Page</strong> plugin updates an existing Confluence page through the Confluence REST API. Workflows can set a page title and XHTML storage-format body using values from earlier steps.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>Confluence Page</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>confluence</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>confluence</code> (e.g., <code>confluence_1</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Atlassian</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">Basic Auth (email/username and API token/password) or bearer token (PAT)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>baseUrl</code></td>
+<td style="text-align:left"><strong>Confluence Base URL</strong></td>
+<td style="text-align:left"><code>url</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Base URL of the Confluence instance, such as <code>https://your-domain.atlassian.net/wiki</code>. Trailing slashes are removed before API requests.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pageId</code></td>
+<td style="text-align:left"><strong>Page ID (Content ID)</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Content ID of the existing Confluence page to update.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>titleTemplate</code></td>
+<td style="text-align:left"><strong>Page Title (Optional)</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional replacement title. When blank, the current page title is retained. Supports template tokens, such as ``.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>contentTemplate</code></td>
+<td style="text-align:left"><strong>Page Body (XHTML Storage Format)</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Page body in Confluence XHTML storage format. Defaults to <code>&lt;p&gt;Updated content: &lt;/p&gt;</code> and supports template tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>authType</code></td>
+<td style="text-align:left"><strong>Authentication Type</strong></td>
+<td style="text-align:left"><code>select</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Choose <code>basic</code> (Basic Auth (Cloud API Token)) or <code>bearer</code> (Personal Access Token / PAT). Defaults to <code>basic</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>email</code></td>
+<td style="text-align:left"><strong>Email Address / Username</strong></td>
+<td style="text-align:left"><code>email</code></td>
+<td style="text-align:left"><strong>Yes for Basic Auth</strong></td>
+<td style="text-align:left">Account email or username used with Basic authentication. Not required for bearer authentication.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>apiToken</code></td>
+<td style="text-align:left"><strong>API Token / Password</strong> or <strong>PAT</strong></td>
+<td style="text-align:left"><code>password</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">API token/password for Basic authentication or personal access token for bearer authentication. Supports template tokens, e.g. ``.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>The title, page body, and credential fields are marked as token-enabled in the configuration form.</p>
+<p>Use <code>titleTemplate</code> to provide a dynamic page title and <code>contentTemplate</code> to include dynamic values in the XHTML body.
+The API token field can reference a secret stored as a global variable.</p>
+<h3>Output State</h3>
+<p>After a successful update, downstream steps can reference the returned page metadata:</p>
+<ul>
+<li>``: Updated page content ID.</li>
+<li>``: Updated page title.</li>
+<li>``: Updated page version number.</li>
+<li>``: Confluence page URL when returned by the API; otherwise <code>null</code>.</li>
+</ul>
+<hr>
+<h2>Sidebar UI Actions</h2>
+<ul>
+<li><strong>View Page</strong>: Opens the Confluence page when both the base URL and page ID are configured and resolve to complete values.</li>
+</ul>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;confluence_1&quot;,
+	&quot;type&quot;: &quot;confluence&quot;,
+	&quot;config&quot;: {
+		&quot;baseUrl&quot;: &quot;https://your-domain.atlassian.net/wiki&quot;,
+		&quot;pageId&quot;: &quot;123456789&quot;,
+		&quot;titleTemplate&quot;: &quot;Workflow summary: &quot;,
+		&quot;contentTemplate&quot;: &quot;&lt;p&gt;Summary: &lt;/p&gt;&quot;,
+		&quot;authType&quot;: &quot;bearer&quot;,
+		&quot;email&quot;: &quot;&quot;,
+		&quot;apiToken&quot;: &quot;&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

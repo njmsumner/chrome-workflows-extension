@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/">AI Workflows Chrome Extension Documentation</a>
+			</div>
+		</header>
+
+		<main class="content">
+			<h2>Google Gmail Plugin (<code>gmail</code>)</h2>
+<p>The <strong>Google Gmail</strong> plugin allows automated browser workflows to dispatch emails or create draft messages using the official Gmail REST API (<code>https://gmail.googleapis.com/gmail/v1/users/me/</code>). Email payloads are formatted as RFC 2822 standard messages and converted to URL-safe base64 strings prior to transmission.</p>
+<h3>Plugin Overview</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>Google Gmail</code> (UI Display: <code>Gmail</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>gmail</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>gmail</code> (e.g., <code>gmail_1</code>, <code>gmail_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left"><code>Google</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">OAuth2 Bearer Token (<code>chrome.identity.getAuthToken</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>API Endpoints</strong></td>
+<td style="text-align:left"><code>https://gmail.googleapis.com/gmail/v1/users/me/messages/send</code><br/><code>https://gmail.googleapis.com/gmail/v1/users/me/drafts</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Configuration Fields</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>action</code></td>
+<td style="text-align:left"><strong>Action</strong></td>
+<td style="text-align:left"><code>select</code> (<code>'send'</code> | <code>'draft'</code>)</td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Specifies whether to dispatch the message immediately (<code>'send'</code>) or save it to Gmail Drafts (<code>'draft'</code>). Default: <code>'draft'</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>to</code></td>
+<td style="text-align:left"><strong>Recipient (To)</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Destination email address. Supports dynamic tokens (e.g., <code>user@example.com</code> or ``). Line breaks are prohibited.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>subject</code></td>
+<td style="text-align:left"><strong>Subject</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Email subject line template. Supports tokens (e.g., <code>Automated Update: </code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>contentType</code></td>
+<td style="text-align:left"><strong>Content Type</strong></td>
+<td style="text-align:left"><code>select</code> (<code>'Text'</code> | <code>'HTML'</code>)</td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Specifies body markup format. <code>'Text'</code> maps to <code>text/plain</code>, while <code>'HTML'</code> maps to <code>text/html</code>. Default: <code>'Text'</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>body</code></td>
+<td style="text-align:left"><strong>Email Body</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Multiline body template. Supports dynamic tokens (e.g., <code>Hi,\n\nHere is the summary:\n\n\nBest regards</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3>Template Tokens &amp; State Output</h3>
+<h4>Available Input Tokens</h4>
+<p>You can inject dynamic workflow values into <code>to</code>, <code>subject</code>, and <code>body</code> fields:</p>
+<ul>
+<li><strong>Workflow Outputs:</strong> <code>, </code>, ``</li>
+<li><strong>Global Variables:</strong> ``</li>
+<li><strong>System Variables:</strong> <code>, </code>, ``</li>
+</ul>
+<h4>Output State</h4>
+<p>When executed, the step returns a JSON object stored under its step ID in the workflow state:</p>
+<ul>
+<li>
+<p><strong>For Send Action (<code>action: 'send'</code>):</strong></p>
+<ul>
+<li>``: <code>&quot;success&quot;</code></li>
+<li>``: <code>&quot;send&quot;</code></li>
+<li>``: Sent message ID string from Gmail API.</li>
+<li>``: Gmail thread ID.</li>
+<li>``: Resolved recipient email.</li>
+<li>``: Resolved subject header.</li>
+</ul>
+</li>
+<li>
+<p><strong>For Draft Action (<code>action: 'draft'</code>):</strong></p>
+<ul>
+<li>``: <code>&quot;success&quot;</code></li>
+<li>``: <code>&quot;draft&quot;</code></li>
+<li>``: Created draft ID string.</li>
+<li>``: Underlying message ID within the draft.</li>
+<li>``: Resolved recipient email.</li>
+<li>``: Resolved subject header.</li>
+</ul>
+</li>
+</ul>
+<h3>Sidebar UI Actions</h3>
+<ul>
+<li><strong>View Drafts / Open Gmail</strong>: Displays an interactive button in the sidebar panel (<code>viewContentSection</code>).
+<ul>
+<li>If <code>action === 'draft'</code>, clicking <strong>View Drafts</strong> opens <code>https://mail.google.com/mail/u/0/#drafts</code> in a new browser tab.</li>
+<li>If <code>action === 'send'</code>, clicking <strong>Open Gmail</strong> opens <code>https://mail.google.com/mail/u/0/#inbox</code> in a new tab.</li>
+</ul>
+</li>
+</ul>
+<h3>Example Workflow Configurations</h3>
+<h4>Example 1: Save Email Draft with Page Details</h4>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;gmail_1&quot;,
+	&quot;type&quot;: &quot;gmail&quot;,
+	&quot;config&quot;: {
+		&quot;action&quot;: &quot;draft&quot;,
+		&quot;to&quot;: &quot;&quot;,
+		&quot;subject&quot;: &quot;Research Summary: &quot;,
+		&quot;contentType&quot;: &quot;Text&quot;,
+		&quot;body&quot;: &quot;Hi Team,\n\nHere is the summary generated from :\n\n\n\nBest regards,\nAutomated Workflow&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>
