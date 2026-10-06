@@ -1,0 +1,97 @@
+[
+  {
+    "label": "API/Webhook",
+    "description": "Executes an HTTP request to an API endpoint or webhooks",
+    "idPrefix": "api"
+  },
+  {
+    "label": "OpenAI/LLM",
+    "description": "Send a prompt to an OpenAI-compatible API and return the completion text",
+    "idPrefix": "llm"
+  },
+  {
+    "label": "Condition",
+    "description": "Evaluates a value against a chosen operator and halts the workflow if the condition is not met.",
+    "idPrefix": "condition"
+  },
+  {
+    "label": "Set Variable",
+    "description": "Set a global variable that can be accessed across workflows using the syntax <code>{{globals.key}}</code>",
+    "idPrefix": "global"
+  },
+  {
+    "label": "Trello Create Card",
+    "description": "Creates a new card on a Trello board list.",
+    "idPrefix": "trello_card"
+  },
+  {
+    "label": "Action",
+    "description": "Perform an action on the current browser page.",
+    "idPrefix": "action"
+  },
+  {
+    "label": "Confluence Page",
+    "description": "Updates Confluence page via the REST API",
+    "idPrefix": "confluence"
+  },
+  {
+    "label": "Gmail",
+    "description": "Sends emails or saves drafts to Gmail.",
+    "idPrefix": "gmail"
+  },
+  {
+    "label": "Google Docs",
+    "description": "Append text to or reads content from a Google Doc",
+    "idPrefix": "google_docs"
+  },
+  {
+    "label": "Google Sheets",
+    "description": "Append a row to or reads content from a Google Sheet",
+    "idPrefix": "google_sheets"
+  },
+  {
+    "label": "HubSpot Blog Post",
+    "description": "Update HubSpot CMS blog posts via the CMS API",
+    "idPrefix": "hubspot"
+  },
+  {
+    "label": "Jira Comment",
+    "description": "Adds a comment to the Jira issue.",
+    "idPrefix": "jira"
+  },
+  {
+    "label": "Jira Create Issue",
+    "description": "Creates a new issue in Jira (e.g. Task, Bug, Story).",
+    "idPrefix": "jira_issue"
+  },
+  {
+    "label": "Microsoft Excel",
+    "description": "Append rows to an Excel table/worksheet and retrieve cell/range content.",
+    "idPrefix": "ms_excel"
+  },
+  {
+    "label": "Microsoft Outlook Email",
+    "description": "Sends an email or saves a draft using Microsoft Outlook.",
+    "idPrefix": "ms_email"
+  },
+  {
+    "label": "Microsoft Teams",
+    "description": "Send messages to Microsoft Teams.",
+    "idPrefix": "ms_teams"
+  },
+  {
+    "label": "Microsoft Word",
+    "description": "Append or read content from a Microsoft Word document.",
+    "idPrefix": "ms_word"
+  },
+  {
+    "label": "Run Workflow",
+    "description": "Executes another saved workflow and merges its results into the current pipeline.",
+    "idPrefix": "run_workflow"
+  },
+  {
+    "label": "Slack Notification",
+    "description": "Sends webhook messages to Slack channels",
+    "idPrefix": "slack"
+  }
+]
