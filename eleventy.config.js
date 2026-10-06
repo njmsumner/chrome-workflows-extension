@@ -29,5 +29,6 @@ export default async function eleventy(eleventyConfig) {
 		templateFormats: ['html', 'njk', 'md'],
 		markdownTemplateEngine: 'njk',
 		htmlTemplateEngine: 'njk',
+		pathPrefix: '/chrome-workflows-extension/',
 	};
 }

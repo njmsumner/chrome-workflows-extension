@@ -5,12 +5,31 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="color-scheme" content="light dark">
 		<title>{{ title or site.title }}</title>
-		<link rel="stylesheet" href="/css/site.css">
+		<link rel="stylesheet" href="{{ '/css/site.css' | url }}">
 	</head>
 	<body>
 		<header class="site-header">
 			<div class="header-inner">
-				<a class="site-title" href="/">{{ site.title }}</a>
+				<a class="site-title" href="{{ '/' | url }}">{{ site.title }}</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="{{ '/' | url }}">Home</a>
+						</li>
+						<li>
+							<a href="{{ '/steps/' | url }}">Steps</a>
+						</li>
+						<li>
+							<a href="{{ '/integrations/' | url }}">Integrations</a>
+						</li>
+						<li>
+							<a href="{{ '/settings/' | url }}">Settings</a>
+						</li>
+						<li>
+							<a href="{{ '/create/' | url }}">Create</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</header>
 

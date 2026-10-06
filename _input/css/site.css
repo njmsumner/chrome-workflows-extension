@@ -49,6 +49,31 @@ body {
 	border-bottom: 1px solid var(--border);
 }
 
+.header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.site-nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.site-nav a {
+	color: var(--text);
+	text-decoration: none;
+}
+
+.site-nav a:hover {
+	text-decoration: underline;
+}
+
 .header-inner,
 .footer-inner {
 	width: min(75%, 72rem);
