@@ -4,6 +4,8 @@ The **Settings Screen** in the AI Workflow Sidebar provides a centralized contro
 
 Settings can be accessed from anywhere in the sidebar interface by clicking the **Settings** button in the main header, workflow list header, or agent creation panel.
 
+<img src="../img/Settings General.png" alt="Settings - General" />
+
 ---
 
 ## Overview & Interface Layout
@@ -68,15 +70,6 @@ Default LLM settings are saved in Chrome local storage under the `appIntelligenc
 
 The **General Settings** pane controls UI customization and content viewer access.
 
-```
-+-----------------------------------------------------------------------+
-| General Settings                                                      |
-| Zoom:           [=====o==================] (1.0x)                     |
-+-----------------------------------------------------------------------+
-| [ View Content ]  View collected content                              |
-+-----------------------------------------------------------------------+
-```
-
 ### Controls & Options
 
 - **Zoom Slider (`#sidebarZoom`)**:
@@ -96,20 +89,7 @@ The **General Settings** pane controls UI customization and content viewer acces
 
 The **Global Variables** tab centralizes reusable configuration data—such as API keys, OAuth tokens, Webhook URLs, and document IDs—so they can be updated in one location and referenced across all extension workflows.
 
-```
-+-----------------------------------------------------------------------+
-| Global Variables                                                      |
-| Define reusable tokens that can be inserted into any workflow.        |
-|                                                                       |
-| google_doc_id      [ ******************** ]  [Edit] [Delete]          |
-| slack_webhook_url  [ ******************** ]  [Edit] [Delete]          |
-| trello_api_key     [ ******************** ]  [Edit] [Delete]          |
-|                                                                       |
-| Key:   [ github_pat                                              ]    |
-| Value: [ ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                ]    |
-| [ Save ]                                                              |
-+-----------------------------------------------------------------------+
-```
+<img src="../img/Settings Global.png" alt="Settings - Global Variables" />
 
 ### Token Syntax & Usage
 

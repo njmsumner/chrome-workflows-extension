@@ -23,3 +23,7 @@ The following are the types of steps you can include in a workflow:
 **[Set Variable](../plugins/set_global.md)** - Set a global variable that can be accessed across workflows using the syntax {{globals.key}}.
 
 **[Run Workflow](../plugins/run_workflow.md)** - Executes another saved workflow and merges its results into the current pipeline.
+
+<img src="../img/New Step.png" alt="New Step" />
+<br />
+New Step Screen

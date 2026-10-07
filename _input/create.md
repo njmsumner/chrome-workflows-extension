@@ -2,6 +2,8 @@
 
 The **Create Workflow** screen (also known as the **Agent UI**) serves as the primary creation hub for the AI Workflow Chrome Extension. It bridges natural language user intent with structured browser automation, enabling users to generate multi-step workflows using generative AI models, pick from pre-built sample templates, or configure custom workflows from scratch.
 
+<img src="../img/Create Workflow.png" alt="Create Workflow" />
+
 ## Page Contents
 
 - [1. Overview & Architecture](#1-overview-architecture)
@@ -81,35 +83,21 @@ Located at the top of the detail panel, these controls allow instant setup witho
 
 #### Standard Included Sample Templates
 
-| Template Name                            | Description                                                                       | Key Included Steps                                                                 |
-| :--------------------------------------- | :-------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
-| **Basic LLM Workflow**                   | Analyzes the current page text and answers questions in the sidebar.              | `extract` $\rightarrow$ `openai` $\rightarrow$ `updatePage` (Sidebar)              |
-| **Collect Snippets to Google Doc**       | Extracts page title, URL, and text selection, then appends them to a Google Doc.  | `extract` $\rightarrow$ `googleDocs` (Append) $\rightarrow$ `updatePage` (Sidebar) |
-| **Read Prompt from Google Doc**          | Fetches prompt instructions from a Google Doc and passes them to the LLM.         | `googleDocs` (Read) $\rightarrow$ `openai` $\rightarrow$ `updatePage` (Sidebar)    |
-| **Save Extracted Data to Google Sheets** | Scrapes page details and appends them as a new row in a Google Sheet.             | `extract` $\rightarrow$ `googleSheets` (Append)                                    |
-| **Save Gmail Draft with Page Details**   | Creates a formatted email draft in Gmail containing page metadata and user input. | `extract` $\rightarrow$ `gmail` (Save Draft)                                       |
-| **Save Web Page Summary to Trello**      | Creates a new Trello card on a board list with page title and summary.            | `extract` $\rightarrow$ `trelloCreateCard`                                         |
-| **Show Extracted Data on Page Load**     | Automatically extracts page content on load and displays it in the sidebar.       | `trigger` (Page Load) $\rightarrow$ `extract` $\rightarrow$ `updatePage`           |
+| Template Name                            | Description                                                                       |
+| :--------------------------------------- | :-------------------------------------------------------------------------------- |
+| **Basic LLM Workflow**                   | Analyzes the current page text and answers questions in the sidebar.              |
+| **Collect Snippets to Google Doc**       | Extracts page title, URL, and text selection, then appends them to a Google Doc.  |
+| **Read Prompt from Google Doc**          | Fetches prompt instructions from a Google Doc and passes them to the LLM.         |
+| **Save Extracted Data to Google Sheets** | Scrapes page details and appends them as a new row in a Google Sheet.             |
+| **Save Gmail Draft with Page Details**   | Creates a formatted email draft in Gmail containing page metadata and user input. |
+| **Save Web Page Summary to Trello**      | Creates a new Trello card on a board list with page title and summary.            |
+| **Show Extracted Data on Page Load**     | Automatically extracts page content on load and displays it in the sidebar.       |
 
 ---
 
 ## 4. AI-Powered Workflow Generation Panel
 
 The core feature of the Create screen is the natural language generation panel, which converts high-level user instructions into precise browser automation routines.
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│ Instructions  [?]                                                      │
-├────────────────────────────────────────────────────────────────────────┤
-│ Enter instructions to create a workflow or automate the browser       │
-│                                                                        │
-│ Example: "Search for wireless mouse. Extract top 3 results and post   │
-│ to Slack"                                                              │
-│                                                                        │
-├────────────────────────────────────────────────────────────────────────┤
-│ [ Generate ]   (sync_spinner.svg)                                      │
-└────────────────────────────────────────────────────────────────────────┘
-```
 
 ### UI Controls & Components
 

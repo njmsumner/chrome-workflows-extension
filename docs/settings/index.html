@@ -4,13 +4,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension Documentation</title>
+		<title>AI Workflows Chrome Extension</title>
 		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
 	</head>
 	<body>
 		<header class="site-header">
 			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
 				<nav class="site-nav" aria-label="Main navigation">
 					<ul>
 						<li>
@@ -37,6 +37,7 @@
 			<h1 id="settings-screen-documentation">Settings Screen Documentation</h1>
 <p>The <strong>Settings Screen</strong> in the AI Workflow Sidebar provides a centralized control panel for configuring global application behavior, default Large Language Model (LLM) credentials, extension display settings, and reusable global variable tokens.</p>
 <p>Settings can be accessed from anywhere in the sidebar interface by clicking the <strong>Settings</strong> button in the main header, workflow list header, or agent creation panel.</p>
+<img src="../img/Settings General.png" alt="Settings - General" />
 <hr>
 <h2 id="overview-interface-layout">Overview &amp; Interface Layout</h2>
 <table>
@@ -134,13 +135,6 @@
 <hr>
 <h2 id="2-general-settings">2. General Settings</h2>
 <p>The <strong>General Settings</strong> pane controls UI customization and content viewer access.</p>
-<pre><code>+-----------------------------------------------------------------------+
-| General Settings                                                      |
-| Zoom:           [=====o==================] (1.0x)                     |
-+-----------------------------------------------------------------------+
-| [ View Content ]  View collected content                              |
-+-----------------------------------------------------------------------+
-</code></pre>
 <h3 id="controls-options">Controls &amp; Options</h3>
 <ul>
 <li>
@@ -164,19 +158,7 @@
 <hr>
 <h2 id="3-global-variables-settings">3. Global Variables Settings</h2>
 <p>The <strong>Global Variables</strong> tab centralizes reusable configuration data—such as API keys, OAuth tokens, Webhook URLs, and document IDs—so they can be updated in one location and referenced across all extension workflows.</p>
-<pre><code>+-----------------------------------------------------------------------+
-| Global Variables                                                      |
-| Define reusable tokens that can be inserted into any workflow.        |
-|                                                                       |
-| google_doc_id      [ ******************** ]  [Edit] [Delete]          |
-| slack_webhook_url  [ ******************** ]  [Edit] [Delete]          |
-| trello_api_key     [ ******************** ]  [Edit] [Delete]          |
-|                                                                       |
-| Key:   [ github_pat                                              ]    |
-| Value: [ ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                ]    |
-| [ Save ]                                                              |
-+-----------------------------------------------------------------------+
-</code></pre>
+<img src="../img/Settings Global.png" alt="Settings - Global Variables" />
 <h3 id="token-syntax-usage">Token Syntax &amp; Usage</h3>
 <p>Global variables are referenced in workflow step configurations using double-bracket token syntax:</p>
 <ul>
@@ -271,7 +253,12 @@
 		</main>
 
 		<footer class="site-footer">
-			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+			<div class="footer-inner">
+				AI Workflows Chrome Extension				
+				&copy; Nick Sumner
+				2026
+				<a href="#top">Top</a>
+			</div>
 		</footer>
 	</body>
 </html>

@@ -2,6 +2,8 @@
 
 The **Condition** plugin compares a configured value with a selected condition. If the condition is not met, execution throws an error and the workflow stops.
 
+<img src="../../img/Condition.png" alt="Condition Step" />
+
 ## Plugin Overview
 
 | Property               | Value                             |

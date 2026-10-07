@@ -38,8 +38,12 @@ export default async function eleventy(eleventyConfig) {
 	});
 
 	eleventyConfig.addGlobalData('layout', 'base.njk');
-	eleventyConfig.addPassthroughCopy('src/assets');
+	eleventyConfig.addGlobalData('now', () => {
+		const date = new Date();
+		return { date, year: date.getFullYear() };
+	});
 	eleventyConfig.addPassthroughCopy({ '_input/css': 'css' });
+	eleventyConfig.addPassthroughCopy({ '_input/img': 'img' });
 	eleventyConfig.addPassthroughCopy('src/js');
 
 	eleventyConfig.addPreprocessor('escapePluginWorkflowTokens', 'md', escapePluginWorkflowTokens);

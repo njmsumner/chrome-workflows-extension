@@ -2,6 +2,8 @@
 
 The **Google Docs** plugin connects workflows with the Google Docs REST API (`https://docs.googleapis.com/v1/documents`). It supports both appending generated text entries to the end of an existing Google Document and reading complete plain-text contents from a document for downstream processing (such as feeding document text into an LLM prompt).
 
+<img src="../../img/Google Docs.png" alt="Google Docs Step" />
+
 ### Plugin Overview
 
 | Property               | Value                                                                                                                           |

@@ -2,6 +2,8 @@
 
 The **Google Sheets** plugin integrates with Google Sheets REST API v4 (`https://sheets.googleapis.com/v4/spreadsheets/`). It provides bidirectional capabilities: appending structured rows of data to a spreadsheet or reading cell range values with optional exact row filtering.
 
+<img src="../../img/Google Sheets.png" alt="Google Sheets Step" />
+
 ### Plugin Overview
 
 | Property               | Value                                                                                                                                                                                                            |

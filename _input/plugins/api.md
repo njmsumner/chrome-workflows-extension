@@ -2,6 +2,8 @@
 
 The **API/Webhook** plugin sends an HTTP request to an API endpoint or webhook and returns the response body. It supports common HTTP methods, configurable JSON headers and payloads, and workflow template values.
 
+<img src="../../img/Api.png" alt="API/Webhook Step" />
+
 ## Plugin Overview
 
 | Property               | Value                                                   |

@@ -2,6 +2,8 @@
 
 The **OpenAI/LLM** plugin is designed to send context and a system prompt to an OpenAI-compatible provider, then return response text, raw response data, and token usage. It supports saved default LLM settings or a per-step endpoint, model, and API key.
 
+<img src="../../img/OpenAI.png" alt="OpenAI/LLM Step" />
+
 ## Plugin Overview
 
 | Property               | Value                                                           |

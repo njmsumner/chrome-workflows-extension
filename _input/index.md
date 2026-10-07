@@ -12,6 +12,8 @@
 
 ## Overview
 
+<img src="./img/Run Workflow.png" alt="Run Workflow" />
+
 The Chrome Workflows Extension allows you to automate repetitive tasks within your browser by creating workflows composed of various steps.
 These workflows can interact with web pages, APIs, and popular services like Google Workspace, Microsoft Office, Slack, and more.
 

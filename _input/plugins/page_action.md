@@ -2,6 +2,8 @@
 
 The **Page Action** plugin (`updatePage`) provides essential browser automation capabilities within the AI Workflows extension. It enables workflows to interact directly with active browser tabs—clicking buttons, populating input fields, waiting for dynamic DOM elements, controlling tab navigation, displaying extraction or LLM results in the sidebar, and persisting snippets to local memory.
 
+<img src="../../img/Action.png" alt="Page Action Step" />
+
 ---
 
 ## Plugin Overview

@@ -2,6 +2,8 @@
 
 The **Run Workflow** step executes another saved workflow, passing the current workflow state into it and merging the sub-workflow's results back into the current pipeline. Use it to compose workflows; nested execution is limited to three levels.
 
+<img src="../../img/Sub Workflow.png" alt="Run Sub-Workflow Step" />
+
 ## Plugin Overview
 
 | Property               | Value                                   |

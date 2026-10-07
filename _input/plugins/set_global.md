@@ -2,6 +2,8 @@
 
 The **Set Variable** plugin creates or updates a global variable that workflows can reuse. It stores the value in extension storage and updates the current workflow state so later steps can access it immediately.
 
+<img src="../../img/Set Variable.png" alt="Set Variable Step" />
+
 ## Plugin Overview
 
 | Property               | Value                                              |

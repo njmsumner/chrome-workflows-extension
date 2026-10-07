@@ -2,6 +2,8 @@
 
 The **Jira Comment** plugin posts a comment to a Jira issue using the Jira REST API. It supports Jira Cloud and Server/Data Center, with v3 rich-text or v2 plain-text comment formats and Basic or personal-access-token authentication.
 
+<img src="../../img/Jira Comment.png" alt="Jira Comment Step" />
+
 ## Plugin Overview
 
 | Property               | Value                                                |

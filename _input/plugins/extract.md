@@ -2,6 +2,8 @@
 
 The **Extract** step (`extract`) is the core web scraping engine of the AI Workflow Chrome Extension. It executes inside the active browser tab to retrieve page metadata, user selection, visible body text, sanitized HTML, headings, links, form inputs, buttons, or targeted CSS selector elements for processing in downstream workflow steps.
 
+<img src="../../img/Extract.png" alt="Extract Step" />
+
 ---
 
 ## Step Overview
