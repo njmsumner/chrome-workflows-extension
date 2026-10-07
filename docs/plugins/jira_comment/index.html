@@ -99,21 +99,21 @@
 <td style="text-align:left"><strong>Email Address</strong></td>
 <td style="text-align:left"><code>email</code></td>
 <td style="text-align:left"><strong>Yes for Basic authentication</strong></td>
-<td style="text-align:left">Jira account email; shown and required at execution only when <strong>Basic</strong> authentication is selected. Supports tokens such as ``.</td>
+<td style="text-align:left">Jira account email; shown and required at execution only when <strong>Basic</strong> authentication is selected. Supports tokens such as <code>{{globals.jira_email}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>apiToken</code></td>
 <td style="text-align:left"><strong>API Token / Secret Key</strong></td>
 <td style="text-align:left"><code>password</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">API token for Basic authentication or a personal access token for Server/Data Center. Supports ``.</td>
+<td style="text-align:left">API token for Basic authentication or a personal access token for Server/Data Center. Supports <code>{{globals.jira_api_token}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>commentText</code></td>
 <td style="text-align:left"><strong>Comment Text</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Comment content. Supports workflow tokens, such as ``.</td>
+<td style="text-align:left">Comment content. Supports workflow tokens, such as <code>{{llm_1}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>apiVers</code></td>
@@ -134,14 +134,14 @@
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The workflow runner resolves template tokens before execution. The form exposes token insertion for <strong>Email Address</strong>, <strong>API Token / Secret Key</strong>, and <strong>Comment Text</strong>; for example, use <code>for the credential or</code> in the comment.</p>
+<p>The workflow runner resolves template tokens before execution. The form exposes token insertion for <strong>Email Address</strong>, <strong>API Token / Secret Key</strong>, and <strong>Comment Text</strong>; for example, use <code>{{globals.jira_api_token}}</code> for the credential or <code>{{llm_1}}</code> in the comment.</p>
 <h3>Output State</h3>
 <p>On success, the step returns the Jira API's parsed JSON response object directly when one is available. Downstream steps can reference returned properties, for example:</p>
 <ul>
-<li>``: Comment ID, when included in the API response.</li>
-<li>``: Author details, when included in the API response.</li>
-<li>``: Creation timestamp, when included in the API response.</li>
-<li>``: <code>success</code> when JSON parsing fails or the parsed value is <code>null</code> or a primitive.</li>
+<li><code>{{jira_1.id}}</code>: Comment ID, when included in the API response.</li>
+<li><code>{{jira_1.author}}</code>: Author details, when included in the API response.</li>
+<li><code>{{jira_1.created}}</code>: Creation timestamp, when included in the API response.</li>
+<li><code>{{jira_1.status}}</code>: <code>success</code> when JSON parsing fails or the parsed value is <code>null</code> or a primitive.</li>
 </ul>
 <h2>Sidebar UI Actions</h2>
 <ul>
@@ -155,11 +155,11 @@
 	&quot;config&quot;: {
 		&quot;domainUrl&quot;: &quot;https://your-domain.atlassian.net&quot;,
 		&quot;issueKey&quot;: &quot;PROJ-123&quot;,
-		&quot;commentText&quot;: &quot;Workflow update: &quot;,
+		&quot;commentText&quot;: &quot;Workflow update: {{llm_1}}&quot;,
 		&quot;apiVers&quot;: &quot;v3&quot;,
 		&quot;authMethod&quot;: &quot;basic&quot;,
-		&quot;email&quot;: &quot;&quot;,
-		&quot;apiToken&quot;: &quot;&quot;
+		&quot;email&quot;: &quot;{{globals.jira_email}}&quot;,
+		&quot;apiToken&quot;: &quot;{{globals.jira_api_token}}&quot;
 	}
 }
 </code></pre>

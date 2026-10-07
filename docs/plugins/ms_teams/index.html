@@ -92,7 +92,7 @@
 <td style="text-align:left"><strong>Webhook URL</strong></td>
 <td style="text-align:left"><code>url</code></td>
 <td style="text-align:left"><strong>Yes for webhook mode</strong></td>
-<td style="text-align:left">Incoming Webhook URL; required and shown only in webhook mode. Supports tokens such as ``.</td>
+<td style="text-align:left">Incoming Webhook URL; required and shown only in webhook mode. Supports tokens such as <code>{{globals.teams_webhook_url}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>teamId</code></td>
@@ -127,21 +127,21 @@
 <td style="text-align:left"><strong>Message Content</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Message text or HTML, depending on mode and content format. Defaults to a template containing ``; supports workflow tokens.</td>
+<td style="text-align:left">Message text or HTML, depending on mode and content format. Defaults to a template containing <code>{{llm_1}}</code>; supports workflow tokens.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Webhook URL</strong>, <strong>Team ID</strong>, <strong>Channel ID</strong>, <strong>Chat ID</strong>, and <strong>Message Content</strong>. For example, use <code>for the webhook or</code> in the message.</p>
+<p>The form exposes token insertion for <strong>Webhook URL</strong>, <strong>Team ID</strong>, <strong>Channel ID</strong>, <strong>Chat ID</strong>, and <strong>Message Content</strong>. For example, use <code>{{globals.teams_webhook_url}}</code> for the webhook or <code>{{llm_1}}</code> in the message.</p>
 <h3>Output State</h3>
 <p>On success, webhook mode returns:</p>
 <ul>
-<li>``: <code>success</code>.</li>
-<li>``: <code>webhook</code>.</li>
-<li>``: Message length in characters.</li>
-<li>``: Completion time in ISO 8601 format.</li>
+<li><code>{{ms_teams_1.status}}</code>: <code>success</code>.</li>
+<li><code>{{ms_teams_1.sendMode}}</code>: <code>webhook</code>.</li>
+<li><code>{{ms_teams_1.messageLength}}</code>: Message length in characters.</li>
+<li><code>{{ms_teams_1.timestamp}}</code>: Completion time in ISO 8601 format.</li>
 </ul>
 <p>Graph channel/chat modes return <code>status</code>, <code>sendMode</code>, <code>messageId</code> (if Graph returns a string ID), and <code>timestamp</code>.</p>
 <h2>Sidebar UI Actions</h2>
@@ -155,8 +155,8 @@
 	&quot;type&quot;: &quot;microsoftTeams&quot;,
 	&quot;config&quot;: {
 		&quot;sendMode&quot;: &quot;webhook&quot;,
-		&quot;webhookUrl&quot;: &quot;&quot;,
-		&quot;message&quot;: &quot;Automated update: &quot;,
+		&quot;webhookUrl&quot;: &quot;{{globals.teams_webhook_url}}&quot;,
+		&quot;message&quot;: &quot;Automated update: {{llm_1}}&quot;,
 		&quot;contentType&quot;: &quot;text&quot;
 	}
 }

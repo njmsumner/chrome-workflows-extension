@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="color-scheme" content="light dark">
+		<title>AI Workflows Chrome Extension Documentation</title>
+		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension Documentation</a>
+				<nav class="site-nav" aria-label="Main navigation">
+					<ul>
+						<li>
+							<a href="/chrome-workflows-extension/">Home</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/steps/">Steps</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/settings/">Settings</a>
+						</li>
+						<li>
+							<a href="/chrome-workflows-extension/create/">Create</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="content">
+			<h1>OpenAI/LLM (<code>openai</code>)</h1>
+<p>The <strong>OpenAI/LLM</strong> plugin is designed to send context and a system prompt to an OpenAI-compatible provider, then return response text, raw response data, and token usage. It supports saved default LLM settings or a per-step endpoint, model, and API key.</p>
+<h2>Plugin Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Plugin Label</strong></td>
+<td style="text-align:left"><code>OpenAI/LLM</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
+<td style="text-align:left"><code>openai</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
+<td style="text-align:left"><code>openai</code> (e.g., <code>openai_1</code>, <code>openai_2</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Group / Category</strong></td>
+<td style="text-align:left">Not specified</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Authentication</strong></td>
+<td style="text-align:left">API key from the default LLM settings or per-step configuration</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Configuration Fields</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>useDefaultSettings</code></td>
+<td style="text-align:left"><strong>Use Default LLM Config</strong></td>
+<td style="text-align:left"><code>checkbox</code></td>
+<td style="text-align:left">No (defaults to <code>true</code>)</td>
+<td style="text-align:left">Uses the application’s saved LLM settings. Validation requires a default API key when enabled.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>openaiBaseUrl</code></td>
+<td style="text-align:left"><strong>Provider / OpenAI endpoint</strong></td>
+<td style="text-align:left"><code>provider select + url</code></td>
+<td style="text-align:left"><strong>Yes when defaults are disabled</strong></td>
+<td style="text-align:left">Endpoint URL; defaults to <code>https://api.openai.com/v1</code>. The provider selector offers presets and a custom endpoint. Must be a valid HTTP or HTTPS URL for per-step settings.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>openaiApiKey</code></td>
+<td style="text-align:left"><strong>API Key</strong></td>
+<td style="text-align:left"><code>password</code> (text for tokens)</td>
+<td style="text-align:left"><strong>Yes when defaults are disabled</strong></td>
+<td style="text-align:left">API key for the selected endpoint. Supports workflow tokens, such as <code>{{globals.openai_api_key}}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>openaiModel</code></td>
+<td style="text-align:left"><strong>Model</strong></td>
+<td style="text-align:left"><code>text</code></td>
+<td style="text-align:left"><strong>Yes when defaults are disabled</strong></td>
+<td style="text-align:left">Model name; defaults to <code>gpt-4o-mini</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>context</code></td>
+<td style="text-align:left"><strong>Input/Context</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left">No (defaults to <code>{{userInput}}\nContext: {{extract_1.content}}</code>)</td>
+<td style="text-align:left">Context sent as user input. If it is a JSON object, its properties become request input fields; otherwise it is sent as the <code>input</code> text. Supports tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>prompt</code></td>
+<td style="text-align:left"><strong>System prompt</strong></td>
+<td style="text-align:left"><code>textarea</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Optional system instructions. Supports workflow tokens.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>The form exposes token insertion for <strong>API Key</strong>, <strong>Input/Context</strong>, and <strong>System prompt</strong>. The runner resolves templates before execution. The default context includes <code>{{userInput}}</code> and <code>{{extract_1.content}}</code>; including <code>{{userInput}}</code> makes a user-input field available on the Run Workflow page.</p>
+<h3>Output State</h3>
+<p>When a real provider response is parsed, the step returns:</p>
+<ul>
+<li><code>{{openai_1.text}}</code>: Extracted response text.</li>
+<li><code>{{openai_1.raw}}</code>: Raw JSON response from the provider.</li>
+<li><code>{{openai_1.usage.inputTokens}}</code>: Input token usage, or <code>0</code> if not provided.</li>
+<li><code>{{openai_1.usage.outputTokens}}</code>: Output token usage, or <code>0</code> if not provided.</li>
+</ul>
+<p><strong>Current implementation note:</strong> <code>stubEnabled</code> is set to <code>true</code>, so outside Vitest the plugin returns a fixed stub response instead of making the provider request. The stub has a <code>text</code> string, an empty <code>raw</code> object, and usage values of <code>1</code> input token and <code>2</code> output tokens.</p>
+<h2>Sidebar UI Actions</h2>
+<p>No sidebar action is provided.</p>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;openai_1&quot;,
+	&quot;type&quot;: &quot;openai&quot;,
+	&quot;config&quot;: {
+		&quot;useDefaultSettings&quot;: false,
+		&quot;openaiBaseUrl&quot;: &quot;https://api.openai.com/v1&quot;,
+		&quot;openaiApiKey&quot;: &quot;{{globals.openai_api_key}}&quot;,
+		&quot;openaiModel&quot;: &quot;gpt-4o-mini&quot;,
+		&quot;context&quot;: &quot;{{userInput}}\nContext: {{extract_1.content}}&quot;,
+		&quot;prompt&quot;: &quot;Summarize the supplied context concisely.&quot;
+	}
+}
+</code></pre>
+
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">AI Workflows Chrome Extension Documentation</div>
+		</footer>
+	</body>
+</html>

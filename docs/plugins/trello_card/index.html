@@ -85,35 +85,35 @@
 <td style="text-align:left"><strong>Trello API Key</strong></td>
 <td style="text-align:left"><code>password</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Trello API key. Supports tokens, for example ``.</td>
+<td style="text-align:left">Trello API key. Supports tokens, for example <code>{{globals.trello_api_key}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>apiToken</code></td>
 <td style="text-align:left"><strong>Trello Token / Secret</strong></td>
 <td style="text-align:left"><code>password</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Trello OAuth token. Supports tokens, for example ``.</td>
+<td style="text-align:left">Trello OAuth token. Supports tokens, for example <code>{{globals.trello_oauth_token}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>idList</code></td>
 <td style="text-align:left"><strong>List ID (idList)</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">ID of the destination Trello list. Supports tokens, such as ``.</td>
+<td style="text-align:left">ID of the destination Trello list. Supports tokens, such as <code>{{globals.trello_list_id}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>name</code></td>
 <td style="text-align:left"><strong>Card Name / Title</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">New card title. Supports tokens, for example <code>Research: </code>.</td>
+<td style="text-align:left">New card title. Supports tokens, for example <code>Research: {{extract_1.title}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>desc</code></td>
 <td style="text-align:left"><strong>Description</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Card description; defaults to an empty string. Supports tokens, such as <code>or</code>.</td>
+<td style="text-align:left">Card description; defaults to an empty string. Supports tokens, such as <code>{{url.href}}</code> or <code>{{llm_1}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>pos</code></td>
@@ -131,12 +131,12 @@
 <h3>Output State</h3>
 <p>After a successful card creation, downstream steps can reference the returned Trello card data:</p>
 <ul>
-<li>``: Card ID.</li>
-<li>``: Card name.</li>
-<li>``: Card URL.</li>
-<li>``: Short card URL.</li>
-<li>``: ID of the list containing the card.</li>
-<li>``: ID of the board containing the card.</li>
+<li><code>{{trello_card_1.id}}</code>: Card ID.</li>
+<li><code>{{trello_card_1.name}}</code>: Card name.</li>
+<li><code>{{trello_card_1.url}}</code>: Card URL.</li>
+<li><code>{{trello_card_1.shortUrl}}</code>: Short card URL.</li>
+<li><code>{{trello_card_1.idList}}</code>: ID of the list containing the card.</li>
+<li><code>{{trello_card_1.idBoard}}</code>: ID of the board containing the card.</li>
 </ul>
 <h2>Sidebar UI Actions</h2>
 <ul>
@@ -148,11 +148,11 @@
 	&quot;id&quot;: &quot;trello_card_1&quot;,
 	&quot;type&quot;: &quot;trelloCreateCard&quot;,
 	&quot;config&quot;: {
-		&quot;apiKey&quot;: &quot;&quot;,
-		&quot;apiToken&quot;: &quot;&quot;,
-		&quot;idList&quot;: &quot;&quot;,
-		&quot;name&quot;: &quot;Research: &quot;,
-		&quot;desc&quot;: &quot;Source URL: \n\nAI summary: &quot;,
+		&quot;apiKey&quot;: &quot;{{globals.trello_api_key}}&quot;,
+		&quot;apiToken&quot;: &quot;{{globals.trello_oauth_token}}&quot;,
+		&quot;idList&quot;: &quot;{{globals.trello_list_id}}&quot;,
+		&quot;name&quot;: &quot;Research: {{extract_1.title}}&quot;,
+		&quot;desc&quot;: &quot;Source URL: {{url.href}}\n\nAI summary: {{llm_1}}&quot;,
 		&quot;pos&quot;: &quot;top&quot;
 	}
 }

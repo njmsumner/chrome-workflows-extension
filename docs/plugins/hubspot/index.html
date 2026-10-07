@@ -85,14 +85,14 @@
 <td style="text-align:left"><strong>App Access Token</strong></td>
 <td style="text-align:left"><code>password</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">HubSpot Private App credential used to authenticate CMS API requests. Supports workflow tokens, such as ``.</td>
+<td style="text-align:left">HubSpot Private App credential used to authenticate CMS API requests. Supports workflow tokens, such as <code>{{globals.hubspot_access_token}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>blogId</code></td>
 <td style="text-align:left"><strong>Blog ID (contentGroupId)</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">HubSpot blog ID sent as <code>contentGroupId</code>. Supports workflow tokens, such as ``.</td>
+<td style="text-align:left">HubSpot blog ID sent as <code>contentGroupId</code>. Supports workflow tokens, such as <code>{{globals.hubspot_blog_id}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>authorId</code></td>
@@ -106,14 +106,14 @@
 <td style="text-align:left"><strong>Post Title</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Title for the blog post. Supports tokens, such as ``.</td>
+<td style="text-align:left">Title for the blog post. Supports tokens, such as <code>{{extract_1.title}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>postBody</code></td>
 <td style="text-align:left"><strong>Post Body (HTML template)</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">HTML content for the post. Supports workflow tokens, such as <code>or</code>.</td>
+<td style="text-align:left">HTML content for the post. Supports workflow tokens, such as <code>{{extract_1.title}}</code> or <code>{{llm_1}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>postState</code></td>
@@ -148,13 +148,13 @@
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The form marks <strong>App Access Token</strong>, <strong>Blog ID</strong>, <strong>Author ID</strong>, <strong>Post Title</strong>, and <strong>Post Body</strong> as tokenizable. The workflow runner resolves template tokens before the plugin executes; for example, use <code>in the post title or</code> for the access token.</p>
+<p>The form marks <strong>App Access Token</strong>, <strong>Blog ID</strong>, <strong>Author ID</strong>, <strong>Post Title</strong>, and <strong>Post Body</strong> as tokenizable. The workflow runner resolves template tokens before the plugin executes; for example, use <code>{{extract_1.title}}</code> in the post title or <code>{{globals.hubspot_access_token}}</code> for the access token.</p>
 <h3>Output State</h3>
 <p>On success, the step returns the parsed HubSpot API response object directly. Downstream steps can reference properties returned by that response, including:</p>
 <ul>
-<li>``: HubSpot post ID.</li>
-<li>``: Post slug.</li>
-<li>``: Post URL.</li>
+<li><code>{{hubspot_1.id}}</code>: HubSpot post ID.</li>
+<li><code>{{hubspot_1.slug}}</code>: Post slug.</li>
+<li><code>{{hubspot_1.url}}</code>: Post URL.</li>
 </ul>
 <p>The available properties depend on the API response.</p>
 <h2>Sidebar UI Actions</h2>
@@ -167,10 +167,10 @@
 	&quot;id&quot;: &quot;hubspot_1&quot;,
 	&quot;type&quot;: &quot;hubspotBlog&quot;,
 	&quot;config&quot;: {
-		&quot;accessToken&quot;: &quot;&quot;,
-		&quot;blogId&quot;: &quot;&quot;,
-		&quot;postName&quot;: &quot;&quot;,
-		&quot;postBody&quot;: &quot;&lt;p&gt;&lt;/p&gt;&quot;,
+		&quot;accessToken&quot;: &quot;{{globals.hubspot_access_token}}&quot;,
+		&quot;blogId&quot;: &quot;{{globals.hubspot_blog_id}}&quot;,
+		&quot;postName&quot;: &quot;{{extract_1.title}}&quot;,
+		&quot;postBody&quot;: &quot;&lt;p&gt;{{extract_1.title}}&lt;/p&gt;&quot;,
 		&quot;postState&quot;: &quot;DRAFT&quot;
 	}
 }

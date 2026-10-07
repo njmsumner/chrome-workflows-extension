@@ -92,7 +92,7 @@
 <td style="text-align:left"><strong>Workbook Item ID</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">OneDrive file ID or SharePoint document item ID. Supports tokens such as ``.</td>
+<td style="text-align:left">OneDrive file ID or SharePoint document item ID. Supports tokens such as <code>{{globals.excel_workbook_id}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>sheetRange</code></td>
@@ -113,27 +113,27 @@
 <td style="text-align:left"><strong>Row Values (JSON Array)</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left"><strong>Yes for append</strong></td>
-<td style="text-align:left">JSON array of cell values for one row, such as <code>[&quot;&quot;, &quot;&quot;]</code>. Defaults to <code>[]</code>; hidden and disabled in read mode. Supports tokens.</td>
+<td style="text-align:left">JSON array of cell values for one row, such as <code>[&quot;{{extract_1.title}}&quot;, &quot;{{llm_1}}&quot;]</code>. Defaults to <code>[]</code>; hidden and disabled in read mode. Supports tokens.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Workbook Item ID</strong>, <strong>Sheet Name / Cell Range</strong>, <strong>Table Name</strong>, and <strong>Row Values</strong>. The row-values field must remain valid JSON in the form; for example, use <code>&quot;[\&quot;\&quot;, \&quot;\&quot;]&quot;</code> in the workflow configuration.</p>
+<p>The form exposes token insertion for <strong>Workbook Item ID</strong>, <strong>Sheet Name / Cell Range</strong>, <strong>Table Name</strong>, and <strong>Row Values</strong>. The row-values field must remain valid JSON in the form; for example, use <code>&quot;[\&quot;{{extract_1.title}}\&quot;, \&quot;{{llm_1}}\&quot;]&quot;</code> in the workflow configuration.</p>
 <h3>Output State</h3>
 <p>Both actions return <code>status</code> (<code>success</code>) and <code>workbookId</code>.</p>
 <p>For <strong>Get Cell / Range Content</strong>, the step also returns:</p>
 <ul>
-<li>``: Address reported by Graph, or the configured sheet/range if none is returned.</li>
-<li>``: Empty string when no values are returned; the cell value for a single cell; otherwise values as tab-separated columns and newline-separated rows.</li>
-<li>``: Raw two-dimensional array of cell values.</li>
+<li><code>{{ms_excel_1.range}}</code>: Address reported by Graph, or the configured sheet/range if none is returned.</li>
+<li><code>{{ms_excel_1.data}}</code>: Empty string when no values are returned; the cell value for a single cell; otherwise values as tab-separated columns and newline-separated rows.</li>
+<li><code>{{ms_excel_1.values}}</code>: Raw two-dimensional array of cell values.</li>
 </ul>
 <p>For <strong>Append Row</strong>, the step also returns:</p>
 <ul>
-<li>``: <code>Row index N</code> when Graph returns an index, otherwise the configured sheet/range.</li>
-<li>``: Values returned by Graph, or the submitted row wrapped in an array.</li>
-<li>``: Completion time in ISO 8601 format.</li>
+<li><code>{{ms_excel_1.updatedRange}}</code>: <code>Row index N</code> when Graph returns an index, otherwise the configured sheet/range.</li>
+<li><code>{{ms_excel_1.values}}</code>: Values returned by Graph, or the submitted row wrapped in an array.</li>
+<li><code>{{ms_excel_1.timestamp}}</code>: Completion time in ISO 8601 format.</li>
 </ul>
 <h2>Sidebar UI Actions</h2>
 <ul>
@@ -146,10 +146,10 @@
 	&quot;type&quot;: &quot;microsoftExcel&quot;,
 	&quot;config&quot;: {
 		&quot;action&quot;: &quot;append&quot;,
-		&quot;workbookId&quot;: &quot;&quot;,
+		&quot;workbookId&quot;: &quot;{{globals.excel_workbook_id}}&quot;,
 		&quot;sheetRange&quot;: &quot;Sheet1!A1&quot;,
 		&quot;tableName&quot;: &quot;Table1&quot;,
-		&quot;rowValues&quot;: &quot;[\&quot;\&quot;, \&quot;\&quot;]&quot;
+		&quot;rowValues&quot;: &quot;[\&quot;{{extract_1.title}}\&quot;, \&quot;{{llm_1}}\&quot;]&quot;
 	}
 }
 </code></pre>

@@ -85,7 +85,7 @@
 <td style="text-align:left"><strong>Value</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Value to test; defaults to an empty string. Supports workflow tokens, such as ``.</td>
+<td style="text-align:left">Value to test; defaults to an empty string. Supports workflow tokens, such as <code>{{extract_1.title}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>operator</code></td>
@@ -99,18 +99,18 @@
 <td style="text-align:left"><strong>Comparison value</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes for comparison operators</strong></td>
-<td style="text-align:left">Value compared with <code>value</code>; supports workflow tokens, such as ``. Required for Contains, Does not contain, Equals, Does not equal, Starts with, and Ends with.</td>
+<td style="text-align:left">Value compared with <code>value</code>; supports workflow tokens, such as <code>{{globals.expected_status}}</code>. Required for Contains, Does not contain, Equals, Does not equal, Starts with, and Ends with.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The <strong>Value</strong> and <strong>Comparison value</strong> fields support workflow tokens, which the runner resolves before this step executes. For example, compare `` with a configured string using <strong>Contains</strong>.</p>
+<p>The <strong>Value</strong> and <strong>Comparison value</strong> fields support workflow tokens, which the runner resolves before this step executes. For example, compare <code>{{extract_1.title}}</code> with a configured string using <strong>Contains</strong>.</p>
 <h3>Output State</h3>
 <p>When the condition passes, the step returns an object containing:</p>
 <ul>
-<li>``: Boolean <code>true</code>.</li>
+<li><code>{{condition_1.passed}}</code>: Boolean <code>true</code>.</li>
 </ul>
 <p>If the condition fails or its configuration is missing, execution throws <code>Condition was not met.</code> and no success output is returned.</p>
 <h2>Sidebar UI Actions</h2>
@@ -121,7 +121,7 @@
 	&quot;id&quot;: &quot;condition_1&quot;,
 	&quot;type&quot;: &quot;condition&quot;,
 	&quot;config&quot;: {
-		&quot;value&quot;: &quot;&quot;,
+		&quot;value&quot;: &quot;{{extract_1.title}}&quot;,
 		&quot;operator&quot;: &quot;contains&quot;,
 		&quot;comparisonValue&quot;: &quot;Release notes&quot;
 	}

@@ -92,14 +92,14 @@
 <td style="text-align:left"><strong>Recipient (To)</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Recipient email addresses, separated by commas or semicolons. Empty entries are ignored. Supports tokens such as ``.</td>
+<td style="text-align:left">Recipient email addresses, separated by commas or semicolons. Empty entries are ignored. Supports tokens such as <code>{{extract_1.email}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>subject</code></td>
 <td style="text-align:left"><strong>Subject</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Email subject; defaults to <code>Automated Update from AI Extension</code>. Supports tokens such as ``.</td>
+<td style="text-align:left">Email subject; defaults to <code>Automated Update from AI Extension</code>. Supports tokens such as <code>{{extract_1.title}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>contentType</code></td>
@@ -113,26 +113,26 @@
 <td style="text-align:left"><strong>Email Body</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Message content; defaults to a templated greeting containing ``. Supports workflow tokens.</td>
+<td style="text-align:left">Message content; defaults to a templated greeting containing <code>{{llm_1}}</code>. Supports workflow tokens.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Recipient (To)</strong>, <strong>Subject</strong>, and <strong>Email Body</strong>. For example, use <code>for a recipient and</code> in the message body.</p>
+<p>The form exposes token insertion for <strong>Recipient (To)</strong>, <strong>Subject</strong>, and <strong>Email Body</strong>. For example, use <code>{{extract_1.email}}</code> for a recipient and <code>{{llm_1}}</code> in the message body.</p>
 <h3>Output State</h3>
 <p>On success, both actions return <code>status</code>, <code>action</code>, <code>to</code>, and <code>subject</code>:</p>
 <ul>
-<li>``: <code>success</code>.</li>
-<li>``: <code>send</code> or <code>draft</code>.</li>
-<li>``: Configured recipient string.</li>
-<li>``: Email subject.</li>
+<li><code>{{ms_email_1.status}}</code>: <code>success</code>.</li>
+<li><code>{{ms_email_1.action}}</code>: <code>send</code> or <code>draft</code>.</li>
+<li><code>{{ms_email_1.to}}</code>: Configured recipient string.</li>
+<li><code>{{ms_email_1.subject}}</code>: Email subject.</li>
 </ul>
 <p>Draft actions also return:</p>
 <ul>
-<li>``: Draft message ID from Microsoft Graph.</li>
-<li>``: Draft web link from Microsoft Graph, when returned.</li>
+<li><code>{{ms_email_1.messageId}}</code>: Draft message ID from Microsoft Graph.</li>
+<li><code>{{ms_email_1.webLink}}</code>: Draft web link from Microsoft Graph, when returned.</li>
 </ul>
 <h2>Sidebar UI Actions</h2>
 <ul>
@@ -146,9 +146,9 @@
 	&quot;type&quot;: &quot;microsoftEmail&quot;,
 	&quot;config&quot;: {
 		&quot;action&quot;: &quot;send&quot;,
-		&quot;to&quot;: &quot;&quot;,
-		&quot;subject&quot;: &quot;Workflow summary: &quot;,
-		&quot;body&quot;: &quot;Hi,\n\n&quot;,
+		&quot;to&quot;: &quot;{{extract_1.email}}&quot;,
+		&quot;subject&quot;: &quot;Workflow summary: {{extract_1.title}}&quot;,
+		&quot;body&quot;: &quot;Hi,\n\n{{llm_1}}&quot;,
 		&quot;contentType&quot;: &quot;Text&quot;
 	}
 }

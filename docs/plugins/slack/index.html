@@ -85,7 +85,7 @@
 <td style="text-align:left"><strong>Slack Incoming Webhook URL</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">The Incoming Webhook URL generated in Slack App settings (e.g., <code>https://hooks.slack.com/services/...</code> or ``).</td>
+<td style="text-align:left">The Incoming Webhook URL generated in Slack App settings (e.g., <code>https://hooks.slack.com/services/...</code> or <code>{{globals.slack_webhook_url}}</code>).</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>channelUrl</code></td>
@@ -99,7 +99,7 @@
 <td style="text-align:left"><strong>Message Payload</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">The text message body sent to Slack. Supports multiline formatting and dynamic template tokens (e.g., <code>Hello, summary: </code>).</td>
+<td style="text-align:left">The text message body sent to Slack. Supports multiline formatting and dynamic template tokens (e.g., <code>Hello, summary: {{llm_1}}</code>).</td>
 </tr>
 </tbody>
 </table>
@@ -110,8 +110,8 @@
 <h3>Output State</h3>
 <p>When executed, the step records its execution status in the pipeline state for downstream steps:</p>
 <ul>
-<li>``: String result (<code>&quot;sent&quot;</code> upon success).</li>
-<li>``: Epoch timestamp (in milliseconds) when the message was dispatched.</li>
+<li><code>{{slack_1.status}}</code>: String result (<code>&quot;sent&quot;</code> upon success).</li>
+<li><code>{{slack_1.timestamp}}</code>: Epoch timestamp (in milliseconds) when the message was dispatched.</li>
 </ul>
 <hr>
 <h2>Sidebar UI Actions</h2>
@@ -124,9 +124,9 @@
 	&quot;id&quot;: &quot;slack_1&quot;,
 	&quot;type&quot;: &quot;slack&quot;,
 	&quot;config&quot;: {
-		&quot;webhookUrl&quot;: &quot;&quot;,
+		&quot;webhookUrl&quot;: &quot;{{globals.slack_webhook_url}}&quot;,
 		&quot;channelUrl&quot;: &quot;https://app.slack.com/client/T00000000/C00000000&quot;,
-		&quot;message&quot;: &quot;🤖 *AI Web Summary*\n\n*Page:* \n*URL:* \n\n*Summary:*\n&quot;
+		&quot;message&quot;: &quot;🤖 *AI Web Summary*\n\n*Page:* {{extract_1.title}}\n*URL:* {{url.href}}\n\n*Summary:*\n{{llm_1}}&quot;
 	}
 }
 </code></pre>

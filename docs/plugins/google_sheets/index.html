@@ -95,7 +95,7 @@
 <td style="text-align:left"><strong>Spreadsheet ID</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">ID string from Google Sheets URL (<code>docs.google.com/spreadsheets/d/[ID]/edit</code>). Supports tokens (e.g., ``).</td>
+<td style="text-align:left">ID string from Google Sheets URL (<code>docs.google.com/spreadsheets/d/[ID]/edit</code>). Supports tokens (e.g., <code>{{globals.google_sheet_id}}</code>).</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>sheetRange</code></td>
@@ -109,7 +109,7 @@
 <td style="text-align:left"><strong>Row Values (JSON Array)</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong> (when <code>action: 'append'</code>)</td>
-<td style="text-align:left">JSON array string representing column cell values. Scalar strings are auto-wrapped. Example: <code>[&quot;&quot;, &quot;&quot;]</code>.</td>
+<td style="text-align:left">JSON array string representing column cell values. Scalar strings are auto-wrapped. Example: <code>[&quot;{{extract_1.title}}&quot;, &quot;{{url.href}}&quot;]</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>filter</code></td>
@@ -124,30 +124,30 @@
 <h4>Available Input Tokens</h4>
 <p>All input fields support token replacement, e.g.:</p>
 <ul>
-<li><strong>Workflow Outputs:</strong> <code>, </code>, <code>, </code></li>
-<li><strong>Global Variables:</strong> ``</li>
-<li><strong>System Variables:</strong> <code>, </code>, ``</li>
+<li><strong>Workflow Outputs:</strong> <code>{{id_1}}</code>, <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code>, <code>{{extract_1.heading}}</code></li>
+<li><strong>Global Variables:</strong> <code>{{globals.google_sheet_id}}</code></li>
+<li><strong>System Variables:</strong> <code>{{url.href}}</code>, <code>{{datetime}}</code>, <code>{{userInput}}</code></li>
 </ul>
 <h4>Output State</h4>
 <ul>
 <li>
 <p><strong>For Read Action (<code>action: 'read'</code>):</strong></p>
 <ul>
-<li>``: <code>&quot;success&quot;</code></li>
-<li>``: Target spreadsheet ID.</li>
-<li>``: Resolved sheet range.</li>
-<li>``: Formatted text representation (single cell scalar or tab-delimited multiline rows).</li>
-<li>``: Raw 2D array of row cells (<code>string[][]</code>).</li>
-<li>``: Array of cells for the filtered row (<code>string[] | null</code>), if <code>filter</code> was provided.</li>
+<li><code>{{google_sheets_1.status}}</code>: <code>&quot;success&quot;</code></li>
+<li><code>{{google_sheets_1.spreadsheetId}}</code>: Target spreadsheet ID.</li>
+<li><code>{{google_sheets_1.range}}</code>: Resolved sheet range.</li>
+<li><code>{{google_sheets_1.data}}</code>: Formatted text representation (single cell scalar or tab-delimited multiline rows).</li>
+<li><code>{{google_sheets_1.values}}</code>: Raw 2D array of row cells (<code>string[][]</code>).</li>
+<li><code>{{google_sheets_1.matchedRow}}</code>: Array of cells for the filtered row (<code>string[] | null</code>), if <code>filter</code> was provided.</li>
 </ul>
 </li>
 <li>
 <p><strong>For Append Action (<code>action: 'append'</code>):</strong></p>
 <ul>
-<li>``: <code>&quot;success&quot;</code></li>
-<li>``: Range updated by Google Sheets API (e.g., <code>'Sheet1!A5:E5'</code>).</li>
-<li>``: Count of appended rows (typically <code>1</code>).</li>
-<li>``: ISO 8601 execution timestamp.</li>
+<li><code>{{google_sheets_1.status}}</code>: <code>&quot;success&quot;</code></li>
+<li><code>{{google_sheets_1.updatedRange}}</code>: Range updated by Google Sheets API (e.g., <code>'Sheet1!A5:E5'</code>).</li>
+<li><code>{{google_sheets_1.updatedRows}}</code>: Count of appended rows (typically <code>1</code>).</li>
+<li><code>{{google_sheets_1.timestamp}}</code>: ISO 8601 execution timestamp.</li>
 </ul>
 </li>
 </ul>
@@ -162,9 +162,9 @@
 	&quot;type&quot;: &quot;googleSheets&quot;,
 	&quot;config&quot;: {
 		&quot;action&quot;: &quot;append&quot;,
-		&quot;spreadsheetId&quot;: &quot;&quot;,
+		&quot;spreadsheetId&quot;: &quot;{{globals.google_sheet_id}}&quot;,
 		&quot;sheetRange&quot;: &quot;Sheet1!A:C&quot;,
-		&quot;rowValues&quot;: &quot;[\&quot;\&quot;, \&quot;\&quot;, \&quot;\&quot;]&quot;
+		&quot;rowValues&quot;: &quot;[\&quot;{{extract_1.title}}\&quot;, \&quot;{{url.href}}\&quot;, \&quot;{{extract_1.heading}}\&quot;]&quot;
 	}
 }
 </code></pre>
@@ -174,9 +174,9 @@
 	&quot;type&quot;: &quot;googleSheets&quot;,
 	&quot;config&quot;: {
 		&quot;action&quot;: &quot;read&quot;,
-		&quot;spreadsheetId&quot;: &quot;&quot;,
+		&quot;spreadsheetId&quot;: &quot;{{globals.google_sheet_id}}&quot;,
 		&quot;sheetRange&quot;: &quot;Sheet1!A1:F50&quot;,
-		&quot;filter&quot;: &quot;&quot;
+		&quot;filter&quot;: &quot;{{id_1}}&quot;
 	}
 }
 </code></pre>

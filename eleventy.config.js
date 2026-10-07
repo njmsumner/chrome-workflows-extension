@@ -1,3 +1,12 @@
+function escapePluginWorkflowTokens(_data, content) {
+	const inputPath = this.inputPath.replace(/\\/g, '/');
+	if (!/(?:^|\/)_input\/plugins\//.test(inputPath)) {
+		return;
+	}
+
+	return content.replace(/\{\{/g, '{% raw %}{{').replace(/\}\}/g, '}}{% endraw %}');
+}
+
 function removeMarkdownFromInternalLinks(content) {
 	return content.replace(/(\bhref=["'])([^"']+)(["'])/gi, (match, prefix, url, suffix) => {
 		if (/^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(url)) {
@@ -16,6 +25,7 @@ export default async function eleventy(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy({ '_input/css': 'css' });
 	eleventyConfig.addPassthroughCopy('src/js');
 
+	eleventyConfig.addPreprocessor('escapePluginWorkflowTokens', 'md', escapePluginWorkflowTokens);
 	eleventyConfig.addTransform('html', removeMarkdownFromInternalLinks);
 
 	return {

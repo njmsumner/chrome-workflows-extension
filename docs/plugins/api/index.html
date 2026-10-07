@@ -92,33 +92,33 @@
 <td style="text-align:left"><strong>API Endpoint</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Request URL; must be a valid HTTP or HTTPS URL. Template values are resolved at runtime, e.g. ``.</td>
+<td style="text-align:left">Request URL; must be a valid HTTP or HTTPS URL. Template values are resolved at runtime, e.g. <code>{{globals.api_url}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>headers</code></td>
 <td style="text-align:left"><strong>HTTP Headers (JSON)</strong></td>
 <td style="text-align:left"><code>string</code> (JSON object)</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Optional JSON object of string-valued headers. Defaults to <code>{&quot;Content-Type&quot;:&quot;application/json&quot;}</code>. Header values can use tokens, e.g. <code>{&quot;X-Workflow-Value&quot;:&quot;&quot;}</code>.</td>
+<td style="text-align:left">Optional JSON object of string-valued headers. Defaults to <code>{&quot;Content-Type&quot;:&quot;application/json&quot;}</code>. Header values can use tokens, e.g. <code>{&quot;X-Workflow-Value&quot;:&quot;{{globals.header_value}}&quot;}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>body</code></td>
 <td style="text-align:left"><strong>Payload Body (JSON)</strong></td>
 <td style="text-align:left"><code>string</code> (JSON)</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">JSON request payload. Defaults to <code>{&quot;message&quot;:&quot;Result from AI extraction: &quot;}</code>. Supports tokens such as ``. An empty body uses the most recent non-global step output as the payload, with <code>userInput</code> included when present.</td>
+<td style="text-align:left">JSON request payload. Defaults to <code>{&quot;message&quot;:&quot;Result from AI extraction: {{llm_1}}&quot;}</code>. Supports tokens such as <code>{{extract_1.title}}</code>. An empty body uses the most recent non-global step output as the payload, with <code>userInput</code> included when present.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>Template values in the endpoint, headers, and body are resolved against workflow state. For example, use <code>or</code>. The workflow's <code>userInput</code> is also added to a non-GET request body when present; for GET requests it is added as a <code>userInput</code> query parameter.</p>
+<p>Template values in the endpoint, headers, and body are resolved against workflow state. For example, use <code>{{extract_1.title}}</code> or <code>{{globals.api_url}}</code>. The workflow's <code>userInput</code> is also added to a non-GET request body when present; for GET requests it is added as a <code>userInput</code> query parameter.</p>
 <h3>Output State</h3>
 <p>The step output is the response body, not a wrapper object:</p>
 <ul>
-<li>For a JSON response, the output is the parsed JSON value. Reference it directly with <code>or reference returned properties, such as</code> when the response contains an <code>id</code> property.</li>
-<li>For a non-JSON response, the output is the response text and can be referenced with ``.</li>
+<li>For a JSON response, the output is the parsed JSON value. Reference it directly with <code>{{api_1}}</code> or reference returned properties, such as <code>{{api_1.id}}</code> when the response contains an <code>id</code> property.</li>
+<li>For a non-JSON response, the output is the response text and can be referenced with <code>{{api_1}}</code>.</li>
 </ul>
 <hr>
 <h2>Sidebar UI Actions</h2>
@@ -132,7 +132,7 @@
 		&quot;method&quot;: &quot;POST&quot;,
 		&quot;url&quot;: &quot;https://api.example.com/v1/data&quot;,
 		&quot;headers&quot;: &quot;{\&quot;Content-Type\&quot;:\&quot;application/json\&quot;}&quot;,
-		&quot;body&quot;: &quot;{\&quot;message\&quot;:\&quot;\&quot;}&quot;
+		&quot;body&quot;: &quot;{\&quot;message\&quot;:\&quot;{{llm_1}}\&quot;}&quot;
 	}
 }
 </code></pre>

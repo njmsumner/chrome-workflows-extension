@@ -99,14 +99,14 @@
 <td style="text-align:left"><strong>Page Title (Optional)</strong></td>
 <td style="text-align:left"><code>string</code></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Optional replacement title. When blank, the current page title is retained. Supports template tokens, such as ``.</td>
+<td style="text-align:left">Optional replacement title. When blank, the current page title is retained. Supports template tokens, such as <code>{{llm_1}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>contentTemplate</code></td>
 <td style="text-align:left"><strong>Page Body (XHTML Storage Format)</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Page body in Confluence XHTML storage format. Defaults to <code>&lt;p&gt;Updated content: &lt;/p&gt;</code> and supports template tokens.</td>
+<td style="text-align:left">Page body in Confluence XHTML storage format. Defaults to <code>&lt;p&gt;Updated content: {{llm_1}}&lt;/p&gt;</code> and supports template tokens.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>authType</code></td>
@@ -127,7 +127,7 @@
 <td style="text-align:left"><strong>API Token / Password</strong> or <strong>PAT</strong></td>
 <td style="text-align:left"><code>password</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">API token/password for Basic authentication or personal access token for bearer authentication. Supports template tokens, e.g. ``.</td>
+<td style="text-align:left">API token/password for Basic authentication or personal access token for bearer authentication. Supports template tokens, e.g. <code>{{globals.confluence_api_token}}</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -140,10 +140,10 @@ The API token field can reference a secret stored as a global variable.</p>
 <h3>Output State</h3>
 <p>After a successful update, downstream steps can reference the returned page metadata:</p>
 <ul>
-<li>``: Updated page content ID.</li>
-<li>``: Updated page title.</li>
-<li>``: Updated page version number.</li>
-<li>``: Confluence page URL when returned by the API; otherwise <code>null</code>.</li>
+<li><code>{{confluence_1.id}}</code>: Updated page content ID.</li>
+<li><code>{{confluence_1.title}}</code>: Updated page title.</li>
+<li><code>{{confluence_1.version}}</code>: Updated page version number.</li>
+<li><code>{{confluence_1.url}}</code>: Confluence page URL when returned by the API; otherwise <code>null</code>.</li>
 </ul>
 <hr>
 <h2>Sidebar UI Actions</h2>
@@ -158,11 +158,11 @@ The API token field can reference a secret stored as a global variable.</p>
 	&quot;config&quot;: {
 		&quot;baseUrl&quot;: &quot;https://your-domain.atlassian.net/wiki&quot;,
 		&quot;pageId&quot;: &quot;123456789&quot;,
-		&quot;titleTemplate&quot;: &quot;Workflow summary: &quot;,
-		&quot;contentTemplate&quot;: &quot;&lt;p&gt;Summary: &lt;/p&gt;&quot;,
+		&quot;titleTemplate&quot;: &quot;Workflow summary: {{llm_1}}&quot;,
+		&quot;contentTemplate&quot;: &quot;&lt;p&gt;Summary: {{llm_1}}&lt;/p&gt;&quot;,
 		&quot;authType&quot;: &quot;bearer&quot;,
 		&quot;email&quot;: &quot;&quot;,
-		&quot;apiToken&quot;: &quot;&quot;
+		&quot;apiToken&quot;: &quot;{{globals.confluence_api_token}}&quot;
 	}
 }
 </code></pre>

@@ -106,28 +106,28 @@
 <td style="text-align:left"><strong>Summary / Title</strong></td>
 <td style="text-align:left"><code>text</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Issue summary. Supports tokens, such as ``.</td>
+<td style="text-align:left">Issue summary. Supports tokens, such as <code>{{extract_1.title}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>description</code></td>
 <td style="text-align:left"><strong>Description</strong></td>
 <td style="text-align:left"><code>textarea</code></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Optional issue details. Supports tokens, such as ``; v3 converts the text to ADF, while v2 sends it as text.</td>
+<td style="text-align:left">Optional issue details. Supports tokens, such as <code>{{llm_1}}</code>; v3 converts the text to ADF, while v2 sends it as text.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>email</code></td>
 <td style="text-align:left"><strong>Email Address</strong></td>
 <td style="text-align:left"><code>email</code></td>
 <td style="text-align:left"><strong>Yes for Basic authentication</strong></td>
-<td style="text-align:left">Jira account email; shown and required at execution only for Basic authentication. Supports ``.</td>
+<td style="text-align:left">Jira account email; shown and required at execution only for Basic authentication. Supports <code>{{globals.jira_email}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>apiToken</code></td>
 <td style="text-align:left"><strong>API Token / Secret Key</strong></td>
 <td style="text-align:left"><code>password</code></td>
 <td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">API token for Basic authentication or personal access token for Server/Data Center. Supports ``.</td>
+<td style="text-align:left">API token for Basic authentication or personal access token for Server/Data Center. Supports <code>{{globals.jira_api_token}}</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>apiVers</code></td>
@@ -148,14 +148,14 @@
 <hr>
 <h2>Template Tokens &amp; State Output</h2>
 <h3>Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Summary / Title</strong>, <strong>Description</strong>, <strong>Email Address</strong>, and <strong>API Token / Secret Key</strong>. The workflow runner resolves tokens before execution; for example, use <code>in a summary and</code> in a description.</p>
+<p>The form exposes token insertion for <strong>Summary / Title</strong>, <strong>Description</strong>, <strong>Email Address</strong>, and <strong>API Token / Secret Key</strong>. The workflow runner resolves tokens before execution; for example, use <code>{{extract_1.title}}</code> in a summary and <code>{{llm_1}}</code> in a description.</p>
 <h3>Output State</h3>
 <p>On success, the plugin returns an object with these properties:</p>
 <ul>
-<li>``: Jira issue ID from the API response.</li>
-<li>``: Jira issue key. The plugin requires this value in the API response.</li>
-<li>``: Jira API URL from the response.</li>
-<li>``: Browser URL for the created issue, built from the configured Jira base URL and returned issue key.</li>
+<li><code>{{jira_issue_1.id}}</code>: Jira issue ID from the API response.</li>
+<li><code>{{jira_issue_1.key}}</code>: Jira issue key. The plugin requires this value in the API response.</li>
+<li><code>{{jira_issue_1.self}}</code>: Jira API URL from the response.</li>
+<li><code>{{jira_issue_1.issueUrl}}</code>: Browser URL for the created issue, built from the configured Jira base URL and returned issue key.</li>
 </ul>
 <h2>Sidebar UI Actions</h2>
 <ul>
@@ -170,12 +170,12 @@
 		&quot;domainUrl&quot;: &quot;https://your-domain.atlassian.net&quot;,
 		&quot;projectKey&quot;: &quot;PROJ&quot;,
 		&quot;issueType&quot;: &quot;Task&quot;,
-		&quot;summary&quot;: &quot;[AI] &quot;,
-		&quot;description&quot;: &quot;&quot;,
+		&quot;summary&quot;: &quot;[AI] {{extract_1.title}}&quot;,
+		&quot;description&quot;: &quot;{{llm_1}}&quot;,
 		&quot;apiVers&quot;: &quot;v3&quot;,
 		&quot;authMethod&quot;: &quot;basic&quot;,
-		&quot;email&quot;: &quot;&quot;,
-		&quot;apiToken&quot;: &quot;&quot;
+		&quot;email&quot;: &quot;{{globals.jira_email}}&quot;,
+		&quot;apiToken&quot;: &quot;{{globals.jira_api_token}}&quot;
 	}
 }
 </code></pre>
