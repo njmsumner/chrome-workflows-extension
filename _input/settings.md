@@ -1,4 +1,4 @@
-# Settings Screen Documentation
+# Settings Screen
 
 The **Settings Screen** in the AI Workflow Sidebar provides a centralized control panel for configuring global application behavior, default Large Language Model (LLM) credentials, extension display settings, and reusable global variable tokens.
 
@@ -22,19 +22,6 @@ Settings can be accessed from anywhere in the sidebar interface by clicking the 
 ## 1. Default LLM Settings
 
 The **Default LLM** section (located under the **General** tab) defines the system-wide AI credentials used by background automation helpers and serves as a fallback provider for workflow steps.
-
-```
-+-----------------------------------------------------------------------+
-| Default LLM                                                           |
-| Credentials for background AI helpers like workflow generator         |
-| agents, and also can be used in workflows                             |
-|                                                                       |
-| Provider:       [ OpenRouter                             v ]          |
-| OpenAI endpoint:[ https://openrouter.ai/api/v1                     ]  |
-| API Key:        [ ************************************************ ]  |
-| Model:          [ gpt-4o-mini                                      ]  |
-+-----------------------------------------------------------------------+
-```
 
 ### Purpose & Capabilities
 

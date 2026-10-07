@@ -69,14 +69,14 @@ To streamline workflow creation, the extension runner automatically inspects dow
 
 During execution, `detectExtractOptionsFromTokens()` computes and enables required extraction options automatically:
 
-- **`{{extract_1.title}}`** $\rightarrow$ Automatically sets `includeTitle: true`.
-- **`{{extract_1.selection}}`** $\rightarrow$ Automatically sets `includeSelection: true`.
-- **`{{extract_1.heading}}`** $\rightarrow$ Automatically sets `includeHeadings: true`.
-- **`{{extract_1.links}}`** $\rightarrow$ Automatically sets `includeLinks: true`.
-- **`{{extract_1.buttons}}`** $\rightarrow$ Automatically sets `includeButtons: true`.
-- **`{{extract_1.fields}}`** $\rightarrow$ Automatically sets `includeFields: true`.
-- **`{{extract_1.content}}`** $\rightarrow$ Automatically sets `includeElement: true` (or page content flag).
-- **`{{extract_1}}` (Whole Object)** $\rightarrow$ Enables all standard metadata flags (`title`, `selection`, `heading`, `links`, `buttons`, `fields`, `content`).
+- **`{{extract_1.title}}`** &gt; Automatically sets `includeTitle: true`.
+- **`{{extract_1.selection}}`** &gt; Automatically sets `includeSelection: true`.
+- **`{{extract_1.heading}}`** &gt; Automatically sets `includeHeadings: true`.
+- **`{{extract_1.links}}`** &gt; Automatically sets `includeLinks: true`.
+- **`{{extract_1.buttons}}`** &gt; Automatically sets `includeButtons: true`.
+- **`{{extract_1.fields}}`** &gt; Automatically sets `includeFields: true`.
+- **`{{extract_1.content}}`** &gt; Automatically sets `includeElement: true` (or page content flag).
+- **`{{extract_1}}` (Whole Object)** &gt; Enables all standard metadata flags (`title`, `selection`, `heading`, `links`, `buttons`, `fields`, `content`).
 
 ---
 

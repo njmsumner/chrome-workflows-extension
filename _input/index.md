@@ -1,4 +1,4 @@
-# Chrome Workflows Extension Documentation
+# AI Workflows Chrome Extension Documentation
 
 ## Contents
 

@@ -34,7 +34,7 @@
 		</header>
 
 		<main class="content">
-			<h1 id="settings-screen-documentation">Settings Screen Documentation</h1>
+			<h1 id="settings-screen">Settings Screen</h1>
 <p>The <strong>Settings Screen</strong> in the AI Workflow Sidebar provides a centralized control panel for configuring global application behavior, default Large Language Model (LLM) credentials, extension display settings, and reusable global variable tokens.</p>
 <p>Settings can be accessed from anywhere in the sidebar interface by clicking the <strong>Settings</strong> button in the main header, workflow list header, or agent creation panel.</p>
 <img src="../img/Settings General.png" alt="Settings - General" />
@@ -74,17 +74,6 @@
 <hr>
 <h2 id="1-default-llm-settings">1. Default LLM Settings</h2>
 <p>The <strong>Default LLM</strong> section (located under the <strong>General</strong> tab) defines the system-wide AI credentials used by background automation helpers and serves as a fallback provider for workflow steps.</p>
-<pre><code>+-----------------------------------------------------------------------+
-| Default LLM                                                           |
-| Credentials for background AI helpers like workflow generator         |
-| agents, and also can be used in workflows                             |
-|                                                                       |
-| Provider:       [ OpenRouter                             v ]          |
-| OpenAI endpoint:[ https://openrouter.ai/api/v1                     ]  |
-| API Key:        [ ************************************************ ]  |
-| Model:          [ gpt-4o-mini                                      ]  |
-+-----------------------------------------------------------------------+
-</code></pre>
 <h3 id="purpose-capabilities">Purpose &amp; Capabilities</h3>
 <ul>
 <li><strong>Background Agent Helpers</strong>: Powers natural language workflow generation (<code>AgentUi.generateWorkflow</code>) and single-step prompt generation (<code>generateSingleStep</code>).</li>

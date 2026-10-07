@@ -211,14 +211,14 @@
 <p>To streamline workflow creation, the extension runner automatically inspects downstream workflow steps for tokens referencing an Extract step (e.g. <code>{{extract_1.fields}}</code> or <code>{{extract_1.title}}</code>).</p>
 <p>During execution, <code>detectExtractOptionsFromTokens()</code> computes and enables required extraction options automatically:</p>
 <ul>
-<li><strong><code>{{extract_1.title}}</code></strong> $\rightarrow$ Automatically sets <code>includeTitle: true</code>.</li>
-<li><strong><code>{{extract_1.selection}}</code></strong> $\rightarrow$ Automatically sets <code>includeSelection: true</code>.</li>
-<li><strong><code>{{extract_1.heading}}</code></strong> $\rightarrow$ Automatically sets <code>includeHeadings: true</code>.</li>
-<li><strong><code>{{extract_1.links}}</code></strong> $\rightarrow$ Automatically sets <code>includeLinks: true</code>.</li>
-<li><strong><code>{{extract_1.buttons}}</code></strong> $\rightarrow$ Automatically sets <code>includeButtons: true</code>.</li>
-<li><strong><code>{{extract_1.fields}}</code></strong> $\rightarrow$ Automatically sets <code>includeFields: true</code>.</li>
-<li><strong><code>{{extract_1.content}}</code></strong> $\rightarrow$ Automatically sets <code>includeElement: true</code> (or page content flag).</li>
-<li><strong><code>{{extract_1}}</code> (Whole Object)</strong> $\rightarrow$ Enables all standard metadata flags (<code>title</code>, <code>selection</code>, <code>heading</code>, <code>links</code>, <code>buttons</code>, <code>fields</code>, <code>content</code>).</li>
+<li><strong><code>{{extract_1.title}}</code></strong> &gt; Automatically sets <code>includeTitle: true</code>.</li>
+<li><strong><code>{{extract_1.selection}}</code></strong> &gt; Automatically sets <code>includeSelection: true</code>.</li>
+<li><strong><code>{{extract_1.heading}}</code></strong> &gt; Automatically sets <code>includeHeadings: true</code>.</li>
+<li><strong><code>{{extract_1.links}}</code></strong> &gt; Automatically sets <code>includeLinks: true</code>.</li>
+<li><strong><code>{{extract_1.buttons}}</code></strong> &gt; Automatically sets <code>includeButtons: true</code>.</li>
+<li><strong><code>{{extract_1.fields}}</code></strong> &gt; Automatically sets <code>includeFields: true</code>.</li>
+<li><strong><code>{{extract_1.content}}</code></strong> &gt; Automatically sets <code>includeElement: true</code> (or page content flag).</li>
+<li><strong><code>{{extract_1}}</code> (Whole Object)</strong> &gt; Enables all standard metadata flags (<code>title</code>, <code>selection</code>, <code>heading</code>, <code>links</code>, <code>buttons</code>, <code>fields</code>, <code>content</code>).</li>
 </ul>
 <hr>
 <h2 id="interactive-visual-element-picker">Interactive Visual Element Picker</h2>

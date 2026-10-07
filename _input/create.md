@@ -1,4 +1,4 @@
-# Create Workflow Screen Documentation
+# Create Workflow Screen
 
 The **Create Workflow** screen (also known as the **Agent UI**) serves as the primary creation hub for the AI Workflow Chrome Extension. It bridges natural language user intent with structured browser automation, enabling users to generate multi-step workflows using generative AI models, pick from pre-built sample templates, or configure custom workflows from scratch.
 
