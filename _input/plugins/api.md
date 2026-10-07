@@ -42,9 +42,19 @@ The step output is the response body, not a wrapper object:
 
 ---
 
-## Sidebar UI Actions
+## API Template
 
-No sidebar action is provided.
+These templates represent common API integrations that can be used within the API plugin.#
+Selecting a template will pre-fill the API configuration with the necessary endpoint, headers, and body structure for that integration.
+
+- Discord Post
+- GitHub Create Issue
+- Notion Create Page in Database
+- n8n Workflow (Local)
+- n8n Workflow (Cloud)
+- Todoist Create Task
+- Telegram Send Notification
+- ClickUp Create Task
 
 ---
 
