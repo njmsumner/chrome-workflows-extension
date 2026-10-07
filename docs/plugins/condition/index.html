@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Condition (<code>condition</code>)</h1>
+			<h1 id="condition-condition">Condition (<code>condition</code>)</h1>
 <p>The <strong>Condition</strong> plugin compares a configured value with a selected condition. If the condition is not met, execution throws an error and the workflow stops.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -104,19 +104,19 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The <strong>Value</strong> and <strong>Comparison value</strong> fields support workflow tokens, which the runner resolves before this step executes. For example, compare <code>{{extract_1.title}}</code> with a configured string using <strong>Contains</strong>.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>When the condition passes, the step returns an object containing:</p>
 <ul>
 <li><code>{{condition_1.passed}}</code>: Boolean <code>true</code>.</li>
 </ul>
 <p>If the condition fails or its configuration is missing, execution throws <code>Condition was not met.</code> and no success output is returned.</p>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <p>No sidebar action is provided.</p>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;condition_1&quot;,
 	&quot;type&quot;: &quot;condition&quot;,

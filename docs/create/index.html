@@ -34,8 +34,330 @@
 		</header>
 
 		<main class="content">
-			<h1>Create Workflow</h1>
-<p>There are several ways to create a new workflow.</p>
+			<h1 id="create-workflow-screen-documentation">Create Workflow Screen Documentation</h1>
+<p>The <strong>Create Workflow</strong> screen (also known as the <strong>Agent UI</strong>) serves as the primary creation hub for the AI Workflow Chrome Extension. It bridges natural language user intent with structured browser automation, enabling users to generate multi-step workflows using generative AI models, pick from pre-built sample templates, or configure custom workflows from scratch.</p>
+<h2 id="page-contents">Page Contents</h2>
+<ul>
+<li><a href="#1-overview-architecture">1. Overview &amp; Architecture</a></li>
+<li><a href="#2-header-navigation-controls">2. Header &amp; Navigation Controls</a></li>
+<li><a href="#3-manual-configuration-sample-template-library">3. Manual Configuration &amp; Sample Template Library</a></li>
+<li><a href="#4-ai-powered-workflow-generation-panel">4. AI-Powered Workflow Generation Panel</a></li>
+<li><a href="#5-background-ai-generation-architecture">5. Background AI Generation Architecture</a></li>
+<li><a href="#6-example-natural-language-prompt-generated-payload">6. Example Natural Language Prompt &amp; Generated Payload</a></li>
+<li><a href="#7-troubleshooting-error-states">7. Troubleshooting &amp; Error States</a></li>
+</ul>
+<hr>
+<h2 id="1-overview-architecture">1. Overview &amp; Architecture</h2>
+<p>The Create Workflow interface offers three distinct creation pathways:</p>
+<ol>
+<li><strong>AI-Powered Agentic Workflow Generation</strong>: Transforms plain-English instructions into fully configured, multi-step browser workflows using Large Language Models (LLMs) and active page context.</li>
+<li><strong>Pre-built Sample Templates</strong>: Provides ready-to-use workflow templates for common automation scenarios (such as scraping page content to Google Docs, Sheets, Trello, or Gmail).</li>
+<li><strong>Manual Configuration</strong>: Skips automated setup and opens the interactive Step Editor with an empty workflow canvas.</li>
+</ol>
+<pre><code>                    ┌─────────────────────────────────────────┐
+                    │          Create Workflow Screen         │
+                    └────────────────────┬────────────────────┘
+                                         │
+         ┌───────────────────────────────┼───────────────────────────────┐
+         │                               │                               │
+         ▼                               ▼                               ▼
+┌──────────────────┐           ┌──────────────────┐           ┌──────────────────┐
+│  AI Instructions │           │  Sample Template │           │  Manual Creation │
+│  (Prompt Engine) │           │    Library       │           │   (Empty Editor) │
+└────────┬─────────┘           └────────┬─────────┘           └────────┬─────────┘
+         │                               │                               │
+         ▼                               ▼                               ▼
+┌──────────────────┐           ┌──────────────────┐           ┌──────────────────┐
+│ Background Agent │           │ Clone Template   │           │ Open Blank Card  │
+│ (Default LLM)    │           │ Data Object      │           │ Editor           │
+└────────┬─────────┘           └────────┬─────────┘           └────────┬─────────┘
+         │                               │                               │
+         └───────────────────────────────┼───────────────────────────────┘
+                                         │
+                                         ▼
+                       ┌───────────────────────────────────┐
+                       │     Workflow Editor Section       │
+                       └───────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="2-header-navigation-controls">2. Header &amp; Navigation Controls</h2>
+<p>The top navigation header provides immediate access to list management and global extension configurations.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Header Control</th>
+<th style="text-align:left">DOM Element ID</th>
+<th style="text-align:left">Function &amp; Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Workflows Button</strong></td>
+<td style="text-align:left"><code>#openAgentWorkflowList</code></td>
+<td style="text-align:left">Navigates to the <strong>Workflow List</strong> panel, displaying all saved workflows.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Settings Button</strong></td>
+<td style="text-align:left"><code>#openAgentSettings</code></td>
+<td style="text-align:left">Opens the <strong>Settings</strong> panel to configure Default LLM API credentials or manage Global Variables.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Back Button</strong></td>
+<td style="text-align:left"><code>#closeAgentsBtn</code></td>
+<td style="text-align:left">Returns to the previous view (hidden by default when accessed from the primary menu).</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Error Banner</strong></td>
+<td style="text-align:left"><code>#agentErrorMessage</code></td>
+<td style="text-align:left">Displays real-time error notifications, such as unconfigured LLM settings or API errors.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-manual-configuration-sample-template-library">3. Manual Configuration &amp; Sample Template Library</h2>
+<p>Located at the top of the detail panel, these controls allow instant setup without calling external AI endpoints.</p>
+<h3 id="manual-setup-configure">Manual Setup (<code>Configure</code>)</h3>
+<ul>
+<li><strong>Button</strong>: <code>#createWorkflowBtn</code> (&quot;Configure&quot;)</li>
+<li><strong>Action</strong>: Immediately opens the <strong>Workflow Editor</strong> with a clean slate (<code>null</code> workflow object), letting users manually add steps, define CSS selectors, and construct custom pipelines step-by-step.</li>
+</ul>
+<h3 id="sample-template-library-use-sample">Sample Template Library (<code>Use Sample</code>)</h3>
+<ul>
+<li><strong>Dropdown</strong>: <code>#sampleWorkflowTemplate</code></li>
+<li><strong>Button</strong>: <code>#sampleWorkflowBtn</code> (&quot;Use Sample&quot;)</li>
+<li><strong>Action</strong>: Clones the selected pre-built template, assigns a unique instance name, saves it to Chrome local storage (<code>aiWorkflows</code>), and opens the main workflow view ready for execution.</li>
+</ul>
+<h4 id="standard-included-sample-templates">Standard Included Sample Templates</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Template Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Key Included Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Basic LLM Workflow</strong></td>
+<td style="text-align:left">Analyzes the current page text and answers questions in the sidebar.</td>
+<td style="text-align:left"><code>extract</code> $\rightarrow$ <code>openai</code> $\rightarrow$ <code>updatePage</code> (Sidebar)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Collect Snippets to Google Doc</strong></td>
+<td style="text-align:left">Extracts page title, URL, and text selection, then appends them to a Google Doc.</td>
+<td style="text-align:left"><code>extract</code> $\rightarrow$ <code>googleDocs</code> (Append) $\rightarrow$ <code>updatePage</code> (Sidebar)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Read Prompt from Google Doc</strong></td>
+<td style="text-align:left">Fetches prompt instructions from a Google Doc and passes them to the LLM.</td>
+<td style="text-align:left"><code>googleDocs</code> (Read) $\rightarrow$ <code>openai</code> $\rightarrow$ <code>updatePage</code> (Sidebar)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Save Extracted Data to Google Sheets</strong></td>
+<td style="text-align:left">Scrapes page details and appends them as a new row in a Google Sheet.</td>
+<td style="text-align:left"><code>extract</code> $\rightarrow$ <code>googleSheets</code> (Append)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Save Gmail Draft with Page Details</strong></td>
+<td style="text-align:left">Creates a formatted email draft in Gmail containing page metadata and user input.</td>
+<td style="text-align:left"><code>extract</code> $\rightarrow$ <code>gmail</code> (Save Draft)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Save Web Page Summary to Trello</strong></td>
+<td style="text-align:left">Creates a new Trello card on a board list with page title and summary.</td>
+<td style="text-align:left"><code>extract</code> $\rightarrow$ <code>trelloCreateCard</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Show Extracted Data on Page Load</strong></td>
+<td style="text-align:left">Automatically extracts page content on load and displays it in the sidebar.</td>
+<td style="text-align:left"><code>trigger</code> (Page Load) $\rightarrow$ <code>extract</code> $\rightarrow$ <code>updatePage</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-ai-powered-workflow-generation-panel">4. AI-Powered Workflow Generation Panel</h2>
+<p>The core feature of the Create screen is the natural language generation panel, which converts high-level user instructions into precise browser automation routines.</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│ Instructions  [?]                                                      │
+├────────────────────────────────────────────────────────────────────────┤
+│ Enter instructions to create a workflow or automate the browser       │
+│                                                                        │
+│ Example: &quot;Search for wireless mouse. Extract top 3 results and post   │
+│ to Slack&quot;                                                              │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────┤
+│ [ Generate ]   (sync_spinner.svg)                                      │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="ui-controls-components">UI Controls &amp; Components</h3>
+<ul>
+<li><strong>Instructions Textarea</strong> (<code>#agentPromptInput</code>): The text input field where users enter their natural language requirements or automation goals.</li>
+<li><strong>Tooltip Guidance</strong>: Hovering over the info icon provides key prompt engineering recommendations:
+<blockquote>
+<p><em>To create a workflow, first open the web page where the workflow will run.</em>
+<em>Enter a simple description of the workflow steps.</em>
+<em>Example: &quot;Search for batteries. Add the first product to the basket. Click the basket link/button&quot;</em>
+<em>Start with a simple workflow and add steps later.</em></p>
+</blockquote>
+</li>
+<li><strong>Generate Button</strong> (<code>#agentGenerateBtn</code>): Initiates background context gathering and dispatches the AI generation request.</li>
+<li><strong>Progress Spinner</strong> (<code>#agentSpinner</code>): Visual loading indicator active while the LLM processes the request.</li>
+</ul>
+<hr>
+<h2 id="5-background-ai-generation-architecture">5. Background AI Generation Architecture</h2>
+<p>When the user clicks <strong>Generate</strong>, the extension executes a multi-stage background process that constructs a rich prompt payload, queries the configured LLM provider, enforces strict JSON schema validation, and instantiates the resulting workflow.</p>
+<pre><code>┌────────────────────────┐
+│  Active Browser Tab    │
+│  (DOM Context)         │
+└───────────┬────────────┘
+            │ 1. Extract Form Fields &amp; Clickable Buttons
+            ▼
+┌────────────────────────┐
+│  Agent UI Controller   │
+│  (agent-ui.ts)         │
+└───────────┬────────────┘
+            │ 2. Compose APP_INTEL_GENERATE Runtime Message
+            ▼
+┌────────────────────────┐
+│ Background Worker      │
+│ (background-agent.ts)  │
+└───────────┬────────────┘
+            │ 3. Fetch Global Vars &amp; Plugin Config Schemas
+            │ 4. Build Structured System &amp; User Prompts
+            ▼
+┌────────────────────────┐
+│  Default LLM Endpoint  │
+│  (OpenAI / Compatible) │
+└───────────┬────────────┘
+            │ 5. Return Validated JSON Workflow (Structured Output)
+            ▼
+┌────────────────────────┐
+│  Workflow Manager      │
+│  (Save &amp; Open Editor)  │
+└────────────────────────┘
+</code></pre>
+<h3 id="step-1-active-tab-context-gathering">Step 1: Active Tab Context Gathering</h3>
+<p>The <code>AgentUi</code> class queries the active browser tab via <code>context-provider.ts</code> to extract structural DOM details:</p>
+<ul>
+<li><strong>Page Metadata</strong>: <code>contextTitle</code> and <code>contextUrl</code>.</li>
+<li><strong>Available Form Fields (<code>pageInputs</code>)</strong>: CSS selectors, labels, placeholders, and field types.</li>
+<li><strong>Available Clickable Buttons (<code>pageButtons</code>)</strong>: CSS selectors and button text/values.</li>
+</ul>
+<h3 id="step-2-system-prompt-schema-injection">Step 2: System Prompt &amp; Schema Injection</h3>
+<p>The background listener (<code>background-agent-listener.ts</code>) constructs the full prompt by combining:</p>
+<ol>
+<li><strong>System Prompt (<code>GENERAL_AGENT_PROMPT</code>)</strong>: Outlines rules for step ordering, state token passing (``), and DOM actions.</li>
+<li><strong>Current Tab Context</strong>: Injects extracted inputs and buttons so the LLM uses exact CSS selectors from the active page.</li>
+<li><strong>Global Variables</strong>: Injects available secret tokens (e.g. <code>, </code>).</li>
+<li><strong>Plugin Registry Schemas</strong>: Injects descriptions and config requirements for registered plugins (Slack, Jira, Google Docs, Sheets, Microsoft 365, etc.).</li>
+<li><strong>JSON Schema Enforcement (<code>WORKFLOW_JSON_SCHEMA</code>)</strong>: Passed as <code>response_format</code> to enforce strict schema adherence from OpenAI Structured Outputs or compatible endpoints.</li>
+</ol>
+<h3 id="step-3-execution-auto-transition">Step 3: Execution &amp; Auto-Transition</h3>
+<ol>
+<li>The background worker dispatches a <code>POST</code> request to the configured <strong>Default LLM Endpoint</strong> (e.g. <code>https://api.openai.com/v1/chat/completions</code>).</li>
+<li>Upon receiving the JSON completion, <code>normalizeGeneratedWorkflow()</code> validates that all step IDs are unique, step types exist in <code>PluginRegistry</code>, and required parameters are present.</li>
+<li>The new workflow is appended to <code>state.workflows</code> and persisted in Chrome storage.</li>
+<li>The sidebar automatically hides the Create screen, opens the <strong>Workflow Editor</strong>, and alerts the user:
+<blockquote>
+<p><em>&quot;Successfully created workflow: [Workflow Name]&quot;</em></p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="6-example-natural-language-prompt-generated-payload">6. Example Natural Language Prompt &amp; Generated Payload</h2>
+<h3 id="user-prompt-input">User Prompt Input</h3>
+<blockquote>
+<p><em>&quot;Extract the product title and price from this page, generate an executive summary using LLM, and post the summary to Slack&quot;</em></p>
+</blockquote>
+<h3 id="dispatched-context-payload-sent-to-llm">Dispatched Context Payload (Sent to LLM)</h3>
+<pre><code>[Current Tab Context]
+- Page Title: Wireless Ergonomic Mouse - Tech Store
+- Page URL: https://example-store.com/products/mouse-123
+
+[Available Form Fields / Inputs]
+Selector: &quot;input#qty&quot;, Label: &quot;Quantity&quot;, Placeholder: &quot;1&quot;
+
+[Available Clickable Buttons]
+Selector: &quot;button#add-to-cart&quot;, Text/Value: &quot;Add to Cart&quot;
+
+[Available Global Variables]
+- 
+
+[User Goal / Request]
+Extract the product title and price from this page, generate an executive summary using LLM, and post the summary to Slack
+</code></pre>
+<h3 id="generated-json-workflow-payload">Generated JSON Workflow Payload</h3>
+<pre><code class="language-json">{
+	&quot;name&quot;: &quot;Product Summary to Slack&quot;,
+	&quot;description&quot;: &quot;Extracts product details, summarizes them with LLM, and dispatches a Slack alert.&quot;,
+	&quot;displayDescription&quot;: true,
+	&quot;enabled&quot;: true,
+	&quot;urlRegex&quot;: &quot;&quot;,
+	&quot;steps&quot;: [
+		{
+			&quot;id&quot;: &quot;extract_1&quot;,
+			&quot;type&quot;: &quot;extract&quot;,
+			&quot;options&quot;: {
+				&quot;includeTitle&quot;: true,
+				&quot;includePageText&quot;: true,
+				&quot;includeCleanHtml&quot;: false,
+				&quot;includeSelection&quot;: false
+			},
+			&quot;config&quot;: {}
+		},
+		{
+			&quot;id&quot;: &quot;openai_1&quot;,
+			&quot;type&quot;: &quot;openai&quot;,
+			&quot;config&quot;: {
+				&quot;useDefaultSettings&quot;: true,
+				&quot;prompt&quot;: &quot;You are a product research assistant. Create a concise summary including key features and price.&quot;,
+				&quot;context&quot;: &quot;Title: \n\nFull Text:\n&quot;
+			}
+		},
+		{
+			&quot;id&quot;: &quot;slack_1&quot;,
+			&quot;type&quot;: &quot;slack&quot;,
+			&quot;config&quot;: {
+				&quot;webhookUrl&quot;: &quot;&quot;,
+				&quot;message&quot;: &quot;🛍️ *New Product Research Summary*\n\n*Product:* \n*URL:* \n\n*AI Summary:*\n&quot;
+			}
+		}
+	]
+}
+</code></pre>
+<hr>
+<h2 id="7-troubleshooting-error-states">7. Troubleshooting &amp; Error States</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Error Message in UI</th>
+<th style="text-align:left">Root Cause</th>
+<th style="text-align:left">Resolution Step</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>&quot;Set up your Default LLM endpoint and API key in Settings to use AI features.&quot;</strong></td>
+<td style="text-align:left">No API key is stored in Default LLM settings.</td>
+<td style="text-align:left">Click <strong>Settings</strong> in the header and enter your OpenAI API key and endpoint.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>&quot;Please enter some instructions first.&quot;</strong></td>
+<td style="text-align:left">Generate was clicked with an empty text area.</td>
+<td style="text-align:left">Type a description into the Instructions box before clicking Generate.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>&quot;Import error: Response payload is not a valid workflow. Try refining your prompt.&quot;</strong></td>
+<td style="text-align:left">The LLM returned incomplete JSON or invalid step types.</td>
+<td style="text-align:left">Refine the prompt instructions with more specific step descriptions.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>&quot;Could not communicate with the webpage. Please refresh the web page and try again.&quot;</strong></td>
+<td style="text-align:left">Content script is disconnected on the active tab.</td>
+<td style="text-align:left">Refresh the active web page (<code>F5</code>) to re-inject the content script listener.</td>
+</tr>
+</tbody>
+</table>
 
 		</main>
 

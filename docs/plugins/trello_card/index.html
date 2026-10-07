@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Trello Create Card (<code>trelloCreateCard</code>)</h1>
+			<h1 id="trello-create-card-trellocreatecard">Trello Create Card (<code>trelloCreateCard</code>)</h1>
 <p>The <strong>Trello Create Card</strong> plugin creates a card in a configured Trello list through the Trello REST API. Workflows can populate the card title and description with values from earlier steps and choose whether to place it at the top or bottom of the list.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -125,10 +125,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The API key, OAuth token, list ID, card name, and description fields accept workflow template tokens. The position selector does not.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>After a successful card creation, downstream steps can reference the returned Trello card data:</p>
 <ul>
 <li><code>{{trello_card_1.id}}</code>: Card ID.</li>
@@ -138,12 +138,12 @@
 <li><code>{{trello_card_1.idList}}</code>: ID of the list containing the card.</li>
 <li><code>{{trello_card_1.idBoard}}</code>: ID of the board containing the card.</li>
 </ul>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>View Trello</strong>: Opens <code>https://trello.com</code> when the list ID is configured and resolves without an unresolved template token. It does not open a list-specific URL.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;trello_card_1&quot;,
 	&quot;type&quot;: &quot;trelloCreateCard&quot;,

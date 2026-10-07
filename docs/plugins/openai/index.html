@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>OpenAI/LLM (<code>openai</code>)</h1>
+			<h1 id="openaillm-openai">OpenAI/LLM (<code>openai</code>)</h1>
 <p>The <strong>OpenAI/LLM</strong> plugin is designed to send context and a system prompt to an OpenAI-compatible provider, then return response text, raw response data, and token usage. It supports saved default LLM settings or a per-step endpoint, model, and API key.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -125,10 +125,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The form exposes token insertion for <strong>API Key</strong>, <strong>Input/Context</strong>, and <strong>System prompt</strong>. The runner resolves templates before execution. The default context includes <code>{{userInput}}</code> and <code>{{extract_1.content}}</code>; including <code>{{userInput}}</code> makes a user-input field available on the Run Workflow page.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>When a real provider response is parsed, the step returns:</p>
 <ul>
 <li><code>{{openai_1.text}}</code>: Extracted response text.</li>
@@ -137,10 +137,10 @@
 <li><code>{{openai_1.usage.outputTokens}}</code>: Output token usage, or <code>0</code> if not provided.</li>
 </ul>
 <p><strong>Current implementation note:</strong> <code>stubEnabled</code> is set to <code>true</code>, so outside Vitest the plugin returns a fixed stub response instead of making the provider request. The stub has a <code>text</code> string, an empty <code>raw</code> object, and usage values of <code>1</code> input token and <code>2</code> output tokens.</p>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <p>No sidebar action is provided.</p>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;openai_1&quot;,
 	&quot;type&quot;: &quot;openai&quot;,

@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Microsoft Outlook Email (<code>microsoftEmail</code>)</h1>
+			<h1 id="microsoft-outlook-email-microsoftemail">Microsoft Outlook Email (<code>microsoftEmail</code>)</h1>
 <p>The <strong>Microsoft Outlook Email</strong> plugin sends an email through Microsoft Graph or saves it as a draft. It supports dynamic recipients, subjects, and message bodies, with plain-text or HTML content.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -118,10 +118,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The form exposes token insertion for <strong>Recipient (To)</strong>, <strong>Subject</strong>, and <strong>Email Body</strong>. For example, use <code>{{extract_1.email}}</code> for a recipient and <code>{{llm_1}}</code> in the message body.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>On success, both actions return <code>status</code>, <code>action</code>, <code>to</code>, and <code>subject</code>:</p>
 <ul>
 <li><code>{{ms_email_1.status}}</code>: <code>success</code>.</li>
@@ -134,13 +134,13 @@
 <li><code>{{ms_email_1.messageId}}</code>: Draft message ID from Microsoft Graph.</li>
 <li><code>{{ms_email_1.webLink}}</code>: Draft web link from Microsoft Graph, when returned.</li>
 </ul>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>Open Outlook</strong>: Opens Outlook Web Mail when the action is <code>send</code> (or not <code>draft</code>).</li>
 <li><strong>View Drafts</strong>: Opens the Outlook drafts folder when the action is <code>draft</code>.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;ms_email_1&quot;,
 	&quot;type&quot;: &quot;microsoftEmail&quot;,

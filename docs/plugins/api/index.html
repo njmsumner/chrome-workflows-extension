@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>API/Webhook (<code>api</code>)</h1>
+			<h1 id="apiwebhook-api">API/Webhook (<code>api</code>)</h1>
 <p>The <strong>API/Webhook</strong> plugin sends an HTTP request to an API endpoint or webhook and returns the response body. It supports common HTTP methods, configurable JSON headers and payloads, and workflow template values.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -111,20 +111,20 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>Template values in the endpoint, headers, and body are resolved against workflow state. For example, use <code>{{extract_1.title}}</code> or <code>{{globals.api_url}}</code>. The workflow's <code>userInput</code> is also added to a non-GET request body when present; for GET requests it is added as a <code>userInput</code> query parameter.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>The step output is the response body, not a wrapper object:</p>
 <ul>
 <li>For a JSON response, the output is the parsed JSON value. Reference it directly with <code>{{api_1}}</code> or reference returned properties, such as <code>{{api_1.id}}</code> when the response contains an <code>id</code> property.</li>
 <li>For a non-JSON response, the output is the response text and can be referenced with <code>{{api_1}}</code>.</li>
 </ul>
 <hr>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <p>No sidebar action is provided.</p>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;api_1&quot;,
 	&quot;type&quot;: &quot;api&quot;,

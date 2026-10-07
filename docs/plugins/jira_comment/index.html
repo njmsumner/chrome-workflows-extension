@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Jira Comment (<code>jiraComment</code>)</h1>
+			<h1 id="jira-comment-jiracomment">Jira Comment (<code>jiraComment</code>)</h1>
 <p>The <strong>Jira Comment</strong> plugin posts a comment to a Jira issue using the Jira REST API. It supports Jira Cloud and Server/Data Center, with v3 rich-text or v2 plain-text comment formats and Basic or personal-access-token authentication.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -132,10 +132,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The workflow runner resolves template tokens before execution. The form exposes token insertion for <strong>Email Address</strong>, <strong>API Token / Secret Key</strong>, and <strong>Comment Text</strong>; for example, use <code>{{globals.jira_api_token}}</code> for the credential or <code>{{llm_1}}</code> in the comment.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>On success, the step returns the Jira API's parsed JSON response object directly when one is available. Downstream steps can reference returned properties, for example:</p>
 <ul>
 <li><code>{{jira_1.id}}</code>: Comment ID, when included in the API response.</li>
@@ -143,12 +143,12 @@
 <li><code>{{jira_1.created}}</code>: Creation timestamp, when included in the API response.</li>
 <li><code>{{jira_1.status}}</code>: <code>success</code> when JSON parsing fails or the parsed value is <code>null</code> or a primitive.</li>
 </ul>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>View Issue</strong>: Opens the Jira issue in the browser when both the base URL and issue key are configured and resolve without unresolved template tokens.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;jira_1&quot;,
 	&quot;type&quot;: &quot;jiraComment&quot;,

@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h2>Google Gmail Plugin (<code>gmail</code>)</h2>
+			<h2 id="google-gmail-plugin-gmail">Google Gmail Plugin (<code>gmail</code>)</h2>
 <p>The <strong>Google Gmail</strong> plugin allows automated browser workflows to dispatch emails or create draft messages using the official Gmail REST API (<code>https://gmail.googleapis.com/gmail/v1/users/me/</code>). Email payloads are formatted as RFC 2822 standard messages and converted to URL-safe base64 strings prior to transmission.</p>
-<h3>Plugin Overview</h3>
+<h3 id="plugin-overview">Plugin Overview</h3>
 <table>
 <thead>
 <tr>
@@ -71,7 +71,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Configuration Fields</h3>
+<h3 id="configuration-fields">Configuration Fields</h3>
 <table>
 <thead>
 <tr>
@@ -120,15 +120,15 @@
 </tr>
 </tbody>
 </table>
-<h3>Template Tokens &amp; State Output</h3>
-<h4>Available Input Tokens</h4>
+<h3 id="template-tokens-state-output">Template Tokens &amp; State Output</h3>
+<h4 id="available-input-tokens">Available Input Tokens</h4>
 <p>You can inject dynamic workflow values into <code>to</code>, <code>subject</code>, and <code>body</code> fields:</p>
 <ul>
 <li><strong>Workflow Outputs:</strong> <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code>, <code>{{extract_1.selection}}</code></li>
 <li><strong>Global Variables:</strong> <code>{{globals.recipient_email}}</code></li>
 <li><strong>System Variables:</strong> <code>{{url.href}}</code>, <code>{{userInput}}</code>, <code>{{datetime}}</code></li>
 </ul>
-<h4>Output State</h4>
+<h4 id="output-state">Output State</h4>
 <p>When executed, the step returns a JSON object stored under its step ID in the workflow state:</p>
 <ul>
 <li>
@@ -154,7 +154,7 @@
 </ul>
 </li>
 </ul>
-<h3>Sidebar UI Actions</h3>
+<h3 id="sidebar-ui-actions">Sidebar UI Actions</h3>
 <ul>
 <li><strong>View Drafts / Open Gmail</strong>: Displays an interactive button in the sidebar panel (<code>viewContentSection</code>).
 <ul>
@@ -163,8 +163,8 @@
 </ul>
 </li>
 </ul>
-<h3>Example Workflow Configurations</h3>
-<h4>Example 1: Save Email Draft with Page Details</h4>
+<h3 id="example-workflow-configurations">Example Workflow Configurations</h3>
+<h4 id="example-1-save-email-draft-with-page-details">Example 1: Save Email Draft with Page Details</h4>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;gmail_1&quot;,
 	&quot;type&quot;: &quot;gmail&quot;,

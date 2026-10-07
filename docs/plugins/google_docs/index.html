@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h2>Google Docs Plugin (<code>googleDocs</code>)</h2>
+			<h2 id="google-docs-plugin-googledocs">Google Docs Plugin (<code>googleDocs</code>)</h2>
 <p>The <strong>Google Docs</strong> plugin connects workflows with the Google Docs REST API (<code>https://docs.googleapis.com/v1/documents</code>). It supports both appending generated text entries to the end of an existing Google Document and reading complete plain-text contents from a document for downstream processing (such as feeding document text into an LLM prompt).</p>
-<h3>Plugin Overview</h3>
+<h3 id="plugin-overview">Plugin Overview</h3>
 <table>
 <thead>
 <tr>
@@ -71,7 +71,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Configuration Fields</h3>
+<h3 id="configuration-fields">Configuration Fields</h3>
 <table>
 <thead>
 <tr>
@@ -106,10 +106,10 @@
 </tr>
 </tbody>
 </table>
-<h3>Template Tokens &amp; State Output</h3>
-<h4>Available Input Tokens</h4>
+<h3 id="template-tokens-state-output">Template Tokens &amp; State Output</h3>
+<h4 id="available-input-tokens">Available Input Tokens</h4>
 <p><code>documentId</code> and <code>textTemplate</code> accept dynamic token variables</p>
-<h4>Output State</h4>
+<h4 id="output-state">Output State</h4>
 <p>Depending on the selected <code>action</code>, the plugin yields the following state variables:</p>
 <ul>
 <li>
@@ -132,12 +132,12 @@
 </ul>
 </li>
 </ul>
-<h3>Sidebar UI Actions</h3>
+<h3 id="sidebar-ui-actions">Sidebar UI Actions</h3>
 <ul>
 <li><strong>View Doc</strong>: Renders an action button in the sidebar panel. Clicking it opens <code>https://docs.google.com/document/d/{resolvedDocumentId}/edit</code> in a new browser tab.</li>
 </ul>
-<h3>Example Workflow Configurations</h3>
-<h4>Example 1: Read Prompt from Google Doc and Feed to LLM</h4>
+<h3 id="example-workflow-configurations">Example Workflow Configurations</h3>
+<h4 id="example-1-read-prompt-from-google-doc-and-feed-to-llm">Example 1: Read Prompt from Google Doc and Feed to LLM</h4>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;google_docs_1&quot;,
 	&quot;type&quot;: &quot;googleDocs&quot;,
@@ -147,7 +147,7 @@
 	}
 }
 </code></pre>
-<h4>Example 2: Append Web Snippet to Google Doc</h4>
+<h4 id="example-2-append-web-snippet-to-google-doc">Example 2: Append Web Snippet to Google Doc</h4>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;google_docs_1&quot;,
 	&quot;type&quot;: &quot;googleDocs&quot;,

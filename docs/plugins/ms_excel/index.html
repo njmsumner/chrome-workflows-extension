@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Microsoft Excel (<code>microsoftExcel</code>)</h1>
+			<h1 id="microsoft-excel-microsoftexcel">Microsoft Excel (<code>microsoftExcel</code>)</h1>
 <p>The <strong>Microsoft Excel</strong> plugin appends a row to an Excel table or reads cell and range content through Microsoft Graph. It supports workbooks in OneDrive or SharePoint and uses Microsoft OAuth authentication.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -118,10 +118,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The form exposes token insertion for <strong>Workbook Item ID</strong>, <strong>Sheet Name / Cell Range</strong>, <strong>Table Name</strong>, and <strong>Row Values</strong>. The row-values field must remain valid JSON in the form; for example, use <code>&quot;[\&quot;{{extract_1.title}}\&quot;, \&quot;{{llm_1}}\&quot;]&quot;</code> in the workflow configuration.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>Both actions return <code>status</code> (<code>success</code>) and <code>workbookId</code>.</p>
 <p>For <strong>Get Cell / Range Content</strong>, the step also returns:</p>
 <ul>
@@ -135,12 +135,12 @@
 <li><code>{{ms_excel_1.values}}</code>: Values returned by Graph, or the submitted row wrapped in an array.</li>
 <li><code>{{ms_excel_1.timestamp}}</code>: Completion time in ISO 8601 format.</li>
 </ul>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>View Excel File</strong>: Opens the workbook in OneDrive when <code>workbookId</code> resolves to a value without an unresolved template token.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;ms_excel_1&quot;,
 	&quot;type&quot;: &quot;microsoftExcel&quot;,

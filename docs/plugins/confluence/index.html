@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Confluence Page (<code>confluence</code>)</h1>
+			<h1 id="confluence-page-confluence">Confluence Page (<code>confluence</code>)</h1>
 <p>The <strong>Confluence Page</strong> plugin updates an existing Confluence page through the Confluence REST API. Workflows can set a page title and XHTML storage-format body using values from earlier steps.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -132,12 +132,12 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The title, page body, and credential fields are marked as token-enabled in the configuration form.</p>
 <p>Use <code>titleTemplate</code> to provide a dynamic page title and <code>contentTemplate</code> to include dynamic values in the XHTML body.
 The API token field can reference a secret stored as a global variable.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>After a successful update, downstream steps can reference the returned page metadata:</p>
 <ul>
 <li><code>{{confluence_1.id}}</code>: Updated page content ID.</li>
@@ -146,12 +146,12 @@ The API token field can reference a secret stored as a global variable.</p>
 <li><code>{{confluence_1.url}}</code>: Confluence page URL when returned by the API; otherwise <code>null</code>.</li>
 </ul>
 <hr>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>View Page</strong>: Opens the Confluence page when both the base URL and page ID are configured and resolve to complete values.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;confluence_1&quot;,
 	&quot;type&quot;: &quot;confluence&quot;,

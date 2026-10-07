@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Run Workflow (<code>runWorkflow</code>)</h1>
+			<h1 id="run-workflow-runworkflow">Run Workflow (<code>runWorkflow</code>)</h1>
 <p>The <strong>Run Workflow</strong> step executes another saved workflow, passing the current workflow state into it and merging the sub-workflow's results back into the current pipeline. Use it to compose workflows; nested execution is limited to three levels.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -90,17 +90,17 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The workflow runner resolves template tokens throughout the step configuration before execution. <code>targetWorkflowName</code> must resolve to the exact name of a saved workflow. The selector lists other saved workflows; it does not provide token suggestions.</p>
 <p>The selected workflow receives the current workflow state, including values from earlier steps, as its initial state.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>On success, the sub-workflow's state is merged into the current workflow state, so its step outputs can be referenced downstream by their step IDs (for example, <code>{{extract_1.title}}</code>). The <code>run_workflow_1</code> state entry contains the output of the sub-workflow's final step; it has no plugin-defined properties. Internal nesting-depth metadata is not merged into the parent state. If the sub-workflow has no steps, the step output is <code>undefined</code>.</p>
 <hr>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <p>No sidebar action is provided.</p>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;run_workflow_1&quot;,
 	&quot;type&quot;: &quot;runWorkflow&quot;,

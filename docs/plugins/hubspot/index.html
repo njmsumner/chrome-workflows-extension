@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>HubSpot Blog Post (<code>hubspotBlog</code>)</h1>
+			<h1 id="hubspot-blog-post-hubspotblog">HubSpot Blog Post (<code>hubspotBlog</code>)</h1>
 <p>The <strong>HubSpot Blog Post</strong> plugin creates a HubSpot CMS blog post as a draft or publishes it immediately. It sends the configured title, HTML body, and optional metadata to the HubSpot CMS Blogs API.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -146,10 +146,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The form marks <strong>App Access Token</strong>, <strong>Blog ID</strong>, <strong>Author ID</strong>, <strong>Post Title</strong>, and <strong>Post Body</strong> as tokenizable. The workflow runner resolves template tokens before the plugin executes; for example, use <code>{{extract_1.title}}</code> in the post title or <code>{{globals.hubspot_access_token}}</code> for the access token.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>On success, the step returns the parsed HubSpot API response object directly. Downstream steps can reference properties returned by that response, including:</p>
 <ul>
 <li><code>{{hubspot_1.id}}</code>: HubSpot post ID.</li>
@@ -157,12 +157,12 @@
 <li><code>{{hubspot_1.url}}</code>: Post URL.</li>
 </ul>
 <p>The available properties depend on the API response.</p>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>View Blog</strong>: Opens the HubSpot blog page for the configured <code>blogId</code>. The action is shown only when the blog ID resolves to a value without an unresolved template token.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;hubspot_1&quot;,
 	&quot;type&quot;: &quot;hubspotBlog&quot;,

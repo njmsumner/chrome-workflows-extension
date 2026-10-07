@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Microsoft Word (<code>microsoftWord</code>)</h1>
+			<h1 id="microsoft-word-microsoftword">Microsoft Word (<code>microsoftWord</code>)</h1>
 <p>The <strong>Microsoft Word</strong> plugin reads text from a Word document or appends templated text to an existing document through Microsoft Graph. It supports documents stored in OneDrive or SharePoint.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -104,10 +104,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The form exposes token insertion for <strong>OneDrive File ID / Document ID</strong> and <strong>Text to Append</strong>. For example, use <code>{{globals.word_document_id}}</code> for the document ID or <code>{{llm_1}}</code> in the appended text.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>For <strong>Get Document Content</strong>, the step returns:</p>
 <ul>
 <li><code>{{ms_word_1.status}}</code>: <code>success</code>.</li>
@@ -121,12 +121,12 @@
 <li><code>{{ms_word_1.appendedTextLength}}</code>: Length of the appended template text.</li>
 <li><code>{{ms_word_1.result}}</code>: Parsed response from Microsoft Graph, or an empty object if the response body is not valid JSON.</li>
 </ul>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>View Doc</strong>: Opens the Word document in OneDrive when the configured document ID resolves without an unresolved template token.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;ms_word_1&quot;,
 	&quot;type&quot;: &quot;microsoftWord&quot;,

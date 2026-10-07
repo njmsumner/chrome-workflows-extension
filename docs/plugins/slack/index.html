@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Slack Notification (<code>slack</code>)</h1>
+			<h1 id="slack-notification-slack">Slack Notification (<code>slack</code>)</h1>
 <p>The <strong>Slack Notification</strong> plugin posts automated messages to Slack channels using Slack Incoming Webhooks. It enables workflows to send extracted webpage content, LLM summaries, or custom alert payloads directly into your Slack workspace.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -104,22 +104,22 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>You can inject dynamic variables into the <code>message</code>, <code>webhookUrl</code>, or <code>channelUrl</code> fields using double-bracket syntax.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>When executed, the step records its execution status in the pipeline state for downstream steps:</p>
 <ul>
 <li><code>{{slack_1.status}}</code>: String result (<code>&quot;sent&quot;</code> upon success).</li>
 <li><code>{{slack_1.timestamp}}</code>: Epoch timestamp (in milliseconds) when the message was dispatched.</li>
 </ul>
 <hr>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <ul>
 <li><strong>Open Slack Channel</strong>: Displays a action button in the extension sidebar if <code>channelUrl</code> is provided, allowing users to jump directly to the target Slack channel.</li>
 </ul>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;slack_1&quot;,
 	&quot;type&quot;: &quot;slack&quot;,

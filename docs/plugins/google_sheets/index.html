@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h2>Google Sheets Plugin (<code>googleSheets</code>)</h2>
+			<h2 id="google-sheets-plugin-googlesheets">Google Sheets Plugin (<code>googleSheets</code>)</h2>
 <p>The <strong>Google Sheets</strong> plugin integrates with Google Sheets REST API v4 (<code>https://sheets.googleapis.com/v4/spreadsheets/</code>). It provides bidirectional capabilities: appending structured rows of data to a spreadsheet or reading cell range values with optional exact row filtering.</p>
-<h3>Plugin Overview</h3>
+<h3 id="plugin-overview">Plugin Overview</h3>
 <table>
 <thead>
 <tr>
@@ -71,7 +71,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Configuration Fields</h3>
+<h3 id="configuration-fields">Configuration Fields</h3>
 <table>
 <thead>
 <tr>
@@ -120,15 +120,15 @@
 </tr>
 </tbody>
 </table>
-<h3>Template Tokens &amp; State Output</h3>
-<h4>Available Input Tokens</h4>
+<h3 id="template-tokens-state-output">Template Tokens &amp; State Output</h3>
+<h4 id="available-input-tokens">Available Input Tokens</h4>
 <p>All input fields support token replacement, e.g.:</p>
 <ul>
 <li><strong>Workflow Outputs:</strong> <code>{{id_1}}</code>, <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code>, <code>{{extract_1.heading}}</code></li>
 <li><strong>Global Variables:</strong> <code>{{globals.google_sheet_id}}</code></li>
 <li><strong>System Variables:</strong> <code>{{url.href}}</code>, <code>{{datetime}}</code>, <code>{{userInput}}</code></li>
 </ul>
-<h4>Output State</h4>
+<h4 id="output-state">Output State</h4>
 <ul>
 <li>
 <p><strong>For Read Action (<code>action: 'read'</code>):</strong></p>
@@ -151,12 +151,12 @@
 </ul>
 </li>
 </ul>
-<h3>Sidebar UI Actions</h3>
+<h3 id="sidebar-ui-actions">Sidebar UI Actions</h3>
 <ul>
 <li><strong>View Sheet</strong>: Renders an action button in the sidebar panel. Clicking it opens <code>https://docs.google.com/spreadsheets/d/{resolvedSpreadsheetId}/edit</code> in a new browser tab.</li>
 </ul>
-<h3>Example Workflow Configurations</h3>
-<h4>Example 1: Save Extracted Web Metadata to Google Sheet</h4>
+<h3 id="example-workflow-configurations">Example Workflow Configurations</h3>
+<h4 id="example-1-save-extracted-web-metadata-to-google-sheet">Example 1: Save Extracted Web Metadata to Google Sheet</h4>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;google_sheets_1&quot;,
 	&quot;type&quot;: &quot;googleSheets&quot;,
@@ -168,7 +168,7 @@
 	}
 }
 </code></pre>
-<h4>Example 2: Read Google Sheet Row Matching Jira Issue Key</h4>
+<h4 id="example-2-read-google-sheet-row-matching-jira-issue-key">Example 2: Read Google Sheet Row Matching Jira Issue Key</h4>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;google_sheets_1&quot;,
 	&quot;type&quot;: &quot;googleSheets&quot;,

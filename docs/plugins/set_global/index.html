@@ -34,9 +34,9 @@
 		</header>
 
 		<main class="content">
-			<h1>Set Variable (<code>setGlobal</code>)</h1>
+			<h1 id="set-variable-setglobal">Set Variable (<code>setGlobal</code>)</h1>
 <p>The <strong>Set Variable</strong> plugin creates or updates a global variable that workflows can reuse. It stores the value in extension storage and updates the current workflow state so later steps can access it immediately.</p>
-<h2>Plugin Overview</h2>
+<h2 id="plugin-overview">Plugin Overview</h2>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Configuration Fields</h2>
+<h2 id="configuration-fields">Configuration Fields</h2>
 <table>
 <thead>
 <tr>
@@ -97,20 +97,20 @@
 </tbody>
 </table>
 <hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
+<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+<h3 id="available-input-tokens">Available Input Tokens</h3>
 <p>The <strong>Variable Value / Template</strong> field supports workflow tokens. The plugin resolves tokens before evaluating the resulting text as a Jexl expression. If expression evaluation fails, it stores the resolved text as-is. The plugin also registers the <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code> Jexl functions.</p>
-<h3>Output State</h3>
+<h3 id="output-state">Output State</h3>
 <p>After execution, the step returns an object containing:</p>
 <ul>
 <li><code>{{global_1.key}}</code>: The trimmed variable key.</li>
 <li><code>{{global_1.value}}</code>: The value stored as a string.</li>
 </ul>
 <p>The same value is also available to this and later workflows through the global token <code>{{globals.workflow_title}}</code> (replace <code>workflow_title</code> with the configured key).</p>
-<h2>Sidebar UI Actions</h2>
+<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
 <p>No sidebar action is provided.</p>
 <hr>
-<h2>Example Workflow Configuration (JSON)</h2>
+<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;global_1&quot;,
 	&quot;type&quot;: &quot;setGlobal&quot;,
