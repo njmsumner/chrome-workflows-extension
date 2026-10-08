@@ -34,120 +34,26 @@
 		</header>
 
 		<main class="content">
-			<h1 id="apiwebhook-api">API/Webhook (<code>api</code>)</h1>
-<p>The <strong>API/Webhook</strong> plugin sends an HTTP request to an API endpoint or webhook and returns the response body. It supports common HTTP methods, configurable JSON headers and payloads, and workflow template values.</p>
+			<h1 id="apiwebhook">API/Webhook</h1>
+<p>Use <strong>API/Webhook</strong> to send information from a workflow to another online service, or to retrieve information from one. You can start with a ready-made template or enter the service details yourself.</p>
 <img src="../../img/Api.png" alt="API/Webhook Step" />
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>API/Webhook</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>api</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>api</code> (e.g., <code>api_1</code>, <code>api_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Not specified</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">No built-in authentication; configure headers as needed</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>method</code></td>
-<td style="text-align:left"><strong>Method</strong></td>
-<td style="text-align:left"><code>select</code> (<code>GET</code> | <code>POST</code> | <code>PUT</code> | <code>PATCH</code> | <code>DELETE</code>)</td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">HTTP request method. Default: <code>POST</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>url</code></td>
-<td style="text-align:left"><strong>API Endpoint</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Request URL; must be a valid HTTP or HTTPS URL. Template values are resolved at runtime, e.g. <code>{{globals.api_url}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>headers</code></td>
-<td style="text-align:left"><strong>HTTP Headers (JSON)</strong></td>
-<td style="text-align:left"><code>string</code> (JSON object)</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Optional JSON object of string-valued headers. Defaults to <code>{&quot;Content-Type&quot;:&quot;application/json&quot;}</code>. Header values can use tokens, e.g. <code>{&quot;X-Workflow-Value&quot;:&quot;{{globals.header_value}}&quot;}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>body</code></td>
-<td style="text-align:left"><strong>Payload Body (JSON)</strong></td>
-<td style="text-align:left"><code>string</code> (JSON)</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">JSON request payload. Defaults to <code>{&quot;message&quot;:&quot;Result from AI extraction: {{llm_1}}&quot;}</code>. Supports tokens such as <code>{{extract_1.title}}</code>. An empty body uses the most recent non-global step output as the payload, with <code>userInput</code> included when present.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>Template values in the endpoint, headers, and body are resolved against workflow state. For example, use <code>{{extract_1.title}}</code> or <code>{{globals.api_url}}</code>. The workflow's <code>userInput</code> is also added to a non-GET request body when present; for GET requests it is added as a <code>userInput</code> query parameter.</p>
-<h3 id="output-state">Output State</h3>
-<p>The step output is the response body, not a wrapper object:</p>
+<h2 id="overview">Overview</h2>
+<p>Choose the service and information you want to send. The step contacts that service and makes its reply available to later steps in your workflow. Some services require an address or access details that you provide.</p>
+<h2 id="simple-examples">Simple examples</h2>
 <ul>
-<li>For a JSON response, the output is the parsed JSON value. Reference it directly with <code>{{api_1}}</code> or reference returned properties, such as <code>{{api_1.id}}</code> when the response contains an <code>id</code> property.</li>
-<li>For a non-JSON response, the output is the response text and can be referenced with <code>{{api_1}}</code>.</li>
+<li>Send an AI-generated summary of a webpage to a Discord channel.</li>
+<li>Create a GitHub issue using a webpage’s title and summary.</li>
+<li>Add a Todoist task with a webpage link and a short description.</li>
 </ul>
-<hr>
-<h2 id="api-template">API Template</h2>
-<p>These templates represent common API integrations that can be used within the API plugin.#
-Selecting a template will pre-fill the API configuration with the necessary endpoint, headers, and body structure for that integration.</p>
-<ul>
-<li>Discord Post</li>
-<li>GitHub Create Issue</li>
-<li>Notion Create Page in Database</li>
-<li>n8n Workflow (Local)</li>
-<li>n8n Workflow (Cloud)</li>
-<li>Todoist Create Task</li>
-<li>Telegram Send Notification</li>
-<li>ClickUp Create Task</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;api_1&quot;,
-	&quot;type&quot;: &quot;api&quot;,
-	&quot;config&quot;: {
-		&quot;method&quot;: &quot;POST&quot;,
-		&quot;url&quot;: &quot;https://api.example.com/v1/data&quot;,
-		&quot;headers&quot;: &quot;{\&quot;Content-Type\&quot;:\&quot;application/json\&quot;}&quot;,
-		&quot;body&quot;: &quot;{\&quot;message\&quot;:\&quot;{{llm_1}}\&quot;}&quot;
-	}
-}
-</code></pre>
+<h2 id="get-started">Get started</h2>
+<ol>
+<li>Choose a ready-made option from <strong>Use Template</strong>, or set up the connection yourself.</li>
+<li>Enter the service’s address in <strong>API Endpoint</strong>. The address must begin with <code>http://</code> or <code>https://</code>.</li>
+<li>Choose a <strong>Method</strong>. For example, <strong>GET</strong> retrieves information, while <strong>POST</strong> usually sends information or creates something. <strong>PUT</strong> and <strong>PATCH</strong> update information; <strong>DELETE</strong> removes it.</li>
+<li>If the service requires access details, add them under <strong>HTTP Headers (JSON)</strong>. This step does not sign in to services for you.</li>
+<li>Use <strong>Payload Body (JSON)</strong> to choose what information to send. You can include results from earlier workflow steps. Leave it empty to send the previous step’s result automatically.</li>
+</ol>
+<p>Templates fill in example settings for services such as Discord, GitHub, Notion, Todoist, Telegram, ClickUp, and n8n. Review the settings and supply any service-specific address or access details before running the workflow.</p>
 
 		</main>
 

@@ -10,9 +10,8 @@ The **Create Workflow** screen (also known as the **Agent UI**) serves as the pr
 - [2. Header & Navigation Controls](#2-header-navigation-controls)
 - [3. Manual Configuration & Sample Template Library](#3-manual-configuration-sample-template-library)
 - [4. AI-Powered Workflow Generation Panel](#4-ai-powered-workflow-generation-panel)
-- [5. Background AI Generation Architecture](#5-background-ai-generation-architecture)
-- [6. Example Natural Language Prompt & Generated Payload](#6-example-natural-language-prompt-generated-payload)
-- [7. Troubleshooting & Error States](#7-troubleshooting-error-states)
+- [5. Example Natural Language Prompt & Generated Payload](#6-example-natural-language-prompt-generated-payload)
+- [6. Troubleshooting & Error States](#7-troubleshooting-error-states)
 
 ---
 
@@ -24,45 +23,18 @@ The Create Workflow interface offers three distinct creation pathways:
 2. **Pre-built Sample Templates**: Provides ready-to-use workflow templates for common automation scenarios (such as scraping page content to Google Docs, Sheets, Trello, or Gmail).
 3. **Manual Configuration**: Skips automated setup and opens the interactive Step Editor with an empty workflow canvas.
 
-```
-                    ┌─────────────────────────────────────────┐
-                    │          Create Workflow Screen         │
-                    └────────────────────┬────────────────────┘
-                                         │
-         ┌───────────────────────────────┼───────────────────────────────┐
-         │                               │                               │
-         ▼                               ▼                               ▼
-┌──────────────────┐           ┌──────────────────┐           ┌──────────────────┐
-│  AI Instructions │           │  Sample Template │           │  Manual Creation │
-│  (Prompt Engine) │           │    Library       │           │   (Empty Editor) │
-└────────┬─────────┘           └────────┬─────────┘           └────────┬─────────┘
-         │                               │                               │
-         ▼                               ▼                               ▼
-┌──────────────────┐           ┌──────────────────┐           ┌──────────────────┐
-│ Background Agent │           │ Clone Template   │           │ Open Blank Card  │
-│ (Default LLM)    │           │ Data Object      │           │ Editor           │
-└────────┬─────────┘           └────────┬─────────┘           └────────┬─────────┘
-         │                               │                               │
-         └───────────────────────────────┼───────────────────────────────┘
-                                         │
-                                         ▼
-                       ┌───────────────────────────────────┐
-                       │     Workflow Editor Section       │
-                       └───────────────────────────────────┘
-```
-
 ---
 
 ## 2. Header & Navigation Controls
 
 The top navigation header provides immediate access to list management and global extension configurations.
 
-| Header Control       | DOM Element ID           | Function & Behavior                                                                               |
-| :------------------- | :----------------------- | :------------------------------------------------------------------------------------------------ |
-| **Workflows Button** | `#openAgentWorkflowList` | Navigates to the **Workflow List** panel, displaying all saved workflows.                         |
-| **Settings Button**  | `#openAgentSettings`     | Opens the **Settings** panel to configure Default LLM API credentials or manage Global Variables. |
-| **Back Button**      | `#closeAgentsBtn`        | Returns to the previous view (hidden by default when accessed from the primary menu).             |
-| **Error Banner**     | `#agentErrorMessage`     | Displays real-time error notifications, such as unconfigured LLM settings or API errors.          |
+| Header Control       | Function & Behavior                                                                               |
+| :------------------- | :------------------------------------------------------------------------------------------------ |
+| **Workflows Button** | Navigates to the **Workflow List** panel, displaying all saved workflows.                         |
+| **Settings Button**  | Opens the **Settings** panel to configure Default LLM API credentials or manage Global Variables. |
+| **Back Button**      | Returns to the previous view (hidden by default when accessed from the primary menu).             |
+| **Error Banner**     | Displays real-time error notifications, such as unconfigured LLM settings or API errors.          |
 
 ---
 
@@ -112,71 +84,7 @@ The core feature of the Create screen is the natural language generation panel, 
 
 ---
 
-## 5. Background AI Generation Architecture
-
-When the user clicks **Generate**, the extension executes a multi-stage background process that constructs a rich prompt payload, queries the configured LLM provider, enforces strict JSON schema validation, and instantiates the resulting workflow.
-
-```
-┌────────────────────────┐
-│  Active Browser Tab    │
-│  (DOM Context)         │
-└───────────┬────────────┘
-            │ 1. Extract Form Fields & Clickable Buttons
-            ▼
-┌────────────────────────┐
-│  Agent UI Controller   │
-│  (agent-ui.ts)         │
-└───────────┬────────────┘
-            │ 2. Compose APP_INTEL_GENERATE Runtime Message
-            ▼
-┌────────────────────────┐
-│ Background Worker      │
-│ (background-agent.ts)  │
-└───────────┬────────────┘
-            │ 3. Fetch Global Vars & Plugin Config Schemas
-            │ 4. Build Structured System & User Prompts
-            ▼
-┌────────────────────────┐
-│  Default LLM Endpoint  │
-│  (OpenAI / Compatible) │
-└───────────┬────────────┘
-            │ 5. Return Validated JSON Workflow (Structured Output)
-            ▼
-┌────────────────────────┐
-│  Workflow Manager      │
-│  (Save & Open Editor)  │
-└────────────────────────┘
-```
-
-### Step 1: Active Tab Context Gathering
-
-The `AgentUi` class queries the active browser tab via `context-provider.ts` to extract structural DOM details:
-
-- **Page Metadata**: `contextTitle` and `contextUrl`.
-- **Available Form Fields (`pageInputs`)**: CSS selectors, labels, placeholders, and field types.
-- **Available Clickable Buttons (`pageButtons`)**: CSS selectors and button text/values.
-
-### Step 2: System Prompt & Schema Injection
-
-The background listener (`background-agent-listener.ts`) constructs the full prompt by combining:
-
-1. **System Prompt (`GENERAL_AGENT_PROMPT`)**: Outlines rules for step ordering, state token passing (`{{extract_1.title}}`), and DOM actions.
-2. **Current Tab Context**: Injects extracted inputs and buttons so the LLM uses exact CSS selectors from the active page.
-3. **Global Variables**: Injects available secret tokens (e.g. `{{globals.slack_webhook_url}}`, `{{globals.trello_api_key}}`).
-4. **Plugin Registry Schemas**: Injects descriptions and config requirements for registered plugins (Slack, Jira, Google Docs, Sheets, Microsoft 365, etc.).
-5. **JSON Schema Enforcement (`WORKFLOW_JSON_SCHEMA`)**: Passed as `response_format` to enforce strict schema adherence from OpenAI Structured Outputs or compatible endpoints.
-
-### Step 3: Execution & Auto-Transition
-
-1. The background worker dispatches a `POST` request to the configured **Default LLM Endpoint** (e.g. `https://api.openai.com/v1/chat/completions`).
-2. Upon receiving the JSON completion, `normalizeGeneratedWorkflow()` validates that all step IDs are unique, step types exist in `PluginRegistry`, and required parameters are present.
-3. The new workflow is appended to `state.workflows` and persisted in Chrome storage.
-4. The sidebar automatically hides the Create screen, opens the **Workflow Editor**, and alerts the user:
-    > _"Successfully created workflow: [Workflow Name]"_
-
----
-
-## 6. Example Natural Language Prompt & Generated Payload
+## 5. Example Natural Language Prompt & Generated Payload
 
 ### User Prompt Input
 
@@ -246,7 +154,7 @@ Extract the product title and price from this page, generate an executive summar
 
 ---
 
-## 7. Troubleshooting & Error States
+## 6. Troubleshooting & Error States
 
 | Error Message in UI                                                                      | Root Cause                                              | Resolution Step                                                              |
 | :--------------------------------------------------------------------------------------- | :------------------------------------------------------ | :--------------------------------------------------------------------------- |

@@ -1,74 +1,25 @@
-# API/Webhook (`api`)
+# API/Webhook
 
-The **API/Webhook** plugin sends an HTTP request to an API endpoint or webhook and returns the response body. It supports common HTTP methods, configurable JSON headers and payloads, and workflow template values.
+Use **API/Webhook** to send information from a workflow to another online service, or to retrieve information from one. You can start with a ready-made template or enter the service details yourself.
 
 <img src="../../img/Api.png" alt="API/Webhook Step" />
 
-## Plugin Overview
+## Overview
 
-| Property               | Value                                                   |
-| :--------------------- | :------------------------------------------------------ |
-| **Plugin Label**       | `API/Webhook`                                           |
-| **Step Type (`type`)** | `api`                                                   |
-| **Variable ID Prefix** | `api` (e.g., `api_1`, `api_2`)                          |
-| **Group / Category**   | Not specified                                           |
-| **Authentication**     | No built-in authentication; configure headers as needed |
+Choose the service and information you want to send. The step contacts that service and makes its reply available to later steps in your workflow. Some services require an address or access details that you provide.
 
----
+## Simple examples
 
-## Configuration Fields
+- Send an AI-generated summary of a webpage to a Discord channel.
+- Create a GitHub issue using a webpage’s title and summary.
+- Add a Todoist task with a webpage link and a short description.
 
-| Field Key (`config.*`) | Form Label              | Type                                                       | Required | Description & Token Examples                                                                                                                                                                                                                             |
-| :--------------------- | :---------------------- | :--------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `method`               | **Method**              | `select` (`GET` \| `POST` \| `PUT` \| `PATCH` \| `DELETE`) | **Yes**  | HTTP request method. Default: `POST`.                                                                                                                                                                                                                    |
-| `url`                  | **API Endpoint**        | `string`                                                   | **Yes**  | Request URL; must be a valid HTTP or HTTPS URL. Template values are resolved at runtime, e.g. `{{globals.api_url}}`.                                                                                                                                     |
-| `headers`              | **HTTP Headers (JSON)** | `string` (JSON object)                                     | No       | Optional JSON object of string-valued headers. Defaults to `{"Content-Type":"application/json"}`. Header values can use tokens, e.g. `{"X-Workflow-Value":"{{globals.header_value}}"}`.                                                                  |
-| `body`                 | **Payload Body (JSON)** | `string` (JSON)                                            | No       | JSON request payload. Defaults to `{"message":"Result from AI extraction: {{llm_1}}"}`. Supports tokens such as `{{extract_1.title}}`. An empty body uses the most recent non-global step output as the payload, with `userInput` included when present. |
+## Get started
 
----
+1. Choose a ready-made option from **Use Template**, or set up the connection yourself.
+2. Enter the service’s address in **API Endpoint**. The address must begin with `http://` or `https://`.
+3. Choose a **Method**. For example, **GET** retrieves information, while **POST** usually sends information or creates something. **PUT** and **PATCH** update information; **DELETE** removes it.
+4. If the service requires access details, add them under **HTTP Headers (JSON)**. This step does not sign in to services for you.
+5. Use **Payload Body (JSON)** to choose what information to send. You can include results from earlier workflow steps. Leave it empty to send the previous step’s result automatically.
 
-## Template Tokens & State Output
-
-### Available Input Tokens
-
-Template values in the endpoint, headers, and body are resolved against workflow state. For example, use `{{extract_1.title}}` or `{{globals.api_url}}`. The workflow's `userInput` is also added to a non-GET request body when present; for GET requests it is added as a `userInput` query parameter.
-
-### Output State
-
-The step output is the response body, not a wrapper object:
-
-- For a JSON response, the output is the parsed JSON value. Reference it directly with `{{api_1}}` or reference returned properties, such as `{{api_1.id}}` when the response contains an `id` property.
-- For a non-JSON response, the output is the response text and can be referenced with `{{api_1}}`.
-
----
-
-## API Template
-
-These templates represent common API integrations that can be used within the API plugin.#
-Selecting a template will pre-fill the API configuration with the necessary endpoint, headers, and body structure for that integration.
-
-- Discord Post
-- GitHub Create Issue
-- Notion Create Page in Database
-- n8n Workflow (Local)
-- n8n Workflow (Cloud)
-- Todoist Create Task
-- Telegram Send Notification
-- ClickUp Create Task
-
----
-
-## Example Workflow Configuration (JSON)
-
-```json
-{
-	"id": "api_1",
-	"type": "api",
-	"config": {
-		"method": "POST",
-		"url": "https://api.example.com/v1/data",
-		"headers": "{\"Content-Type\":\"application/json\"}",
-		"body": "{\"message\":\"{{llm_1}}\"}"
-	}
-}
-```
+Templates fill in example settings for services such as Discord, GitHub, Notion, Todoist, Telegram, ClickUp, and n8n. Review the settings and supply any service-specific address or access details before running the workflow.
