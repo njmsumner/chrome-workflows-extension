@@ -25,8 +25,8 @@
 						<li>
 							<a href="/chrome-workflows-extension/settings/">Settings</a>
 						</li>
-						<li>
-							<a href="/chrome-workflows-extension/create/">Create</a>
+						<li class="hidden">
+							<a href="/chrome-workflows-extension/plain/plugins/ms_excel.md">Plain</a>
 						</li>
 					</ul>
 				</nav>
@@ -34,125 +34,27 @@
 		</header>
 
 		<main class="content">
-			<h1 id="microsoft-excel-microsoftexcel">Microsoft Excel (<code>microsoftExcel</code>)</h1>
-<p>The <strong>Microsoft Excel</strong> plugin appends a row to an Excel table or reads cell and range content through Microsoft Graph. It supports workbooks in OneDrive or SharePoint and uses Microsoft OAuth authentication.</p>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Microsoft Excel</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>microsoftExcel</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>ms_excel</code> (e.g., <code>ms_excel_1</code>, <code>ms_excel_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Microsoft</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Microsoft OAuth 2.0; uses global <code>ms_client_id</code> and optional <code>ms_tenant_id</code> (defaults to <code>common</code>)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>action</code></td>
-<td style="text-align:left"><strong>Action</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left">No (defaults to <code>append</code>)</td>
-<td style="text-align:left">Choose <strong>Append Row</strong> (<code>append</code>) or <strong>Get Cell / Range Content</strong> (<code>read</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>workbookId</code></td>
-<td style="text-align:left"><strong>Workbook Item ID</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">OneDrive file ID or SharePoint document item ID. Supports tokens such as <code>{{globals.excel_workbook_id}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>sheetRange</code></td>
-<td style="text-align:left"><strong>Sheet Name / Cell Range</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong> (defaults to <code>Sheet1!A1</code>)</td>
-<td style="text-align:left">Worksheet name, optionally followed by <code>!</code> and a range address, such as <code>Sheet1!A1:C5</code>. Supports workflow tokens. In read mode, a worksheet without a range reads its used range; append uses the worksheet name.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>tableName</code></td>
-<td style="text-align:left"><strong>Table Name (Optional for Append)</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left">No (defaults to <code>Table1</code>)</td>
-<td style="text-align:left">Table to append to. If blank, execution uses <code>Table1</code>; this field is not used in read mode. Supports tokens.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>rowValues</code></td>
-<td style="text-align:left"><strong>Row Values (JSON Array)</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left"><strong>Yes for append</strong></td>
-<td style="text-align:left">JSON array of cell values for one row, such as <code>[&quot;{{extract_1.title}}&quot;, &quot;{{llm_1}}&quot;]</code>. Defaults to <code>[]</code>; hidden and disabled in read mode. Supports tokens.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Workbook Item ID</strong>, <strong>Sheet Name / Cell Range</strong>, <strong>Table Name</strong>, and <strong>Row Values</strong>. The row-values field must remain valid JSON in the form; for example, use <code>&quot;[\&quot;{{extract_1.title}}\&quot;, \&quot;{{llm_1}}\&quot;]&quot;</code> in the workflow configuration.</p>
-<h3 id="output-state">Output State</h3>
-<p>Both actions return <code>status</code> (<code>success</code>) and <code>workbookId</code>.</p>
-<p>For <strong>Get Cell / Range Content</strong>, the step also returns:</p>
+			<h1 id="microsoft-excel">Microsoft Excel</h1>
+<h2 id="overview">Overview</h2>
+<p>Use <strong>Microsoft Excel</strong> to add a row to a table or read values from a worksheet in an Excel workbook stored in OneDrive or SharePoint.</p>
+<h2 id="simple-examples">Simple examples</h2>
 <ul>
-<li><code>{{ms_excel_1.range}}</code>: Address reported by Graph, or the configured sheet/range if none is returned.</li>
-<li><code>{{ms_excel_1.data}}</code>: Empty string when no values are returned; the cell value for a single cell; otherwise values as tab-separated columns and newline-separated rows.</li>
-<li><code>{{ms_excel_1.values}}</code>: Raw two-dimensional array of cell values.</li>
+<li>Add a workflow result to a table, such as logging a completed task.</li>
+<li>Read a set of cells and use their contents in later workflow steps.</li>
+<li>Read a worksheet's used range when you want to work with its existing data.</li>
 </ul>
-<p>For <strong>Append Row</strong>, the step also returns:</p>
-<ul>
-<li><code>{{ms_excel_1.updatedRange}}</code>: <code>Row index N</code> when Graph returns an index, otherwise the configured sheet/range.</li>
-<li><code>{{ms_excel_1.values}}</code>: Values returned by Graph, or the submitted row wrapped in an array.</li>
-<li><code>{{ms_excel_1.timestamp}}</code>: Completion time in ISO 8601 format.</li>
-</ul>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<ul>
-<li><strong>View Excel File</strong>: Opens the workbook in OneDrive when <code>workbookId</code> resolves to a value without an unresolved template token.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;ms_excel_1&quot;,
-	&quot;type&quot;: &quot;microsoftExcel&quot;,
-	&quot;config&quot;: {
-		&quot;action&quot;: &quot;append&quot;,
-		&quot;workbookId&quot;: &quot;{{globals.excel_workbook_id}}&quot;,
-		&quot;sheetRange&quot;: &quot;Sheet1!A1&quot;,
-		&quot;tableName&quot;: &quot;Table1&quot;,
-		&quot;rowValues&quot;: &quot;[\&quot;{{extract_1.title}}\&quot;, \&quot;{{llm_1}}\&quot;]&quot;
-	}
-}
-</code></pre>
+<h2 id="set-up-microsoft-sign-in">Set up Microsoft sign-in</h2>
+<p>Before using this step, add your Microsoft app registration's client ID under <strong>Settings &gt; Global Variables</strong>. You can also add a tenant ID if your organization requires one; otherwise, the extension uses the default Microsoft sign-in option. The first time the workflow runs, sign in to Microsoft and approve the requested access.</p>
+<h2 id="add-and-configure-the-step">Add and configure the step</h2>
+<ol>
+<li>Add <strong>Microsoft Excel</strong> to your workflow.</li>
+<li>Under <strong>Action</strong>, choose <strong>Append Row</strong> to add a row, or <strong>Get Cell / Range Content</strong> to read data.</li>
+<li>Enter the workbook's file item ID in <strong>Workbook Item ID</strong>. This is the ID for the file in OneDrive or SharePoint. You can insert a saved value using the token picker.</li>
+<li>Under <strong>Sheet Name / Cell Range</strong>, enter the worksheet name. To read specific cells, add <code>!</code> and the cell range, for example <code>Sheet1!A1:C5</code>. To read the worksheet's used range, enter only its name. The cell range applies when reading; new rows are added to a table.</li>
+<li>For <strong>Append Row</strong>, enter the name of an existing table under <strong>Table Name</strong>. If you leave it blank, the step uses <code>Table1</code>. Enter the new row's values under <strong>Row Values (JSON Array)</strong>, in the same order as the table's columns. Keep the values in a valid list format, such as <code>[&quot;Task&quot;, &quot;Complete&quot;]</code>.</li>
+<li>Use the token picker in the available fields to include information from earlier workflow steps.</li>
+</ol>
+<p>Choose <strong>View Excel File</strong> to open the configured workbook in OneDrive.</p>
 
 		</main>
 

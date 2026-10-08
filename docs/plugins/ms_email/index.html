@@ -25,8 +25,8 @@
 						<li>
 							<a href="/chrome-workflows-extension/settings/">Settings</a>
 						</li>
-						<li>
-							<a href="/chrome-workflows-extension/create/">Create</a>
+						<li class="hidden">
+							<a href="/chrome-workflows-extension/plain/plugins/ms_email.md">Plain</a>
 						</li>
 					</ul>
 				</nav>
@@ -34,125 +34,27 @@
 		</header>
 
 		<main class="content">
-			<h1 id="microsoft-outlook-email-microsoftemail">Microsoft Outlook Email (<code>microsoftEmail</code>)</h1>
-<p>The <strong>Microsoft Outlook Email</strong> plugin sends an email through Microsoft Graph or saves it as a draft. It supports dynamic recipients, subjects, and message bodies, with plain-text or HTML content.</p>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Microsoft Outlook Email</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>microsoftEmail</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>ms_email</code> (e.g., <code>ms_email_1</code>, <code>ms_email_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Microsoft</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Microsoft OAuth 2.0; uses global <code>ms_client_id</code> and optional <code>ms_tenant_id</code> (defaults to <code>common</code>)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>action</code></td>
-<td style="text-align:left"><strong>Action</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left">No (defaults to <code>send</code>)</td>
-<td style="text-align:left">Choose <strong>Send Email</strong> (<code>send</code>) or <strong>Save as Draft</strong> (<code>draft</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>to</code></td>
-<td style="text-align:left"><strong>Recipient (To)</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Recipient email addresses, separated by commas or semicolons. Empty entries are ignored. Supports tokens such as <code>{{extract_1.email}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>subject</code></td>
-<td style="text-align:left"><strong>Subject</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Email subject; defaults to <code>Automated Update from AI Extension</code>. Supports tokens such as <code>{{extract_1.title}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>contentType</code></td>
-<td style="text-align:left"><strong>Body Content Type</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left">No (defaults to <code>Text</code>)</td>
-<td style="text-align:left">Choose <strong>Plain Text</strong> (<code>Text</code>) or <strong>HTML</strong> (<code>HTML</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>body</code></td>
-<td style="text-align:left"><strong>Email Body</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Message content; defaults to a templated greeting containing <code>{{llm_1}}</code>. Supports workflow tokens.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Recipient (To)</strong>, <strong>Subject</strong>, and <strong>Email Body</strong>. For example, use <code>{{extract_1.email}}</code> for a recipient and <code>{{llm_1}}</code> in the message body.</p>
-<h3 id="output-state">Output State</h3>
-<p>On success, both actions return <code>status</code>, <code>action</code>, <code>to</code>, and <code>subject</code>:</p>
+			<h1 id="microsoft-outlook-email">Microsoft Outlook Email</h1>
+<h2 id="overview">Overview</h2>
+<p>Use <strong>Microsoft Outlook Email</strong> to send an email or save it to your Outlook drafts. You can fill in the recipient, subject, and message yourself, or add information from earlier workflow steps. Messages can be plain text or HTML.</p>
+<h2 id="simple-examples">Simple examples</h2>
 <ul>
-<li><code>{{ms_email_1.status}}</code>: <code>success</code>.</li>
-<li><code>{{ms_email_1.action}}</code>: <code>send</code> or <code>draft</code>.</li>
-<li><code>{{ms_email_1.to}}</code>: Configured recipient string.</li>
-<li><code>{{ms_email_1.subject}}</code>: Email subject.</li>
+<li>Send a workflow-generated summary to an email recipient.</li>
+<li>Save a prepared update as an Outlook draft so you can review it before sending.</li>
+<li>Use an email address or subject gathered earlier in the workflow.</li>
 </ul>
-<p>Draft actions also return:</p>
-<ul>
-<li><code>{{ms_email_1.messageId}}</code>: Draft message ID from Microsoft Graph.</li>
-<li><code>{{ms_email_1.webLink}}</code>: Draft web link from Microsoft Graph, when returned.</li>
-</ul>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<ul>
-<li><strong>Open Outlook</strong>: Opens Outlook Web Mail when the action is <code>send</code> (or not <code>draft</code>).</li>
-<li><strong>View Drafts</strong>: Opens the Outlook drafts folder when the action is <code>draft</code>.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;ms_email_1&quot;,
-	&quot;type&quot;: &quot;microsoftEmail&quot;,
-	&quot;config&quot;: {
-		&quot;action&quot;: &quot;send&quot;,
-		&quot;to&quot;: &quot;{{extract_1.email}}&quot;,
-		&quot;subject&quot;: &quot;Workflow summary: {{extract_1.title}}&quot;,
-		&quot;body&quot;: &quot;Hi,\n\n{{llm_1}}&quot;,
-		&quot;contentType&quot;: &quot;Text&quot;
-	}
-}
-</code></pre>
+<h2 id="set-up-microsoft-sign-in">Set up Microsoft sign-in</h2>
+<p>Before using this step, add your Microsoft app registration's client ID under <strong>Settings &gt; Global Variables</strong>. You can also add a tenant ID if your organization requires one; otherwise, the extension uses the default Microsoft sign-in option. The first time the workflow runs, sign in to Microsoft and approve the requested access.</p>
+<h2 id="add-and-configure-the-step">Add and configure the step</h2>
+<ol>
+<li>Add <strong>Microsoft Outlook Email</strong> to your workflow.</li>
+<li>Under <strong>Action</strong>, choose <strong>Send Email</strong> or <strong>Save as Draft</strong>.</li>
+<li>Enter one or more addresses under <strong>Recipient (To)</strong>. Separate multiple addresses with commas or semicolons.</li>
+<li>Enter a <strong>Subject</strong> and <strong>Email Body</strong>. These fields are required.</li>
+<li>Under <strong>Body Content Type</strong>, choose <strong>Plain Text</strong> or <strong>HTML</strong> to match your message.</li>
+<li>If you want to use information from earlier workflow steps, insert it with the token picker in the recipient, subject, or message fields.</li>
+</ol>
+<p>After saving a draft, choose <strong>View Drafts</strong> to open the Outlook drafts folder. For a send action, <strong>Open Outlook</strong> opens Outlook Mail.</p>
 
 		</main>
 

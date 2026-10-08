@@ -25,8 +25,8 @@
 						<li>
 							<a href="/chrome-workflows-extension/settings/">Settings</a>
 						</li>
-						<li>
-							<a href="/chrome-workflows-extension/create/">Create</a>
+						<li class="hidden">
+							<a href="/chrome-workflows-extension/plain/plugins/condition.md">Plain</a>
 						</li>
 					</ul>
 				</nav>
@@ -34,100 +34,25 @@
 		</header>
 
 		<main class="content">
-			<h1 id="condition-condition">Condition (<code>condition</code>)</h1>
-<p>The <strong>Condition</strong> plugin compares a configured value with a selected condition. If the condition is not met, execution throws an error and the workflow stops.</p>
-<img src="../../img/Condition.png" alt="Condition Step" />
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Condition</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>condition</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>condition</code> (e.g., <code>condition_1</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Not specified</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">None</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>value</code></td>
-<td style="text-align:left"><strong>Value</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Value to test; defaults to an empty string. Supports workflow tokens, such as <code>{{extract_1.title}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>operator</code></td>
-<td style="text-align:left"><strong>Condition</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Comparison to apply: Is empty, Is not empty, Contains, Does not contain, Equals, Does not equal, Starts with, Ends with.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>comparisonValue</code></td>
-<td style="text-align:left"><strong>Comparison value</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes for comparison operators</strong></td>
-<td style="text-align:left">Value compared with <code>value</code>; supports workflow tokens, such as <code>{{globals.expected_status}}</code>. Required for Contains, Does not contain, Equals, Does not equal, Starts with, and Ends with.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The <strong>Value</strong> and <strong>Comparison value</strong> fields support workflow tokens, which the runner resolves before this step executes. For example, compare <code>{{extract_1.title}}</code> with a configured string using <strong>Contains</strong>.</p>
-<h3 id="output-state">Output State</h3>
-<p>When the condition passes, the step returns an object containing:</p>
+			<h1 id="condition">Condition</h1>
+<p>Use <strong>Condition</strong> to check information in a workflow before it continues. By default, the workflow stops when the check does not pass. Turn off <strong>Stop Workflow</strong> if it should continue instead.</p>
+<h2 id="overview">Overview</h2>
+<p>Choose a value to check and select what should be true about it. For many checks, you can also enter text to compare it with.</p>
+<h2 id="simple-examples">Simple examples</h2>
 <ul>
-<li><code>{{condition_1.passed}}</code>: Boolean <code>true</code>.</li>
+<li>Continue only when a page title contains “Release notes.”</li>
+<li>Check that a status matches “Published” before continuing.</li>
+<li>Make sure a required detail is present before sending a message.</li>
 </ul>
-<p>If the condition fails or its configuration is missing, execution throws <code>Condition was not met.</code> and no success output is returned.</p>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<p>No sidebar action is provided.</p>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;condition_1&quot;,
-	&quot;type&quot;: &quot;condition&quot;,
-	&quot;config&quot;: {
-		&quot;value&quot;: &quot;{{extract_1.title}}&quot;,
-		&quot;operator&quot;: &quot;contains&quot;,
-		&quot;comparisonValue&quot;: &quot;Release notes&quot;
-	}
-}
-</code></pre>
+<h2 id="set-up-a-condition">Set up a condition</h2>
+<ul>
+<li><strong>Value:</strong> Choose the information to check. It can come from an earlier step in the workflow.</li>
+<li><strong>Condition:</strong> Choose <strong>Is empty</strong>, <strong>Is not empty</strong>, <strong>Contains</strong>, <strong>Does not contain</strong>, <strong>Equals</strong>, <strong>Does not equal</strong>, <strong>Starts with</strong>, or <strong>Ends with</strong>.</li>
+<li><strong>Comparison value:</strong> For most conditions, enter the text to check for. You do not need this for <strong>Is empty</strong> or <strong>Is not empty</strong>.</li>
+<li><strong>Stop Workflow:</strong> Checked by default. When checked, a failed condition stops the workflow. When unchecked, the workflow continues after a failed condition.</li>
+</ul>
+<p>A value is always required. If you choose a condition that compares text, the comparison value is required too.</p>
+<img src="../../img/Condition.png" alt="Condition Step" />
 
 		</main>
 

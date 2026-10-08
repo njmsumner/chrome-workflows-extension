@@ -1,71 +1,26 @@
-# Microsoft Excel (`microsoftExcel`)
+# Microsoft Excel
 
-The **Microsoft Excel** plugin appends a row to an Excel table or reads cell and range content through Microsoft Graph. It supports workbooks in OneDrive or SharePoint and uses Microsoft OAuth authentication.
+## Overview
 
-## Plugin Overview
+Use **Microsoft Excel** to add a row to a table or read values from a worksheet in an Excel workbook stored in OneDrive or SharePoint.
 
-| Property               | Value                                                                                              |
-| :--------------------- | :------------------------------------------------------------------------------------------------- |
-| **Plugin Label**       | `Microsoft Excel`                                                                                  |
-| **Step Type (`type`)** | `microsoftExcel`                                                                                   |
-| **Variable ID Prefix** | `ms_excel` (e.g., `ms_excel_1`, `ms_excel_2`)                                                      |
-| **Group / Category**   | Microsoft                                                                                          |
-| **Authentication**     | Microsoft OAuth 2.0; uses global `ms_client_id` and optional `ms_tenant_id` (defaults to `common`) |
+## Simple examples
 
----
+- Add a workflow result to a table, such as logging a completed task.
+- Read a set of cells and use their contents in later workflow steps.
+- Read a worksheet's used range when you want to work with its existing data.
 
-## Configuration Fields
+## Set up Microsoft sign-in
 
-| Field Key (`config.*`) | Form Label                           | Type       | Required                          | Description & Token Examples                                                                                                                                                                                      |
-| :--------------------- | :----------------------------------- | :--------- | :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `action`               | **Action**                           | `select`   | No (defaults to `append`)         | Choose **Append Row** (`append`) or **Get Cell / Range Content** (`read`).                                                                                                                                        |
-| `workbookId`           | **Workbook Item ID**                 | `text`     | **Yes**                           | OneDrive file ID or SharePoint document item ID. Supports tokens such as `{{globals.excel_workbook_id}}`.                                                                                                         |
-| `sheetRange`           | **Sheet Name / Cell Range**          | `text`     | **Yes** (defaults to `Sheet1!A1`) | Worksheet name, optionally followed by `!` and a range address, such as `Sheet1!A1:C5`. Supports workflow tokens. In read mode, a worksheet without a range reads its used range; append uses the worksheet name. |
-| `tableName`            | **Table Name (Optional for Append)** | `text`     | No (defaults to `Table1`)         | Table to append to. If blank, execution uses `Table1`; this field is not used in read mode. Supports tokens.                                                                                                      |
-| `rowValues`            | **Row Values (JSON Array)**          | `textarea` | **Yes for append**                | JSON array of cell values for one row, such as `["{{extract_1.title}}", "{{llm_1}}"]`. Defaults to `[]`; hidden and disabled in read mode. Supports tokens.                                                       |
+Before using this step, add your Microsoft app registration's client ID under **Settings > Global Variables**. You can also add a tenant ID if your organization requires one; otherwise, the extension uses the default Microsoft sign-in option. The first time the workflow runs, sign in to Microsoft and approve the requested access.
 
----
+## Add and configure the step
 
-## Template Tokens & State Output
+1. Add **Microsoft Excel** to your workflow.
+2. Under **Action**, choose **Append Row** to add a row, or **Get Cell / Range Content** to read data.
+3. Enter the workbook's file item ID in **Workbook Item ID**. This is the ID for the file in OneDrive or SharePoint. You can insert a saved value using the token picker.
+4. Under **Sheet Name / Cell Range**, enter the worksheet name. To read specific cells, add `!` and the cell range, for example `Sheet1!A1:C5`. To read the worksheet's used range, enter only its name. The cell range applies when reading; new rows are added to a table.
+5. For **Append Row**, enter the name of an existing table under **Table Name**. If you leave it blank, the step uses `Table1`. Enter the new row's values under **Row Values (JSON Array)**, in the same order as the table's columns. Keep the values in a valid list format, such as `["Task", "Complete"]`.
+6. Use the token picker in the available fields to include information from earlier workflow steps.
 
-### Available Input Tokens
-
-The form exposes token insertion for **Workbook Item ID**, **Sheet Name / Cell Range**, **Table Name**, and **Row Values**. The row-values field must remain valid JSON in the form; for example, use `"[\"{{extract_1.title}}\", \"{{llm_1}}\"]"` in the workflow configuration.
-
-### Output State
-
-Both actions return `status` (`success`) and `workbookId`.
-
-For **Get Cell / Range Content**, the step also returns:
-
-- `{{ms_excel_1.range}}`: Address reported by Graph, or the configured sheet/range if none is returned.
-- `{{ms_excel_1.data}}`: Empty string when no values are returned; the cell value for a single cell; otherwise values as tab-separated columns and newline-separated rows.
-- `{{ms_excel_1.values}}`: Raw two-dimensional array of cell values.
-
-For **Append Row**, the step also returns:
-
-- `{{ms_excel_1.updatedRange}}`: `Row index N` when Graph returns an index, otherwise the configured sheet/range.
-- `{{ms_excel_1.values}}`: Values returned by Graph, or the submitted row wrapped in an array.
-- `{{ms_excel_1.timestamp}}`: Completion time in ISO 8601 format.
-
-## Sidebar UI Actions
-
-- **View Excel File**: Opens the workbook in OneDrive when `workbookId` resolves to a value without an unresolved template token.
-
----
-
-## Example Workflow Configuration (JSON)
-
-```json
-{
-	"id": "ms_excel_1",
-	"type": "microsoftExcel",
-	"config": {
-		"action": "append",
-		"workbookId": "{{globals.excel_workbook_id}}",
-		"sheetRange": "Sheet1!A1",
-		"tableName": "Table1",
-		"rowValues": "[\"{{extract_1.title}}\", \"{{llm_1}}\"]"
-	}
-}
-```
+Choose **View Excel File** to open the configured workbook in OneDrive.

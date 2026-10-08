@@ -25,8 +25,8 @@
 						<li>
 							<a href="/chrome-workflows-extension/settings/">Settings</a>
 						</li>
-						<li>
-							<a href="/chrome-workflows-extension/create/">Create</a>
+						<li class="hidden">
+							<a href="/chrome-workflows-extension/plain/plugins/gmail.md">Plain</a>
 						</li>
 					</ul>
 				</nav>
@@ -34,149 +34,27 @@
 		</header>
 
 		<main class="content">
-			<h2 id="google-gmail-plugin-gmail">Google Gmail Plugin (<code>gmail</code>)</h2>
-<p>The <strong>Google Gmail</strong> plugin allows automated browser workflows to dispatch emails or create draft messages using the official Gmail REST API (<code>https://gmail.googleapis.com/gmail/v1/users/me/</code>). Email payloads are formatted as RFC 2822 standard messages and converted to URL-safe base64 strings prior to transmission.</p>
-<h3 id="plugin-overview">Plugin Overview</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Google Gmail</code> (UI Display: <code>Gmail</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>gmail</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>gmail</code> (e.g., <code>gmail_1</code>, <code>gmail_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left"><code>Google</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">OAuth2 Bearer Token (<code>chrome.identity.getAuthToken</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>API Endpoints</strong></td>
-<td style="text-align:left"><code>https://gmail.googleapis.com/gmail/v1/users/me/messages/send</code><br/><code>https://gmail.googleapis.com/gmail/v1/users/me/drafts</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="configuration-fields">Configuration Fields</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>action</code></td>
-<td style="text-align:left"><strong>Action</strong></td>
-<td style="text-align:left"><code>select</code> (<code>'send'</code> | <code>'draft'</code>)</td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Specifies whether to dispatch the message immediately (<code>'send'</code>) or save it to Gmail Drafts (<code>'draft'</code>). Default: <code>'draft'</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>to</code></td>
-<td style="text-align:left"><strong>Recipient (To)</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Destination email address. Supports dynamic tokens (e.g., <code>user@example.com</code> or <code>{{extract_1.email}}</code>). Line breaks are prohibited.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>subject</code></td>
-<td style="text-align:left"><strong>Subject</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Email subject line template. Supports tokens (e.g., <code>Automated Update: {{extract_1.title}}</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>contentType</code></td>
-<td style="text-align:left"><strong>Content Type</strong></td>
-<td style="text-align:left"><code>select</code> (<code>'Text'</code> | <code>'HTML'</code>)</td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Specifies body markup format. <code>'Text'</code> maps to <code>text/plain</code>, while <code>'HTML'</code> maps to <code>text/html</code>. Default: <code>'Text'</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>body</code></td>
-<td style="text-align:left"><strong>Email Body</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Multiline body template. Supports dynamic tokens (e.g., <code>Hi,\n\nHere is the summary:\n{{llm_1}}\n\nBest regards</code>).</td>
-</tr>
-</tbody>
-</table>
-<h3 id="template-tokens-state-output">Template Tokens &amp; State Output</h3>
-<h4 id="available-input-tokens">Available Input Tokens</h4>
-<p>You can inject dynamic workflow values into <code>to</code>, <code>subject</code>, and <code>body</code> fields:</p>
+			<h1 id="gmail">Gmail</h1>
+<p>Use <strong>Gmail</strong> to send an email from a workflow or save it as a draft.</p>
+<h2 id="overview">Overview</h2>
+<p>Choose <strong>Send Email</strong> to send the message right away, or <strong>Save as Draft</strong> to review it before sending. Messages are sent from the Google account you authorize.</p>
+<h2 id="simple-examples">Simple examples</h2>
 <ul>
-<li><strong>Workflow Outputs:</strong> <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code>, <code>{{extract_1.selection}}</code></li>
-<li><strong>Global Variables:</strong> <code>{{globals.recipient_email}}</code></li>
-<li><strong>System Variables:</strong> <code>{{url.href}}</code>, <code>{{userInput}}</code>, <code>{{datetime}}</code></li>
+<li>Save a webpage summary as a draft so you can review it before sending.</li>
+<li>Email a webpage title and summary to a colleague.</li>
+<li>Send a notification when a workflow finishes a task.</li>
 </ul>
-<h4 id="output-state">Output State</h4>
-<p>When executed, the step returns a JSON object stored under its step ID in the workflow state:</p>
+<h2 id="set-up-the-message">Set up the message</h2>
 <ul>
-<li>
-<p><strong>For Send Action (<code>action: 'send'</code>):</strong></p>
-<ul>
-<li><code>{{gmail_1.status}}</code>: <code>&quot;success&quot;</code></li>
-<li><code>{{gmail_1.action}}</code>: <code>&quot;send&quot;</code></li>
-<li><code>{{gmail_1.id}}</code>: Sent message ID string from Gmail API.</li>
-<li><code>{{gmail_1.threadId}}</code>: Gmail thread ID.</li>
-<li><code>{{gmail_1.to}}</code>: Resolved recipient email.</li>
-<li><code>{{gmail_1.subject}}</code>: Resolved subject header.</li>
+<li><strong>Action:</strong> Choose <strong>Send Email</strong> or <strong>Save as Draft</strong>. Draft is selected by default.</li>
+<li><strong>Recipient (To):</strong> Enter the recipient’s email address.</li>
+<li><strong>Subject:</strong> Enter a subject for the message.</li>
+<li><strong>Content Type:</strong> Choose <strong>Plain Text</strong> for a simple message or <strong>HTML</strong> for formatted content.</li>
+<li><strong>Email Body:</strong> Write the message. You can include information from earlier workflow steps.</li>
 </ul>
-</li>
-<li>
-<p><strong>For Draft Action (<code>action: 'draft'</code>):</strong></p>
-<ul>
-<li><code>{{gmail_1.status}}</code>: <code>&quot;success&quot;</code></li>
-<li><code>{{gmail_1.action}}</code>: <code>&quot;draft&quot;</code></li>
-<li><code>{{gmail_1.draftId}}</code>: Created draft ID string.</li>
-<li><code>{{gmail_1.messageId}}</code>: Underlying message ID within the draft.</li>
-<li><code>{{gmail_1.to}}</code>: Resolved recipient email.</li>
-<li><code>{{gmail_1.subject}}</code>: Resolved subject header.</li>
-</ul>
-</li>
-</ul>
-<h3 id="sidebar-ui-actions">Sidebar UI Actions</h3>
-<ul>
-<li><strong>View Drafts / Open Gmail</strong>: Displays an interactive button in the sidebar panel (<code>viewContentSection</code>).
-<ul>
-<li>If <code>action === 'draft'</code>, clicking <strong>View Drafts</strong> opens <code>https://mail.google.com/mail/u/0/#drafts</code> in a new browser tab.</li>
-<li>If <code>action === 'send'</code>, clicking <strong>Open Gmail</strong> opens <code>https://mail.google.com/mail/u/0/#inbox</code> in a new tab.</li>
-</ul>
-</li>
-</ul>
-<h3 id="example-workflow-configurations">Example Workflow Configurations</h3>
-<h4 id="example-1-save-email-draft-with-page-details">Example 1: Save Email Draft with Page Details</h4>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;gmail_1&quot;,
-	&quot;type&quot;: &quot;gmail&quot;,
-	&quot;config&quot;: {
-		&quot;action&quot;: &quot;draft&quot;,
-		&quot;to&quot;: &quot;{{globals.recipient_email}}&quot;,
-		&quot;subject&quot;: &quot;Research Summary: {{extract_1.title}}&quot;,
-		&quot;contentType&quot;: &quot;Text&quot;,
-		&quot;body&quot;: &quot;Hi Team,\n\nHere is the summary generated from {{url.href}}:\n\n{{llm_1}}\n\nBest regards,\nAutomated Workflow&quot;
-	}
-}
-</code></pre>
+<h2 id="google-account-access">Google account access</h2>
+<p>When prompted, sign in to the Google account that should send the email and allow Gmail access. The workflow uses this account to send messages or save drafts.</p>
+<p>Use <strong>View Drafts</strong> to open your drafts or <strong>Open Gmail</strong> to view your inbox.</p>
 
 		</main>
 

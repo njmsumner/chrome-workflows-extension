@@ -1,52 +1,21 @@
 # Set Variable (`setGlobal`)
 
-The **Set Variable** plugin creates or updates a global variable that workflows can reuse. It stores the value in extension storage and updates the current workflow state so later steps can access it immediately.
+Use **Set Variable** to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow.
 
 <img src="../../img/Set Variable.png" alt="Set Variable Step" />
 
-## Plugin Overview
+## Configure
 
-| Property               | Value                                              |
-| :--------------------- | :------------------------------------------------- |
-| **Plugin Label**       | `Set Variable`                                     |
-| **Step Type (`type`)** | `setGlobal`                                        |
-| **Variable ID Prefix** | `global` (e.g., `global_1`)                        |
-| **Group / Category**   | Not specified                                      |
-| **Authentication**     | None; uses the extension's global-variable storage |
+- **Variable Key** (`key`): Required. Use only letters, numbers, and underscores, such as `workflow_title`.
+- **Variable Value / Template** (`value`): Required in the form; accepts workflow tokens such as `{{extract_1.title}}`. Although the form requires a value, the step can save an empty string.
 
----
+The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is. Available Jexl functions: `substring`, `lower`, `upper`, `trim`, and `replace`.
 
-## Configuration Fields
+## Use the saved value
 
-| Field Key (`config.*`) | Form Label                    | Type       | Required       | Description & Token Examples                                                                                                                                                 |
-| :--------------------- | :---------------------------- | :--------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`                  | **Variable Key**              | `text`     | **Yes**        | Global variable name. Must contain only letters, numbers, and underscores (for example, `workflow_title`).                                                                   |
-| `value`                | **Variable Value / Template** | `textarea` | **Yes (form)** | Value to store; defaults to an empty string. Supports workflow tokens, such as `{{extract_1.title}}`. The form requires a value, though execution can store an empty string. |
+For a step with ID `global_1`, use `{{global_1.key}}` and `{{global_1.value}}` to access its output. To reuse the saved value as a global variable, use `{{globals.workflow_title}}`, replacing `workflow_title` with your configured key.
 
----
-
-## Template Tokens & State Output
-
-### Available Input Tokens
-
-The **Variable Value / Template** field supports workflow tokens. The plugin resolves tokens before evaluating the resulting text as a Jexl expression. If expression evaluation fails, it stores the resolved text as-is. The plugin also registers the `substring`, `lower`, `upper`, `trim`, and `replace` Jexl functions.
-
-### Output State
-
-After execution, the step returns an object containing:
-
-- `{{global_1.key}}`: The trimmed variable key.
-- `{{global_1.value}}`: The value stored as a string.
-
-The same value is also available to this and later workflows through the global token `{{globals.workflow_title}}` (replace `workflow_title` with the configured key).
-
-## Sidebar UI Actions
-
-No sidebar action is provided.
-
----
-
-## Example Workflow Configuration (JSON)
+## Example
 
 ```json
 {

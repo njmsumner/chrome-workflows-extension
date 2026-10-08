@@ -25,8 +25,8 @@
 						<li>
 							<a href="/chrome-workflows-extension/settings/">Settings</a>
 						</li>
-						<li>
-							<a href="/chrome-workflows-extension/create/">Create</a>
+						<li class="hidden">
+							<a href="/chrome-workflows-extension/plain/plugins/set_global.md">Plain</a>
 						</li>
 					</ul>
 				</nav>
@@ -35,83 +35,17 @@
 
 		<main class="content">
 			<h1 id="set-variable-setglobal">Set Variable (<code>setGlobal</code>)</h1>
-<p>The <strong>Set Variable</strong> plugin creates or updates a global variable that workflows can reuse. It stores the value in extension storage and updates the current workflow state so later steps can access it immediately.</p>
+<p>Use <strong>Set Variable</strong> to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow.</p>
 <img src="../../img/Set Variable.png" alt="Set Variable Step" />
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Set Variable</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>setGlobal</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>global</code> (e.g., <code>global_1</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Not specified</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">None; uses the extension's global-variable storage</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>key</code></td>
-<td style="text-align:left"><strong>Variable Key</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Global variable name. Must contain only letters, numbers, and underscores (for example, <code>workflow_title</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>value</code></td>
-<td style="text-align:left"><strong>Variable Value / Template</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left"><strong>Yes (form)</strong></td>
-<td style="text-align:left">Value to store; defaults to an empty string. Supports workflow tokens, such as <code>{{extract_1.title}}</code>. The form requires a value, though execution can store an empty string.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The <strong>Variable Value / Template</strong> field supports workflow tokens. The plugin resolves tokens before evaluating the resulting text as a Jexl expression. If expression evaluation fails, it stores the resolved text as-is. The plugin also registers the <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code> Jexl functions.</p>
-<h3 id="output-state">Output State</h3>
-<p>After execution, the step returns an object containing:</p>
+<h2 id="configure">Configure</h2>
 <ul>
-<li><code>{{global_1.key}}</code>: The trimmed variable key.</li>
-<li><code>{{global_1.value}}</code>: The value stored as a string.</li>
+<li><strong>Variable Key</strong> (<code>key</code>): Required. Use only letters, numbers, and underscores, such as <code>workflow_title</code>.</li>
+<li><strong>Variable Value / Template</strong> (<code>value</code>): Required in the form; accepts workflow tokens such as <code>{{extract_1.title}}</code>. Although the form requires a value, the step can save an empty string.</li>
 </ul>
-<p>The same value is also available to this and later workflows through the global token <code>{{globals.workflow_title}}</code> (replace <code>workflow_title</code> with the configured key).</p>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<p>No sidebar action is provided.</p>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
+<p>The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is. Available Jexl functions: <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code>.</p>
+<h2 id="use-the-saved-value">Use the saved value</h2>
+<p>For a step with ID <code>global_1</code>, use <code>{{global_1.key}}</code> and <code>{{global_1.value}}</code> to access its output. To reuse the saved value as a global variable, use <code>{{globals.workflow_title}}</code>, replacing <code>workflow_title</code> with your configured key.</p>
+<h2 id="example">Example</h2>
 <pre><code class="language-json">{
 	&quot;id&quot;: &quot;global_1&quot;,
 	&quot;type&quot;: &quot;setGlobal&quot;,

@@ -25,8 +25,8 @@
 						<li>
 							<a href="/chrome-workflows-extension/settings/">Settings</a>
 						</li>
-						<li>
-							<a href="/chrome-workflows-extension/create/">Create</a>
+						<li class="hidden">
+							<a href="/chrome-workflows-extension/plain/plugins/confluence.md">Plain</a>
 						</li>
 					</ul>
 				</nav>
@@ -34,138 +34,31 @@
 		</header>
 
 		<main class="content">
-			<h1 id="confluence-page-confluence">Confluence Page (<code>confluence</code>)</h1>
-<p>The <strong>Confluence Page</strong> plugin updates an existing Confluence page through the Confluence REST API. Workflows can set a page title and XHTML storage-format body using values from earlier steps.</p>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Confluence Page</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>confluence</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>confluence</code> (e.g., <code>confluence_1</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Atlassian</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Basic Auth (email/username and API token/password) or bearer token (PAT)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>baseUrl</code></td>
-<td style="text-align:left"><strong>Confluence Base URL</strong></td>
-<td style="text-align:left"><code>url</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Base URL of the Confluence instance, such as <code>https://your-domain.atlassian.net/wiki</code>. Trailing slashes are removed before API requests.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>pageId</code></td>
-<td style="text-align:left"><strong>Page ID (Content ID)</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Content ID of the existing Confluence page to update.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>titleTemplate</code></td>
-<td style="text-align:left"><strong>Page Title (Optional)</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Optional replacement title. When blank, the current page title is retained. Supports template tokens, such as <code>{{llm_1}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>contentTemplate</code></td>
-<td style="text-align:left"><strong>Page Body (XHTML Storage Format)</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Page body in Confluence XHTML storage format. Defaults to <code>&lt;p&gt;Updated content: {{llm_1}}&lt;/p&gt;</code> and supports template tokens.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>authType</code></td>
-<td style="text-align:left"><strong>Authentication Type</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Choose <code>basic</code> (Basic Auth (Cloud API Token)) or <code>bearer</code> (Personal Access Token / PAT). Defaults to <code>basic</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>email</code></td>
-<td style="text-align:left"><strong>Email Address / Username</strong></td>
-<td style="text-align:left"><code>email</code></td>
-<td style="text-align:left"><strong>Yes for Basic Auth</strong></td>
-<td style="text-align:left">Account email or username used with Basic authentication. Not required for bearer authentication.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>apiToken</code></td>
-<td style="text-align:left"><strong>API Token / Password</strong> or <strong>PAT</strong></td>
-<td style="text-align:left"><code>password</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">API token/password for Basic authentication or personal access token for bearer authentication. Supports template tokens, e.g. <code>{{globals.confluence_api_token}}</code>.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The title, page body, and credential fields are marked as token-enabled in the configuration form.</p>
-<p>Use <code>titleTemplate</code> to provide a dynamic page title and <code>contentTemplate</code> to include dynamic values in the XHTML body.
-The API token field can reference a secret stored as a global variable.</p>
-<h3 id="output-state">Output State</h3>
-<p>After a successful update, downstream steps can reference the returned page metadata:</p>
+			<h1 id="update-a-confluence-page">Update a Confluence page</h1>
+<p>Use <strong>Confluence Page</strong> to replace the content of an existing Confluence page with information from a workflow. You can also change the page title.</p>
+<h2 id="overview">Overview</h2>
+<p>Provide the address of your Confluence site and the ID of the page to update. The page body is replaced when the workflow runs. If <strong>Page Title (Optional)</strong> is left blank, the current title stays as it is.</p>
+<h2 id="simple-examples">Simple examples</h2>
 <ul>
-<li><code>{{confluence_1.id}}</code>: Updated page content ID.</li>
-<li><code>{{confluence_1.title}}</code>: Updated page title.</li>
-<li><code>{{confluence_1.version}}</code>: Updated page version number.</li>
-<li><code>{{confluence_1.url}}</code>: Confluence page URL when returned by the API; otherwise <code>null</code>.</li>
+<li>Replace a project page with the latest summary created by a workflow.</li>
+<li>Update an existing page with information gathered from a webpage.</li>
+<li>Change a page’s title and replace its content with a workflow report.</li>
 </ul>
-<hr>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
+<h2 id="set-up-the-page">Set up the page</h2>
 <ul>
-<li><strong>View Page</strong>: Opens the Confluence page when both the base URL and page ID are configured and resolve to complete values.</li>
+<li><strong>Confluence Base URL:</strong> Enter your Confluence site address, such as <code>https://your-domain.atlassian.net/wiki</code>.</li>
+<li><strong>Page ID (Content ID):</strong> Enter the ID of the existing page you want to update.</li>
+<li><strong>Page Title (Optional):</strong> Enter a new title, or leave this blank to keep the current title.</li>
+<li><strong>Page Body (XHTML Storage Format):</strong> Enter the new page content. Confluence requires its own format for page content; information from earlier workflow steps can be included.</li>
 </ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;confluence_1&quot;,
-	&quot;type&quot;: &quot;confluence&quot;,
-	&quot;config&quot;: {
-		&quot;baseUrl&quot;: &quot;https://your-domain.atlassian.net/wiki&quot;,
-		&quot;pageId&quot;: &quot;123456789&quot;,
-		&quot;titleTemplate&quot;: &quot;Workflow summary: {{llm_1}}&quot;,
-		&quot;contentTemplate&quot;: &quot;&lt;p&gt;Summary: {{llm_1}}&lt;/p&gt;&quot;,
-		&quot;authType&quot;: &quot;bearer&quot;,
-		&quot;email&quot;: &quot;&quot;,
-		&quot;apiToken&quot;: &quot;{{globals.confluence_api_token}}&quot;
-	}
-}
-</code></pre>
+<h2 id="set-up-authentication">Set up authentication</h2>
+<p>Choose the method that matches your Confluence account:</p>
+<ul>
+<li><strong>Basic Auth (Cloud API Token):</strong> Enter your account email or username and its API token or password.</li>
+<li><strong>Personal Access Token (PAT):</strong> Choose this option and enter your Confluence personal access token. You do not need to enter an email address or username.</li>
+</ul>
+<p>The token must be valid for the selected authentication method, and the account must be able to edit the page.</p>
+<p>Once the site address and page ID are set, use <strong>View Page</strong> to open the page in Confluence.</p>
 
 		</main>
 

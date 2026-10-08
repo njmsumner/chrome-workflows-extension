@@ -165,3 +165,7 @@ blockquote {
 		padding-top: 1.75rem;
 	}
 }
+
+.hidden {
+	display: none;
+}

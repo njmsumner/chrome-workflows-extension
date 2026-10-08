@@ -2,8 +2,6 @@
 
 Use **API/Webhook** to send information from a workflow to another online service, or to retrieve information from one. You can start with a ready-made template or enter the service details yourself.
 
-<img src="../../img/Api.png" alt="API/Webhook Step" />
-
 ## Overview
 
 Choose the service and information you want to send. The step contacts that service and makes its reply available to later steps in your workflow. Some services require an address or access details that you provide.
@@ -15,6 +13,8 @@ Choose the service and information you want to send. The step contacts that serv
 - Add a Todoist task with a webpage link and a short description.
 
 ## Get started
+
+<img src="../../img/Api.png" alt="API/Webhook Step" />
 
 1. Choose a ready-made option from **Use Template**, or set up the connection yourself.
 2. Enter the service’s address in **API Endpoint**. The address must begin with `http://` or `https://`.
