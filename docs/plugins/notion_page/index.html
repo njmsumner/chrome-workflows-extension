@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="create-a-notion-page">Create a Notion page</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use this step to add a page to a Notion database. The page title is required; you can also add optional body text.</p>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Save a webpage title and link in a research database.</li>
+        <li>Add an AI-generated summary to a new page for later review.</li>
+        <li>Save details gathered by a workflow in a Notion database.</li>
+      </ul>
+      <h2 id="before-you-start">Before you start</h2>
+      <p>You need a Notion internal integration secret and the ID of the database where the page should be created. Make sure the integration has access to that
+        database; you can find the database ID in its URL.</p>
+      <hr >
+      <h2 id="page-details">Page details</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: left">Field Key (<code>config.*</code>)</th>
+            <th style="text-align: left">Form Label</th>
+            <th style="text-align: left">Type</th>
+            <th style="text-align: left">Required</th>
+            <th style="text-align: left">Description &amp; Token Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left"><code>apiToken</code></td>
+            <td style="text-align: left"><strong>Internal Integration Secret</strong></td>
+            <td style="text-align: left"><code>string</code></td>
+            <td style="text-align: left"><strong>Yes</strong></td>
+            <td style="text-align: left">Notion Internal Integration Token starting with <code>ntn_...</code> or <code>secret_...</code> (e.g.,
+              <code>{{globals.notion_api_token}}</code>).</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><code>databaseId</code></td>
+            <td style="text-align: left"><strong>Database ID</strong></td>
+            <td style="text-align: left"><code>string</code></td>
+            <td style="text-align: left"><strong>Yes</strong></td>
+            <td style="text-align: left">The 32-character ID of your target Notion database (e.g., <code>a1b2c3d4e5f678901234567890abcdef</code> or
+              <code>{{globals.notion_database_id}}</code>).</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><code>title</code></td>
+            <td style="text-align: left"><strong>Page Title</strong></td>
+            <td style="text-align: left"><code>string</code></td>
+            <td style="text-align: left"><strong>Yes</strong></td>
+            <td style="text-align: left">The title string for the newly created page (e.g., <code>Research: {{extract_1.title}}</code>). Maps to the database's primary
+              <code>Name</code> title property.</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><code>content</code></td>
+            <td style="text-align: left"><strong>Page Content (Body)</strong></td>
+            <td style="text-align: left"><code>string</code></td>
+            <td style="text-align: left">No</td>
+            <td style="text-align: left">Body text or markdown content inserted into the page as a paragraph block (e.g., <code>URL: {{url.href}}\n\nSummary:\n{{llm_1}}</code>).</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr >
+      <h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
+      <h3 id="available-input-tokens">Available Input Tokens</h3>
+      <p>Dynamic workflow variables can be injected into any configuration field using double-bracket token syntax:</p>
+      <ul>
+        <li><strong>Workflow Outputs:</strong> <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code></li>
+        <li><strong>Global Variables &amp; Secrets:</strong> <code>{{globals.notion_api_token}}</code>, <code>{{globals.notion_database_id}}</code></li>
+        <li><strong>System Metadata:</strong> <code>{{url.href}}</code>, <code>{{userInput}}</code>, <code>{{datetime}}</code></li>
+      </ul>
+      <h3 id="output-state-notion_page_1">Output State (<code>{{notion_page_1.*}}</code>)</h3>
+      <p>When executed successfully, downstream steps can reference properties of the created page:</p>
+      <ul>
+        <li><code>{{notion_page_1.id}}</code>: The unique Notion page ID (e.g., <code>page_1234567890</code>).</li>
+        <li><code>{{notion_page_1.url}}</code>: The direct web link to open the created page in Notion.</li>
+        <li><code>{{notion_page_1.createdTime}}</code>: ISO 8601 creation timestamp.</li>
+      </ul>
+      <hr >
+      <h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
+      <ul>
+        <li><strong>View Notion DB</strong>: Displays an action button in the sidebar panel that opens the target database in your browser
+          (<code>https://notion.so/${cleanDatabaseId}</code>).</li>
+      </ul>
+      <hr >
+      <h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
+      <pre><code class="language-json">{
+	"id": "notion_page_1",
+	"type": "notionCreatePage",
+	"config": {
+		"apiToken": "{{globals.notion_api_token}}",
+		"databaseId": "{{globals.notion_database_id}}",
+		"title": "Article: {{extract_1.title}}",
+		"content": "Source URL: {{url.href}}\nCaptured: {{datetime}}\n\nAI Executive Summary:\n{{llm_1}}"
+	}
+}
+</code></pre>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension 1.7 © Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a> -
+          <a href="plain.md">Plain Version</a>
+        </div>
+      </div>
+    </footer>
+  </body></html>

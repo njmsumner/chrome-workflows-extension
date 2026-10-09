@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="add-a-record-to-airtable">Add a record to Airtable</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use this step to add information from a workflow to a table in Airtable. It can save details such as a webpage title, link, or AI-generated summary.</p>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Save a webpage title, link, and summary in an Airtable research table.</li>
+        <li>Store details gathered during a workflow in Airtable so they are easy to review later.</li>
+      </ul>
+      <h2 id="before-you-start">Before you start</h2>
+      <p>You need an Airtable Personal Access Token, the ID of your base, and the name or ID of the table where the record should be added. Make sure your token
+        can access that base.</p>
+      <hr >
+      <h2 id="record-details">Record details</h2>
+      <p>Enter the following details:</p>
+      <ul>
+        <li><strong>Personal Access Token</strong>: Paste a token from Airtable. Keep it private, and make sure it can access the base you want to use.</li>
+        <li><strong>Base ID</strong>: Enter the ID of the Airtable base that should receive the record.</li>
+        <li><strong>Table Name or ID</strong>: Enter the name or ID of the destination table.</li>
+        <li><strong>Record Fields (JSON)</strong>: List the Airtable column names and the values to save in valid JSON format. In supported fields, use
+          <strong>Insert workflow token</strong> to add information from earlier steps, such as a page title or summary.</li>
+      </ul>
+      <hr >
+      <h2 id="after-the-record-is-added">After the record is added</h2>
+      <p>Later workflow steps can use the new record's ID, creation time, Airtable link, and saved values.</p>
+      <hr >
+      <h2 id="view-the-airtable-base">View the Airtable base</h2>
+      <p>When a valid base ID is provided, the step shows a <strong>View Airtable Base</strong> button in the sidebar. Select it to open the base in your
+        browser.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension 1.7 © Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a> -
+          <a href="plain.md">Plain Version</a>
+        </div>
+      </div>
+    </footer>
+  </body></html>

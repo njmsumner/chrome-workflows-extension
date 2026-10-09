@@ -15,6 +15,16 @@
     "idPrefix": "trello_card"
   },
   {
+    "label": "Airtable Create Record",
+    "description": "Creates a new record/row in an Airtable base table.",
+    "idPrefix": "airtable"
+  },
+  {
+    "label": "Notion Create Page",
+    "description": "Creates a new page or record in a Notion database.",
+    "idPrefix": "notion_page"
+  },
+  {
     "label": "Confluence Page",
     "description": "Updates Confluence page via the REST API",
     "idPrefix": "confluence"

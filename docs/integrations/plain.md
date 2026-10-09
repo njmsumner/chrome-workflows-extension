@@ -16,6 +16,14 @@ Send a prompt to an OpenAI-compatible API and return the completion text (openai
 
 Creates a new card on a Trello board list. (trello\_card)
 
+**[Airtable Create Record](../plugins/airtable)**
+
+Creates a new record/row in an Airtable base table. (airtable)
+
+**[Notion Create Page](../plugins/notion_page)**
+
+Creates a new page or record in a Notion database. (notion\_page)
+
 **[Confluence Page](../plugins/confluence)**
 
 Updates Confluence page via the REST API (confluence)
