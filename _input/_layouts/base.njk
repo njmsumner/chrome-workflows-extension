@@ -40,13 +40,14 @@
 		<footer class="site-footer">
 			<div class="footer-inner">
 				<div class="footer-left">
-					{{ site.title }} &copy; {{ site.author }}
+					{{ site.title }}
+					{{ site.version }} 					
+					&copy; {{ site.author }}
 					{{ now.year }}
 				</div>
 				<div class="footer-right">
-					<a href="#top">Top of Page</a>
+					<a href="#top">Top of Page</a> -
 					<a href="{{ 'plain.md' | url }}">Plain Version</a>
-					<a href="{{ '/all-site-content.md' | url }}">LLM Content</a>
 				</div>
 			</div>
 		</footer>

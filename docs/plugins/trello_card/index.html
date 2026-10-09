@@ -1,6 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="en"><head>
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta name="color-scheme" content="light dark" >
@@ -100,28 +99,26 @@
       <p><strong>View Trello</strong> opens <code>https://trello.com</code> when the list ID is configured and contains no unresolved template token.</p>
       <h2 id="example">Example</h2>
       <pre><code class="language-json">{
-	&quot;id&quot;: &quot;trello_card_1&quot;,
-	&quot;type&quot;: &quot;trelloCreateCard&quot;,
-	&quot;config&quot;: {
-		&quot;apiKey&quot;: &quot;{{globals.trello_api_key}}&quot;,
-		&quot;apiToken&quot;: &quot;{{globals.trello_oauth_token}}&quot;,
-		&quot;idList&quot;: &quot;{{globals.trello_list_id}}&quot;,
-		&quot;name&quot;: &quot;Research: {{extract_1.title}}&quot;,
-		&quot;desc&quot;: &quot;Source URL: {{url.href}}\n\nAI summary: {{llm_1}}&quot;,
-		&quot;pos&quot;: &quot;top&quot;
+	"id": "trello_card_1",
+	"type": "trelloCreateCard",
+	"config": {
+		"apiKey": "{{globals.trello_api_key}}",
+		"apiToken": "{{globals.trello_oauth_token}}",
+		"idList": "{{globals.trello_list_id}}",
+		"name": "Research: {{extract_1.title}}",
+		"desc": "Source URL: {{url.href}}\n\nAI summary: {{llm_1}}",
+		"pos": "top"
 	}
 }
 </code></pre>
     </main>
     <footer class="site-footer">
       <div class="footer-inner">
-        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-left"> AI Workflows Chrome Extension 1.7 © Nick Sumner 2026 </div>
         <div class="footer-right">
-          <a href="#top">Top of Page</a>
+          <a href="#top">Top of Page</a> -
           <a href="plain.md">Plain Version</a>
-          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
         </div>
       </div>
     </footer>
-  </body>
-</html>
+  </body></html>

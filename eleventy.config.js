@@ -1,3 +1,4 @@
+import { load } from 'cheerio';
 import { processHtmlFiles } from './pipeline/processHtmlFiles.js';
 
 function escapePluginWorkflowTokens(_data, content) {
@@ -17,13 +18,30 @@ function escapePluginWorkflowTokens(_data, content) {
  * @returns {string} HTML content with extensions removed from eligible internal links.
  */
 function removeMarkdownFromInternalLinks(content) {
-	return content.replace(/(\bhref=["'])([^"']+)(["'])/gi, (match, prefix, url, suffix) => {
-		if (/^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(url) || /(?:^|\/)plain\.md(?:[?#]|$)/i.test(url)) {
-			return match;
+	const $ = load(content);
+
+	$('[href]').each((_, element) => {
+		const url = $(element).attr('href');
+		if (!url || /^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(url)) {
+			return;
 		}
 
-		return `${prefix}${url.replace(/\.md(?=([?#]|$))/i, '')}${suffix}`;
+		const suffixIndex = url.search(/[?#]/);
+		const pathname = suffixIndex === -1 ? url : url.slice(0, suffixIndex);
+		if (!pathname.toLowerCase().endsWith('.md')) {
+			return;
+		}
+
+		// all-site-content.md should be ignored
+		const ignorePaths = ['plain.md', 'all-site-content.md'];
+		if (ignorePaths.some((ignorePath) => pathname.toLowerCase().endsWith(ignorePath))) {
+			return;
+		}
+
+		$(element).attr('href', `${pathname.slice(0, -3)}${url.slice(pathname.length)}`);
 	});
+
+	return $.html();
 }
 
 /**

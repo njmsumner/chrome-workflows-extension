@@ -1,6 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="en"><head>
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta name="color-scheme" content="light dark" >
@@ -80,9 +79,7 @@
       <ul>
         <li><strong>Background Agent Helpers</strong>: Powers natural language workflow generation (<code>AgentUi.generateWorkflow</code>) and single-step prompt
           generation (<code>generateSingleStep</code>).</li>
-        <li><strong>Workflow Step Fallback</strong>: When an <strong>OpenAI/LLM</strong> step enables the
-          <strong>&quot;Use Default LLM Config&quot;</strong> (<code>useDefaultSettings: true</code>) checkbox, it automatically uses these central credentials
-          without requiring manual API keys in every step card.</li>
+        <li><strong>Workflow Step Fallback</strong>: When an <strong>OpenAI/LLM</strong> step enables the <strong>"Use Default LLM Config"</strong> (<code>useDefaultSettings: true</code>) checkbox, it automatically uses these central credentials without requiring manual API keys in every step card.</li>
       </ul>
       <h3 id="form-configuration-fields">Form Configuration Fields</h3>
       <table>
@@ -125,10 +122,10 @@
       <h3 id="storage-persistence">Storage Persistence</h3>
       <p>Default LLM settings are saved in Chrome local storage under the <code>appIntelligenceConfig</code> object key:</p>
       <pre><code class="language-json">{
-	&quot;appIntelligenceConfig&quot;: {
-		&quot;apiKey&quot;: &quot;sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx&quot;,
-		&quot;baseUrl&quot;: &quot;https://api.openai.com/v1&quot;,
-		&quot;model&quot;: &quot;gpt-4o-mini&quot;
+	"appIntelligenceConfig": {
+		"apiKey": "sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx",
+		"baseUrl": "https://api.openai.com/v1",
+		"model": "gpt-4o-mini"
 	}
 }
 </code></pre>
@@ -140,7 +137,7 @@
         <li>
           <p><strong>Zoom Slider (<code>#sidebarZoom</code>)</strong>:</p>
           <ul>
-            <li><strong>Type</strong>: Interactive range input (<code>&lt;input type=&quot;range&quot;&gt;</code>).</li>
+            <li><strong>Type</strong>: Interactive range input (<code>&lt;input type="range"&gt;</code>).</li>
             <li><strong>Range</strong>: Scale from <code>0.75x</code> (75%) to <code>1.50x</code> (150%) in <code>0.05</code> step increments (default:
               <code>1.0</code>).</li>
             <li><strong>Behavior</strong>: Adjusts the base font size of the extension sidebar in real time (<code>document.documentElement.style.fontSize = 16 * zoom</code>).</li>
@@ -181,7 +178,7 @@
           <p><strong>Variable List (<code>#globalVariablesList</code>)</strong>:</p>
           <ul>
             <li>Displays all active global variables in alphabetical order.</li>
-            <li>Values are masked using password inputs (<code>type=&quot;password&quot;</code>) to protect sensitive credentials from screen exposure.</li>
+            <li>Values are masked using password inputs (<code>type="password"</code>) to protect sensitive credentials from screen exposure.</li>
             <li>Includes <strong>Edit</strong> and <strong>Delete</strong> action icons for each entry.</li>
           </ul>
         </li>
@@ -213,12 +210,12 @@
       <h3 id="storage-persistence">Storage Persistence</h3>
       <p>Global variables are stored under the <code>aiGlobalVariables</code> dictionary key in Chrome local storage:</p>
       <pre><code class="language-json">{
-	&quot;aiGlobalVariables&quot;: {
-		&quot;google_doc_id&quot;: &quot;1aBc_example_doc_id_999&quot;,
-		&quot;google_sheet_id&quot;: &quot;1sXv_example_sheet_id_888&quot;,
-		&quot;slack_webhook_url&quot;: &quot;https://hooks.slack.com/services/T0000/B0000/XXXXX&quot;,
-		&quot;trello_api_key&quot;: &quot;3a7b9c1d2e...&quot;,
-		&quot;trello_oauth_token&quot;: &quot;ATTA123456789...&quot;
+	"aiGlobalVariables": {
+		"google_doc_id": "1aBc_example_doc_id_999",
+		"google_sheet_id": "1sXv_example_sheet_id_888",
+		"slack_webhook_url": "https://hooks.slack.com/services/T0000/B0000/XXXXX",
+		"trello_api_key": "3a7b9c1d2e...",
+		"trello_oauth_token": "ATTA123456789..."
 	}
 }
 </code></pre>
@@ -258,13 +255,11 @@
     </main>
     <footer class="site-footer">
       <div class="footer-inner">
-        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-left"> AI Workflows Chrome Extension 1.7 © Nick Sumner 2026 </div>
         <div class="footer-right">
-          <a href="#top">Top of Page</a>
+          <a href="#top">Top of Page</a> -
           <a href="plain.md">Plain Version</a>
-          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
         </div>
       </div>
     </footer>
-  </body>
-</html>
+  </body></html>
