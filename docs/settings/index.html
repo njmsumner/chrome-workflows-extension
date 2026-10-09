@@ -32,226 +32,47 @@
       </div>
     </header>
     <main class="content">
-      <h1 id="settings-screen">Settings Screen</h1>
-      <p>The <strong>Settings Screen</strong> in the AI Workflow Sidebar provides a centralized control panel for configuring global application behavior,
-        default Large Language Model (LLM) credentials, extension display settings, and reusable global variable tokens.</p>
-      <p>Settings can be accessed from anywhere in the sidebar interface by clicking the <strong>Settings</strong> button in the main header, workflow list
-        header, or agent creation panel.</p>
+      <h1 id="settings">Settings</h1>
+      <p>Use Settings to choose your default AI service, adjust the sidebar, and manage reusable values for your workflows.</p>
       <img src="../img/Settings General.png" alt="Settings - General" >
       <hr >
-      <h2 id="overview-interface-layout">Overview &amp; Interface Layout</h2>
-      <table>
-        <thead>
-          <tr>
-            <th style="text-align: left">Component / Tab</th>
-            <th style="text-align: left">Primary Function</th>
-            <th style="text-align: left">Primary DOM ID / Storage Key</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align: left"><strong>Save Button</strong></td>
-            <td style="text-align: left">Persists all updated LLM configs, global variables, and zoom preferences to Chrome storage.</td>
-            <td style="text-align: left"><code>#saveSettingsBtn</code></td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>Cancel Button</strong></td>
-            <td style="text-align: left">Discards unsaved changes and reverts form fields to stored values.</td>
-            <td style="text-align: left"><code>#cancelSettingsBtn</code></td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>General Tab</strong></td>
-            <td style="text-align: left">Configures Default LLM credentials, extension UI zoom level, and content viewer navigation.</td>
-            <td style="text-align: left"><code>generalSettingsContent</code></td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>Global Variables Tab</strong></td>
-            <td style="text-align: left">Manages reusable secret tokens, API keys, and workspace IDs across all extension workflows.</td>
-            <td style="text-align: left"><code>globalVariablesSettingsContent</code></td>
-          </tr>
-        </tbody>
-      </table>
-      <hr >
-      <h2 id="1-default-llm-settings">1. Default LLM Settings</h2>
-      <p>The <strong>Default LLM</strong> section (located under the <strong>General</strong> tab) defines the system-wide AI credentials used by background
-        automation helpers and serves as a fallback provider for workflow steps.</p>
-      <h3 id="purpose-capabilities">Purpose &amp; Capabilities</h3>
+      <h2 id="overview">Overview</h2>
+      <p>Open <strong>Settings</strong> from the sidebar header, workflow list, or agent creation panel. Use it to choose your default AI service, adjust text
+        size, and manage reusable workflow values. Choose <strong>Save</strong> to keep your changes or <strong>Cancel</strong> to discard them.</p>
+      <h2 id="simple-examples">Simple examples</h2>
       <ul>
-        <li><strong>Background Agent Helpers</strong>: Powers natural language workflow generation (<code>AgentUi.generateWorkflow</code>) and single-step prompt
-          generation (<code>generateSingleStep</code>).</li>
-        <li><strong>Workflow Step Fallback</strong>: When an <strong>OpenAI/LLM</strong> step enables the <strong>"Use Default LLM Config"</strong> (<code>useDefaultSettings: true</code>) checkbox, it automatically uses these central credentials without requiring manual API keys in every step card.</li>
-      </ul>
-      <h3 id="form-configuration-fields">Form Configuration Fields</h3>
-      <table>
-        <thead>
-          <tr>
-            <th style="text-align: left">Field Name</th>
-            <th style="text-align: left">DOM Element ID</th>
-            <th style="text-align: left">Description &amp; Example Values</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align: left"><strong>Provider</strong></td>
-            <td style="text-align: left"><code>#app-intel-provider</code></td>
-            <td style="text-align: left">Select dropdown with presets for major OpenAI-compatible providers (<strong>OpenAI</strong>, <strong>Google Gemini</strong>,
-              <strong>Azure OpenAI</strong>, <strong>OpenRouter</strong>, <strong>Ollama</strong>, <strong>Groq</strong>, <strong>Together AI</strong>,
-              <strong>Fireworks AI</strong>, <strong>DeepInfra</strong>, <strong>Cerebras</strong>, <strong>Mistral</strong>, <strong>DeepSeek</strong>,
-              <strong>xAI</strong>, <strong>Perplexity</strong>, <strong>SambaNova</strong>, <strong>Cohere</strong>, <strong>Hugging Face</strong>, or
-              <strong>Custom endpoint</strong>). Selecting a provider automatically populates the endpoint URL.</td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>OpenAI Endpoint</strong></td>
-            <td style="text-align: left"><code>#app-intel-base-url</code></td>
-            <td style="text-align: left">The base HTTP/HTTPS URL for the API endpoint (e.g. <code>https://api.openai.com/v1</code>, <code>https://openrouter.ai/api/v1</code>,
-              <code>http://localhost:11434/v1</code>).</td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>API Key</strong></td>
-            <td style="text-align: left"><code>#app-intel-api-key</code></td>
-            <td style="text-align: left">Password-masked text input for the secret API key (e.g. <code>sk-proj-...</code>).</td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>Model</strong></td>
-            <td style="text-align: left"><code>#app-intel-model</code></td>
-            <td style="text-align: left">The model identifier string passed in request payloads (e.g. <code>gpt-4o</code>, <code>gpt-4o-mini</code>, <code>gemini-1.5-flash</code>,
-              <code>claude-3-5-sonnet</code>).</td>
-          </tr>
-        </tbody>
-      </table>
-      <h3 id="storage-persistence">Storage Persistence</h3>
-      <p>Default LLM settings are saved in Chrome local storage under the <code>appIntelligenceConfig</code> object key:</p>
-      <pre><code class="language-json">{
-	"appIntelligenceConfig": {
-		"apiKey": "sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx",
-		"baseUrl": "https://api.openai.com/v1",
-		"model": "gpt-4o-mini"
-	}
-}
-</code></pre>
-      <hr >
-      <h2 id="2-general-settings">2. General Settings</h2>
-      <p>The <strong>General Settings</strong> pane controls UI customization and content viewer access.</p>
-      <h3 id="controls-options">Controls &amp; Options</h3>
-      <ul>
-        <li>
-          <p><strong>Zoom Slider (<code>#sidebarZoom</code>)</strong>:</p>
-          <ul>
-            <li><strong>Type</strong>: Interactive range input (<code>&lt;input type="range"&gt;</code>).</li>
-            <li><strong>Range</strong>: Scale from <code>0.75x</code> (75%) to <code>1.50x</code> (150%) in <code>0.05</code> step increments (default:
-              <code>1.0</code>).</li>
-            <li><strong>Behavior</strong>: Adjusts the base font size of the extension sidebar in real time (<code>document.documentElement.style.fontSize = 16 * zoom</code>).</li>
-            <li><strong>Storage Key</strong>: Saved under <code>sidebarZoom</code> in Chrome local storage.</li>
-          </ul>
-        </li>
-        <li>
-          <p><strong>View Content (<code>#openSettingsViewerBtn</code>)</strong>:</p>
-          <ul>
-            <li><strong>Type</strong>: Navigation action button.</li>
-            <li><strong>Behavior</strong>: Opens the packaged <strong>Content Viewer</strong> page (<code>viewer.html</code>) in a full browser tab.</li>
-            <li><strong>Function</strong>: Allows users to inspect, copy, export, or clear clipping snippets aggregated by <strong>Append Content</strong> page
-              actions.</li>
-          </ul>
-        </li>
+        <li>Set up your AI service once, then use it for workflow steps that are set to use the default AI settings.</li>
+        <li>Save a webhook address or API key as a reusable value instead of entering it in every workflow.</li>
+        <li>Make the sidebar text larger or smaller to suit your screen.</li>
+        <li>Review or export text saved by an <strong>Append Content</strong> action in the Content Viewer.</li>
       </ul>
       <hr >
-      <h2 id="3-global-variables-settings">3. Global Variables Settings</h2>
-      <p>The <strong>Global Variables</strong> tab centralizes reusable configuration data—such as API keys, OAuth tokens, Webhook URLs, and document IDs—so
-        they can be updated in one location and referenced across all extension workflows.</p>
+      <h2 id="default-ai-settings">Default AI settings</h2>
+      <p>In the <strong>General</strong> tab, choose a provider and enter the connection details it requires:</p>
+      <ul>
+        <li><strong>Provider</strong>: Choose your AI service. The endpoint is filled in for supported providers; choose a custom endpoint if needed.</li>
+        <li><strong>OpenAI Endpoint</strong>: The service address. Check your provider's instructions if you use a custom endpoint.</li>
+        <li><strong>API Key</strong>: Enter the key supplied by your AI service. You may need to create an account with that service to get a key.</li>
+        <li><strong>Model</strong>: Enter the model name provided by your service.</li>
+      </ul>
+      <p>These settings power the extension's AI helper features. Workflow AI steps can also use them when <strong>Use Default LLM Config</strong> is selected,
+        so you do not have to enter the same connection details in each step.</p>
+      <hr >
+      <h2 id="general-settings">General settings</h2>
+      <ul>
+        <li><strong>Sidebar text size</strong>: Use the size slider to make text in the sidebar smaller or larger. Changes take effect as you move the
+          slider.</li>
+        <li><strong>View Content</strong>: Open the Content Viewer in a browser tab to inspect, copy, export, or clear text saved by
+          <strong>Append Content</strong> actions.</li>
+      </ul>
+      <hr >
+      <h2 id="global-variables">Global Variables</h2>
+      <p>Use this tab to save values you reuse in workflows, such as API keys, webhook addresses, and document IDs. You can add, edit, or delete saved values.
+        Values are hidden when displayed to help protect them from being seen on screen.</p>
       <img src="../img/Settings Global.png" alt="Settings - Global Variables" >
-      <h3 id="token-syntax-usage">Token Syntax &amp; Usage</h3>
-      <p>Global variables are referenced in workflow step configurations using double-bracket token syntax:</p>
-      <ul>
-        <li><strong>Token Syntax</strong>: ``</li>
-        <li><strong>Examples</strong>:
-          <ul>
-            <li>`` (Webhook URL in Slack plugin)</li>
-            <li>`` (Spreadsheet ID in Google Sheets plugin)</li>
-            <li>`` (Bearer Token in API/Webhook headers)</li>
-            <li>`` (API key in Trello plugin)</li>
-          </ul>
-        </li>
-      </ul>
-      <h3 id="management-ui-features">Management UI &amp; Features</h3>
-      <ol>
-        <li>
-          <p><strong>Variable List (<code>#globalVariablesList</code>)</strong>:</p>
-          <ul>
-            <li>Displays all active global variables in alphabetical order.</li>
-            <li>Values are masked using password inputs (<code>type="password"</code>) to protect sensitive credentials from screen exposure.</li>
-            <li>Includes <strong>Edit</strong> and <strong>Delete</strong> action icons for each entry.</li>
-          </ul>
-        </li>
-        <li>
-          <p><strong>Management Form</strong>:</p>
-          <ul>
-            <li><strong>Key Input (<code>#globalVariableKey</code>)</strong>: Name identifier for the variable. Must contain only letters, numbers, and
-              underscores (e.g. <code>slack_webhook_url</code>).</li>
-            <li><strong>Value Input (<code>#globalVariableValue</code>)</strong>: Secret key, URL, or string value.</li>
-            <li><strong>Save Button (<code>#globalVariableSaveBtn</code>)</strong>: Saves or updates the key-value pair in storage.</li>
-          </ul>
-        </li>
-        <li>
-          <p><strong>Inline Creation in Workflow Editor</strong>:</p>
-          <ul>
-            <li>Users can also create global variables directly while editing a workflow inside the <strong>New Step/Variable</strong> card
-              (<code>#editorGlobalVariableKey</code>, <code>#editorGlobalVariableValue</code>, <code>#editorGlobalVariableSaveBtn</code>).</li>
-            <li>If a step configuration contains an unrecognized token like ``, the editor automatically pre-fills the key input for instant creation.</li>
-          </ul>
-        </li>
-        <li>
-          <p><strong>Token Selector Integration</strong>:</p>
-          <ul>
-            <li>All saved global variables automatically populate in the <strong>Insert workflow token</strong> dropdown menu (<code>tokenSelector</code>)
-              attached to tokenizable fields across all plugin forms.</li>
-          </ul>
-        </li>
-      </ol>
-      <h3 id="storage-persistence">Storage Persistence</h3>
-      <p>Global variables are stored under the <code>aiGlobalVariables</code> dictionary key in Chrome local storage:</p>
-      <pre><code class="language-json">{
-	"aiGlobalVariables": {
-		"google_doc_id": "1aBc_example_doc_id_999",
-		"google_sheet_id": "1sXv_example_sheet_id_888",
-		"slack_webhook_url": "https://hooks.slack.com/services/T0000/B0000/XXXXX",
-		"trello_api_key": "3a7b9c1d2e...",
-		"trello_oauth_token": "ATTA123456789..."
-	}
-}
-</code></pre>
-      <hr >
-      <h2 id="technical-storage-key-reference">Technical &amp; Storage Key Reference</h2>
-      <table>
-        <thead>
-          <tr>
-            <th style="text-align: left">Setting Category</th>
-            <th style="text-align: left">Chrome Storage Key (<code>chrome.storage.local</code>)</th>
-            <th style="text-align: left">Data Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align: left"><strong>Default LLM</strong></td>
-            <td style="text-align: left"><code>appIntelligenceConfig</code></td>
-            <td style="text-align: left"><code>Object</code></td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>Global Variables</strong></td>
-            <td style="text-align: left"><code>aiGlobalVariables</code></td>
-            <td style="text-align: left"><code>Record&lt;string, string&gt;</code></td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>Sidebar Zoom</strong></td>
-            <td style="text-align: left"><code>sidebarZoom</code></td>
-            <td style="text-align: left"><code>number</code></td>
-          </tr>
-          <tr>
-            <td style="text-align: left"><strong>Active Workflow</strong></td>
-            <td style="text-align: left"><code>selectedWorkflow</code></td>
-            <td style="text-align: left"><code>string</code></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>(Bearer Token in API/Webhook headers)</p>
+      <p>To add a value, enter a name and its value, then save it. Names can contain letters, numbers, and underscores. In a workflow, choose a saved value from
+        the <strong>Insert workflow token</strong> menu in a supported field.</p>
     </main>
     <footer class="site-footer">
       <div class="footer-inner">
