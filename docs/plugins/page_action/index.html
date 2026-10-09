@@ -1,285 +1,91 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/page_action.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="page-action-plugin-updatepage">Page Action Plugin (<code>updatePage</code>)</h1>
-<p>The <strong>Page Action</strong> plugin (<code>updatePage</code>) provides essential browser automation capabilities within the AI Workflows extension. It enables workflows to interact directly with active browser tabs—clicking buttons, populating input fields, waiting for dynamic DOM elements, controlling tab navigation, displaying extraction or LLM results in the sidebar, and persisting snippets to local memory.</p>
-<img src="../../img/Action.png" alt="Page Action Step" />
-<hr>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Action</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>updatePage</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>action</code> (e.g., <code>action_1</code>, <code>action_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">System (<code>system</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Tab Requirements</strong></td>
-<td style="text-align:left">Requires an injectable web page tab (<code>http://</code> or <code>https://</code>). Restricted browser URLs (<code>chrome://</code>, <code>about:blank</code>, Chrome Web Store) are guarded.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<p>The Page Action step dynamically adapts its visible form controls based on the selected browser action.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Control Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>action</code></td>
-<td style="text-align:left"><strong>Action</strong></td>
-<td style="text-align:left">Dropdown (<code>&lt;select&gt;</code>)</td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Selects the browser automation command to execute (e.g., <code>clickElement</code>, <code>updateField</code>, <code>sidebar</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>selector</code></td>
-<td style="text-align:left"><strong>CSS Selector</strong></td>
-<td style="text-align:left">Text Input (<code>&lt;input&gt;</code>)</td>
-<td style="text-align:left"><strong>Conditional</strong></td>
-<td style="text-align:left">Required for element-targeted actions (<code>clickElement</code>, <code>updateField</code>, <code>waitForSelector</code>). Specifies the DOM element query.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>value</code></td>
-<td style="text-align:left"><strong>Value Template</strong></td>
-<td style="text-align:left">Multiline Textarea (<code>&lt;textarea&gt;</code>)</td>
-<td style="text-align:left"><strong>Conditional</strong></td>
-<td style="text-align:left">Required for actions accepting text, URLs, JSON arrays, or key names. Supports template tokens (<code>{{llm_1}}</code>, <code>{{extract_1.title}}</code>).</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="action-reference">Action Reference</h2>
-<h3 id="1-show-in-sidebar-sidebar">1. Show in Sidebar (<code>sidebar</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Displays formatted text, Markdown, or JSON output directly inside the sidebar's <strong>Result</strong> panel.</li>
-<li><strong>Target Field</strong>: <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: No (<code>config.selector</code> is ignored).</li>
-<li><strong>Mechanics</strong>: Extracts <code>text</code> or <code>value</code> properties from JSON objects, or prints raw text payloads. Sanitizes and cleans JSON formatting for display.</li>
-<li><strong>Example Usage</strong>: Rendering an LLM summary (<code>{{openai_1}}</code>) or structured page metadata (<code>{{extract_1.title}}</code>).</li>
-</ul>
-<h3 id="2-append-content-appendcontent">2. Append Content (<code>appendContent</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Saves text clippings, page excerpts, or AI summaries to local extension storage (<code>chrome.storage.local</code>).</li>
-<li><strong>Target Field</strong>: <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: No.</li>
-<li><strong>Mechanics</strong>: Constructs a metadata-rich clipping record containing a unique UUID, timestamp, text content, active tab URL (<code>sourceUrl</code>), and page title (<code>sourceTitle</code>). Accumulated clippings can be reviewed, copied, or exported as text files via the <strong>View Content</strong> viewer panel.</li>
-<li><strong>Example Usage</strong>: Collecting research snippets across multiple tabs (<code>{{extract_1.selection}}</code>).</li>
-</ul>
-<h3 id="3-switch-tab-switchtab">3. Switch Tab (<code>switchTab</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Changes active focus to an existing browser tab matching a target URL or title substring.</li>
-<li><strong>Target Field</strong>: <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: No.</li>
-<li><strong>Mechanics</strong>: Searches open browser tabs in the current window for a tab whose URL or document title contains the string provided in <code>config.value</code>. Activates the matching tab window.</li>
-<li><strong>Example Usage</strong>: Focusing an open web application tab (<code>https://app.slack.com</code> or <code>Jira</code>).</li>
-</ul>
-<h3 id="4-navigate-url-navigateurl">4. Navigate URL (<code>navigateUrl</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Navigates the current browser tab (or opens a new tab) to a specified web address.</li>
-<li><strong>Target Field</strong>: <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: No.</li>
-<li><strong>Mechanics</strong>: Validates the input URL. Supports absolute HTTP/HTTPS addresses (<code>https://example.com</code>) as well as domain-relative paths (<code>/dashboard</code>), resolving relative paths against the active tab's origin. Suspends step execution until tab navigation completes (<code>status === 'complete'</code>).</li>
-<li><strong>Example Usage</strong>: Redirecting the browser to a search results page (<code>https://google.com/search?q={{userInput}}</code>).</li>
-</ul>
-<h3 id="5-update-field-updatefield">5. Update Field (<code>updateField</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Sets the value or text content of a single target form field or editable element on the active web page.</li>
-<li><strong>Target Field</strong>: <code>config.selector</code> and <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: <strong>Yes</strong> (Valid CSS selector required, e.g., <code>input#username</code> or <code>[data-testid=&quot;search-input&quot;]</code>).</li>
-<li><strong>Mechanics</strong>: Locates the DOM element, retrieves native property descriptors to update input values (compatible with React, Vue, and Angular controlled inputs), and dispatches synthetic <code>input</code> and <code>change</code> DOM events. Fallback handling updates <code>textContent</code> for <code>contenteditable</code> elements.</li>
-<li><strong>Example Usage</strong>: Filling a form search box with an AI query (<code>selector: &quot;#search&quot;</code>, <code>value: &quot;{{userInput}}&quot;</code>).</li>
-</ul>
-<h3 id="6-update-fields-updatefields">6. Update Fields (<code>updateFields</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Programmatically updates multiple web page fields in a single step using a JSON array of selector/value pairs.</li>
-<li><strong>Target Field</strong>: <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: No (Selectors are defined inside the JSON payload).</li>
-<li><strong>Mechanics</strong>: Parses a JSON object formatted with an <code>updates</code> array:<pre><code class="language-json">{
-	&quot;updates&quot;: [
-		{ &quot;selector&quot;: &quot;#firstName&quot;, &quot;value&quot;: &quot;Alice&quot; },
-		{ &quot;selector&quot;: &quot;#lastName&quot;, &quot;value&quot;: &quot;Smith&quot; }
-	]
-}
-</code></pre>
-Iterates through each selector, sets field values via native prototypes, and dispatches change events for all modified elements.</li>
-<li><strong>Example Usage</strong>: Batch-filling an entire registration or checkout form from structured JSON outputs.</li>
-</ul>
-<h3 id="7-click-element-clickelement">7. Click Element (<code>clickElement</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Simulates a user click on a button, link, or interactive element in the webpage DOM.</li>
-<li><strong>Target Field</strong>: <code>config.selector</code></li>
-<li><strong>Selector Needed</strong>: <strong>Yes</strong> (Valid CSS selector required, e.g., <code>button[type=&quot;submit&quot;]</code>).</li>
-<li><strong>Mechanics</strong>: Locates the element using <code>document.querySelector</code>, verifies element existence and clickability, and triggers <code>element.click()</code>. Waits for subsequent page loads if the click initiates navigation.</li>
-<li><strong>Example Usage</strong>: Submitting a form or opening a modal dialog (<code>selector: &quot;button.submit-btn&quot;</code>).</li>
-</ul>
-<h3 id="8-wait-wait-waitfordelay">8. Wait (<code>wait</code> / <code>waitForDelay</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Pauses workflow pipeline execution for a specified duration in seconds.</li>
-<li><strong>Target Field</strong>: <code>config.value</code></li>
-<li><strong>Selector Needed</strong>: No.</li>
-<li><strong>Mechanics</strong>: Converts the input string into a floating-point number of seconds and calls an asynchronous non-blocking delay. Useful for allowing animations, redirects, or background API requests on the page to settle.</li>
-<li><strong>Example Usage</strong>: Delaying execution for 3 seconds (<code>value: &quot;3&quot;</code>).</li>
-</ul>
-<h3 id="9-wait-for-selector-waitforselector">9. Wait For Selector (<code>waitForSelector</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Pauses pipeline execution until a specific element appears in the web page DOM.</li>
-<li><strong>Target Field</strong>: <code>config.selector</code></li>
-<li><strong>Selector Needed</strong>: <strong>Yes</strong> (Valid CSS selector required, e.g., <code>.results-loaded</code>).</li>
-<li><strong>Mechanics</strong>: Checks if the element exists immediately. If not present, attaches a <code>MutationObserver</code> to <code>document.documentElement</code> to watch dynamic DOM insertions. Resolves instantly when detected or times out after 10 seconds.</li>
-<li><strong>Example Usage</strong>: Waiting for dynamic search results or single-page app (SPA) route renders (<code>selector: &quot;.search-results&quot;</code>).</li>
-</ul>
-<h3 id="10-key-press-keypress">10. Key Press (<code>keyPress</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Dispatches synthetic keyboard events (<code>keydown</code>, <code>keypress</code>, <code>keyup</code>) to the active element or target selector.</li>
-<li><strong>Target Field</strong>: <code>config.value</code> and optional <code>config.selector</code></li>
-<li><strong>Selector Needed</strong>: Optional (Defaults to <code>document.activeElement</code> or <code>document.body</code> if omitted).</li>
-<li><strong>Mechanics</strong>: Dispatches <code>KeyboardEvent</code> sequences. Supported keys include <code>Enter</code>, <code>Escape</code>, <code>Tab</code>, <code>ArrowUp</code>, <code>ArrowDown</code>, <code>ArrowLeft</code>, <code>ArrowRight</code>, <code>Backspace</code>, <code>Delete</code>, <code>Space</code>, <code>Home</code>, <code>End</code>, <code>PageUp</code>, and <code>PageDown</code>. Single-character keys automatically modify input field values and trigger <code>input</code> events.</li>
-<li><strong>Example Usage</strong>: Pressing <code>Enter</code> after populating a search bar (<code>selector: &quot;#search&quot;</code>, <code>value: &quot;Enter&quot;</code>).</li>
-</ul>
-<h3 id="11-refresh-tab-refreshtab">11. Refresh Tab (<code>refreshTab</code>)</h3>
-<ul>
-<li><strong>Purpose</strong>: Reloads the current browser tab and waits for page re-loading to complete.</li>
-<li><strong>Target Field</strong>: None.</li>
-<li><strong>Selector Needed</strong>: No.</li>
-<li><strong>Mechanics</strong>: Calls <code>chrome.tabs.reload()</code> on the active tab and listens for <code>chrome.tabs.onUpdated</code> until tab status reaches <code>'complete'</code>.</li>
-<li><strong>Example Usage</strong>: Refreshing a dashboard after executing an API post step.</li>
-</ul>
-<hr>
-<h2 id="template-tokens-pipeline-state">Template Tokens &amp; Pipeline State</h2>
-<p>All string-based fields (<code>config.value</code>, <code>config.selector</code>) support token resolution using double-bracket notation:</p>
-<ul>
-<li><strong>Preceding Step Outputs</strong>: <code>{{extract_1.title}}</code>, <code>{{openai_1}}</code>, <code>{{sheets_1.data}}</code></li>
-<li><strong>Global Variables</strong>: <code>{{globals.search_query}}</code></li>
-<li><strong>Tab &amp; User Context</strong>: <code>{{url.href}}</code>, <code>{{url.hostname}}</code>, <code>{{userInput}}</code>, <code>{{datetime}}</code></li>
-</ul>
-<h3 id="step-output-state-action_1">Step Output State (<code>{{action_1.*}}</code>)</h3>
-<p>When a Page Action step completes, its execution payload is stored in the pipeline state:</p>
-<ul>
-<li><code>{{action_1.value}}</code>: The resolved text value or payload.</li>
-<li><code>{{action_1.selector}}</code>: The CSS selector evaluated during execution.</li>
-<li><code>{{action_1.updates}}</code>: Array of updated field records (when using <code>updateFields</code>).</li>
-</ul>
-<hr>
-<h2 id="sidebar-panel-actions">Sidebar Panel Actions</h2>
-<p>When a Page Action step is configured with the <code>appendContent</code> action, the step contributes a dynamic action button to the sidebar footer:</p>
-<ul>
-<li><strong>View Content Button</strong>: Clicking <strong>View Content</strong> opens the extension's dedicated content viewer (<code>viewer.html</code>), where all accumulated clippings can be inspected, copied, or downloaded.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configurations-json">Example Workflow Configurations (JSON)</h2>
-<h3 id="example-a-fill-search-field-and-press-enter">Example A: Fill Search Field and Press Enter</h3>
-<pre><code class="language-json">[
-	{
-		&quot;id&quot;: &quot;action_fill&quot;,
-		&quot;type&quot;: &quot;updatePage&quot;,
-		&quot;config&quot;: {
-			&quot;action&quot;: &quot;updateField&quot;,
-			&quot;selector&quot;: &quot;input[name='q']&quot;,
-			&quot;value&quot;: &quot;{{userInput}}&quot;
-		}
-	},
-	{
-		&quot;id&quot;: &quot;action_press_enter&quot;,
-		&quot;type&quot;: &quot;updatePage&quot;,
-		&quot;config&quot;: {
-			&quot;action&quot;: &quot;keyPress&quot;,
-			&quot;selector&quot;: &quot;input[name='q']&quot;,
-			&quot;value&quot;: &quot;Enter&quot;
-		}
-	}
-]
-</code></pre>
-<h3 id="example-b-wait-for-results-append-snippet-to-local-storage">Example B: Wait for Results &amp; Append Snippet to Local Storage</h3>
-<pre><code class="language-json">[
-	{
-		&quot;id&quot;: &quot;action_wait&quot;,
-		&quot;type&quot;: &quot;updatePage&quot;,
-		&quot;config&quot;: {
-			&quot;action&quot;: &quot;waitForSelector&quot;,
-			&quot;selector&quot;: &quot;.search-results-list&quot;,
-			&quot;value&quot;: &quot;&quot;
-		}
-	},
-	{
-		&quot;id&quot;: &quot;action_save_clipping&quot;,
-		&quot;type&quot;: &quot;updatePage&quot;,
-		&quot;config&quot;: {
-			&quot;action&quot;: &quot;appendContent&quot;,
-			&quot;selector&quot;: &quot;&quot;,
-			&quot;value&quot;: &quot;Title: {{extract_1.title}}\nURL: {{url.href}}\n\nSummary:\n{{openai_1}}&quot;
-		}
-	}
-]
-</code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="page-action">Page Action</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use <strong>Action</strong> to control a webpage, manage browser tabs, or display and save workflow results. Some actions work with the active webpage;
+        others work with browser tabs or the extension sidebar.</p>
+      <img src="../../img/Action.png" alt="Page Action Step" >
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Fill a webpage's search box and press Enter.</li>
+        <li>Wait for search results to appear, then save a summary in <strong>View Content</strong>.</li>
+        <li>Show a workflow result in the sidebar.</li>
+      </ul>
+      <h2 id="before-you-start">Before you start</h2>
+      <p>Actions that interact with webpage content need an active website tab. Chrome's built-in pages and blank tabs cannot be controlled this way. For
+        <strong>Click Element</strong>, <strong>Update Field</strong>, <strong>Wait for Selector</strong>, or <strong>Key Press</strong>, click
+        <strong>View Element</strong> and select the page item instead of typing its CSS selector yourself.</p>
+      <h2 id="choose-an-action">Choose an action</h2>
+      <p>Select an action from the <strong>Action</strong> menu:</p>
+      <ul>
+        <li><strong>Show in Sidebar</strong> displays text or workflow results in the sidebar's <strong>Result</strong> area.</li>
+        <li><strong>Append Content</strong> saves text in <strong>View Content</strong>, where you can review, copy, or download saved clippings.</li>
+        <li><strong>Navigate to URL</strong> opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; a path can be relative to the
+          current website.</li>
+        <li><strong>Switch to Tab</strong> activates a tab by its web address or title. If you provide a web address that is not already open, it opens in a new
+          tab.</li>
+        <li><strong>Close Tab</strong> closes a tab that matches the address or title you enter.</li>
+        <li><strong>Refresh Tab</strong> reloads the active tab.</li>
+        <li><strong>Click Element</strong> clicks a selected page item, such as a button or link.</li>
+        <li><strong>Update Field</strong> enters text into one page field.</li>
+        <li><strong>Update Multiple Fields</strong> enters text into several fields at once. This option requires a structured list of fields and values.</li>
+        <li><strong>Wait/Delay</strong> pauses the workflow for the number of seconds you enter.</li>
+        <li><strong>Wait for Selector</strong> waits up to 10 seconds for a page element to appear.</li>
+        <li><strong>Key Press</strong> sends a supported key, such as Enter or Tab, to the active field or selected page item.</li>
+      </ul>
+      <p><strong>Auto</strong> is also listed in the menu, but it does not currently perform an action.</p>
+      <h2 id="configure-the-selected-action">Configure the selected action</h2>
+      <ol>
+        <li>Choose the action you want to perform.</li>
+        <li>If the form shows <strong>CSS Selector</strong>, use <strong>View Element</strong> to select the page item. This is needed for actions such as
+          clicking an item, updating a field, or waiting for an item to appear.</li>
+        <li>If the form shows <strong>Value Template</strong>, enter the text, web address, delay, or key required by that action. You can include results from
+          earlier workflow steps.</li>
+      </ol>
+      <p>When you use <strong>Append Content</strong>, choose <strong>View Content</strong> to open the saved clippings.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

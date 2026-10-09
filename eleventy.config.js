@@ -1,3 +1,5 @@
+import { processHtmlFiles } from './pipeline/processHtmlFiles.js';
+
 function escapePluginWorkflowTokens(_data, content) {
 	const inputPath = this.inputPath.replace(/\\/g, '/');
 	if (!/(?:^|\/)_input\/plugins\//.test(inputPath)) {
@@ -16,7 +18,7 @@ function escapePluginWorkflowTokens(_data, content) {
  */
 function removeMarkdownFromInternalLinks(content) {
 	return content.replace(/(\bhref=["'])([^"']+)(["'])/gi, (match, prefix, url, suffix) => {
-		if (/^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(url) || /(?:^|\/)plain\/.*\.md(?:[?#]|$)/i.test(url)) {
+		if (/^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(url) || /(?:^|\/)plain\.md(?:[?#]|$)/i.test(url)) {
 			return match;
 		}
 
@@ -24,29 +26,31 @@ function removeMarkdownFromInternalLinks(content) {
 	});
 }
 
+/**
+ * Adds a URL-friendly ID to a Markdown heading based on its text.
+ * Punctuation is removed, text is lowercased, and whitespace becomes hyphens.
+ * Headings with no resulting text are left without an ID.
+ */
+function renderHeadingOpen(tokens, index, options, env, renderer) {
+	const heading = tokens[index + 1]?.content ?? '';
+	const id = heading
+		.toLowerCase()
+		.replace(/[^\w\s-]/g, '')
+		.trim()
+		.replace(/\s+/g, '-');
+
+	if (id) {
+		tokens[index].attrSet('id', id);
+	}
+
+	return renderer.renderToken(tokens, index, options);
+}
+
 export default async function eleventy(eleventyConfig) {
 	// Configure Eleventy
 
 	eleventyConfig.amendLibrary('md', (markdown) => {
-		/**
-		 * Adds URL-friendly IDs to Markdown headings based on their text.
-		 * Punctuation is removed, text is lowercased, and whitespace becomes hyphens.
-		 * Headings with no resulting text are left without an ID.
-		 */
-		markdown.renderer.rules.heading_open = (tokens, index, options, env, renderer) => {
-			const heading = tokens[index + 1]?.content ?? '';
-			const id = heading
-				.toLowerCase()
-				.replace(/[^\w\s-]/g, '')
-				.trim()
-				.replace(/\s+/g, '-');
-
-			if (id) {
-				tokens[index].attrSet('id', id);
-			}
-
-			return renderer.renderToken(tokens, index, options);
-		};
+		markdown.renderer.rules.heading_open = renderHeadingOpen;
 	});
 
 	// data
@@ -57,7 +61,6 @@ export default async function eleventy(eleventyConfig) {
 	});
 
 	// files
-	// eleventyConfig.addPassthroughCopy({ '_input/**/*.md': 'plain' });
 	eleventyConfig.addPassthroughCopy({ '_input/css': 'css' });
 	eleventyConfig.addPassthroughCopy({ '_input/img': 'img' });
 	eleventyConfig.addPassthroughCopy('src/js');
@@ -65,6 +68,10 @@ export default async function eleventy(eleventyConfig) {
 	// transforms
 	eleventyConfig.addPreprocessor('escapePluginWorkflowTokens', 'md', escapePluginWorkflowTokens);
 	eleventyConfig.addTransform('html', removeMarkdownFromInternalLinks);
+
+	eleventyConfig.on('afterBuild', async ({ _dir, _runMode, _outputMode }) => {
+		await processHtmlFiles();
+	});
 
 	return {
 		dir: {

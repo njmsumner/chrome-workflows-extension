@@ -1,194 +1,77 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/jira_issue.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="jira-create-issue-jiraissue">Jira Create Issue (<code>jiraIssue</code>)</h1>
-<p>The <strong>Jira Create Issue</strong> plugin creates a Jira issue in a selected project. It supports Jira Cloud and Server/Data Center, using the v3 ADF or v2 classic description format and Basic or personal-access-token authentication.</p>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Jira Create Issue</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>jiraIssue</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>jira_issue</code> (e.g., <code>jira_issue_1</code>, <code>jira_issue_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Atlassian</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Basic (email and API token) or personal access token</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>domainUrl</code></td>
-<td style="text-align:left"><strong>Jira Base URL</strong></td>
-<td style="text-align:left"><code>url</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Jira site base URL, such as <code>https://your-domain.atlassian.net</code>; trailing slashes are removed before the request.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>projectKey</code></td>
-<td style="text-align:left"><strong>Project Key</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Project key where the issue will be created, such as <code>PROJ</code>; execution trims and uppercases it.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>issueType</code></td>
-<td style="text-align:left"><strong>Issue Type</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong> (defaults to <code>Task</code>)</td>
-<td style="text-align:left">Issue type name, such as <code>Task</code>, <code>Bug</code>, or <code>Story</code>. Execution uses <code>Task</code> if blank.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>summary</code></td>
-<td style="text-align:left"><strong>Summary / Title</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Issue summary. Supports tokens, such as <code>{{extract_1.title}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>description</code></td>
-<td style="text-align:left"><strong>Description</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Optional issue details. Supports tokens, such as <code>{{llm_1}}</code>; v3 converts the text to ADF, while v2 sends it as text.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>email</code></td>
-<td style="text-align:left"><strong>Email Address</strong></td>
-<td style="text-align:left"><code>email</code></td>
-<td style="text-align:left"><strong>Yes for Basic authentication</strong></td>
-<td style="text-align:left">Jira account email; shown and required at execution only for Basic authentication. Supports <code>{{globals.jira_email}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>apiToken</code></td>
-<td style="text-align:left"><strong>API Token / Secret Key</strong></td>
-<td style="text-align:left"><code>password</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">API token for Basic authentication or personal access token for Server/Data Center. Supports <code>{{globals.jira_api_token}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>apiVers</code></td>
-<td style="text-align:left"><strong>API Version</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left"><strong>Yes</strong> (defaults to <code>v3</code>)</td>
-<td style="text-align:left">Choose <code>v3</code> (Jira Cloud, ADF) or <code>v2</code> (Server/classic text).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>authMethod</code></td>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left">No (defaults to <code>basic</code>)</td>
-<td style="text-align:left">Choose Basic authentication (email and API token) or personal access token.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>Summary / Title</strong>, <strong>Description</strong>, <strong>Email Address</strong>, and <strong>API Token / Secret Key</strong>. The workflow runner resolves tokens before execution; for example, use <code>{{extract_1.title}}</code> in a summary and <code>{{llm_1}}</code> in a description.</p>
-<h3 id="output-state">Output State</h3>
-<p>On success, the plugin returns an object with these properties:</p>
-<ul>
-<li><code>{{jira_issue_1.id}}</code>: Jira issue ID from the API response.</li>
-<li><code>{{jira_issue_1.key}}</code>: Jira issue key. The plugin requires this value in the API response.</li>
-<li><code>{{jira_issue_1.self}}</code>: Jira API URL from the response.</li>
-<li><code>{{jira_issue_1.issueUrl}}</code>: Browser URL for the created issue, built from the configured Jira base URL and returned issue key.</li>
-</ul>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<ul>
-<li><strong>View Project</strong>: Opens the Jira project page when the configured base URL and project key resolve without unresolved template tokens.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;jira_issue_1&quot;,
-	&quot;type&quot;: &quot;jiraIssue&quot;,
-	&quot;config&quot;: {
-		&quot;domainUrl&quot;: &quot;https://your-domain.atlassian.net&quot;,
-		&quot;projectKey&quot;: &quot;PROJ&quot;,
-		&quot;issueType&quot;: &quot;Task&quot;,
-		&quot;summary&quot;: &quot;[AI] {{extract_1.title}}&quot;,
-		&quot;description&quot;: &quot;{{llm_1}}&quot;,
-		&quot;apiVers&quot;: &quot;v3&quot;,
-		&quot;authMethod&quot;: &quot;basic&quot;,
-		&quot;email&quot;: &quot;{{globals.jira_email}}&quot;,
-		&quot;apiToken&quot;: &quot;{{globals.jira_api_token}}&quot;
-	}
-}
-</code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="jira-create-issue">Jira Create Issue</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use <strong>Jira Create Issue</strong> to create a new issue in a Jira project. It works with Jira Cloud and Jira Server/Data Center. You can write the
+        issue details yourself or use information from earlier workflow steps.</p>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Create a task with a summary and details generated by a workflow.</li>
+        <li>Create a bug report using information collected from a webpage.</li>
+      </ul>
+      <h2 id="set-up-jira-access">Set up Jira access</h2>
+      <p>You need your Jira site address, the project key, and credentials that can create issues in that project.</p>
+      <ul>
+        <li>For <strong>Jira Cloud</strong>, you need your Jira account email and an API token.</li>
+        <li>For <strong>Jira Server/Data Center</strong>, you need a personal access token.</li>
+      </ul>
+      <p>You can save credentials under <strong>Settings &gt; Global Variables</strong> and select them with the token picker. This avoids entering them again
+        in each workflow.</p>
+      <h2 id="add-and-configure-the-step">Add and configure the step</h2>
+      <ol>
+        <li>Add <strong>Jira Create Issue</strong> to your workflow.</li>
+        <li>Enter the <strong>Jira Base URL</strong> and <strong>Project Key</strong>.</li>
+        <li>Enter an <strong>Issue Type</strong>, such as Task or Bug. The default is <strong>Task</strong>.</li>
+        <li>Enter the required <strong>Summary / Title</strong>. Add a <strong>Description</strong> if you want to include more details. Use the token picker to
+          include information from earlier workflow steps.</li>
+        <li>Under <strong>Advanced</strong>, set <strong>Authentication</strong> to <strong>Basic (Email &amp; API Token - Cloud)</strong> for Jira Cloud or
+          <strong>Personal Access Token - Server</strong> for Server/Data Center.</li>
+        <li>Under <strong>API Version</strong>, choose <strong>v3</strong> for Jira Cloud or <strong>v2</strong> for Server/Data Center.</li>
+      </ol>
+      <p>Choose <strong>View Project</strong> to open the configured project in Jira.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

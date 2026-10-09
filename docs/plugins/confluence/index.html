@@ -1,74 +1,77 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/confluence.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="update-a-confluence-page">Update a Confluence page</h1>
-<p>Use <strong>Confluence Page</strong> to replace the content of an existing Confluence page with information from a workflow. You can also change the page title.</p>
-<h2 id="overview">Overview</h2>
-<p>Provide the address of your Confluence site and the ID of the page to update. The page body is replaced when the workflow runs. If <strong>Page Title (Optional)</strong> is left blank, the current title stays as it is.</p>
-<h2 id="simple-examples">Simple examples</h2>
-<ul>
-<li>Replace a project page with the latest summary created by a workflow.</li>
-<li>Update an existing page with information gathered from a webpage.</li>
-<li>Change a page’s title and replace its content with a workflow report.</li>
-</ul>
-<h2 id="set-up-the-page">Set up the page</h2>
-<ul>
-<li><strong>Confluence Base URL:</strong> Enter your Confluence site address, such as <code>https://your-domain.atlassian.net/wiki</code>.</li>
-<li><strong>Page ID (Content ID):</strong> Enter the ID of the existing page you want to update.</li>
-<li><strong>Page Title (Optional):</strong> Enter a new title, or leave this blank to keep the current title.</li>
-<li><strong>Page Body (XHTML Storage Format):</strong> Enter the new page content. Confluence requires its own format for page content; information from earlier workflow steps can be included.</li>
-</ul>
-<h2 id="set-up-authentication">Set up authentication</h2>
-<p>Choose the method that matches your Confluence account:</p>
-<ul>
-<li><strong>Basic Auth (Cloud API Token):</strong> Enter your account email or username and its API token or password.</li>
-<li><strong>Personal Access Token (PAT):</strong> Choose this option and enter your Confluence personal access token. You do not need to enter an email address or username.</li>
-</ul>
-<p>The token must be valid for the selected authentication method, and the account must be able to edit the page.</p>
-<p>Once the site address and page ID are set, use <strong>View Page</strong> to open the page in Confluence.</p>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="update-a-confluence-page">Update a Confluence page</h1>
+      <p>Use <strong>Confluence Page</strong> to replace the content of an existing Confluence page with information from a workflow. You can also change the
+        page title.</p>
+      <h2 id="overview">Overview</h2>
+      <p>Provide the address of your Confluence site and the ID of the page to update. The page body is replaced when the workflow runs. If
+        <strong>Page Title (Optional)</strong> is left blank, the current title stays as it is.</p>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Replace a project page with the latest summary created by a workflow.</li>
+        <li>Update an existing page with information gathered from a webpage.</li>
+        <li>Change a page’s title and replace its content with a workflow report.</li>
+      </ul>
+      <h2 id="set-up-the-page">Set up the page</h2>
+      <ul>
+        <li><strong>Confluence Base URL:</strong> Enter your Confluence site address, such as <code>https://your-domain.atlassian.net/wiki</code>.</li>
+        <li><strong>Page ID (Content ID):</strong> Enter the ID of the existing page you want to update.</li>
+        <li><strong>Page Title (Optional):</strong> Enter a new title, or leave this blank to keep the current title.</li>
+        <li><strong>Page Body (XHTML Storage Format):</strong> Enter the new page content. Confluence requires its own format for page content; information from
+          earlier workflow steps can be included.</li>
+      </ul>
+      <h2 id="set-up-authentication">Set up authentication</h2>
+      <p>Choose the method that matches your Confluence account:</p>
+      <ul>
+        <li><strong>Basic Auth (Cloud API Token):</strong> Enter your account email or username and its API token or password.</li>
+        <li><strong>Personal Access Token (PAT):</strong> Choose this option and enter your Confluence personal access token. You do not need to enter an email
+          address or username.</li>
+      </ul>
+      <p>The token must be valid for the selected authentication method, and the account must be able to edit the page.</p>
+      <p>Once the site address and page ID are set, use <strong>View Page</strong> to open the page in Confluence.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

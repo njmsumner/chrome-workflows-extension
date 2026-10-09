@@ -1,126 +1,82 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/slack.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="slack-notification-slack">Slack Notification (<code>slack</code>)</h1>
-<p>The <strong>Slack Notification</strong> plugin posts automated messages to Slack channels using Slack Incoming Webhooks. It enables workflows to send extracted webpage content, LLM summaries, or custom alert payloads directly into your Slack workspace.</p>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Slack Notification</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>slack</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>slack</code> (e.g., <code>slack_1</code>, <code>slack_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Integration Plugins</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Webhook URL (stored directly or via Global Variables)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>webhookUrl</code></td>
-<td style="text-align:left"><strong>Slack Incoming Webhook URL</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">The Incoming Webhook URL generated in Slack App settings (e.g., <code>https://hooks.slack.com/services/...</code> or <code>{{globals.slack_webhook_url}}</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>channelUrl</code></td>
-<td style="text-align:left"><strong>Slack Channel URL</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Optional browser or deep-link URL to the target channel (e.g., <code>https://app.slack.com/client/...</code>). Used to power the <strong>Open Slack Channel</strong> button in the sidebar.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>message</code></td>
-<td style="text-align:left"><strong>Message Payload</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">The text message body sent to Slack. Supports multiline formatting and dynamic template tokens (e.g., <code>Hello, summary: {{llm_1}}</code>).</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>You can inject dynamic variables into the <code>message</code>, <code>webhookUrl</code>, or <code>channelUrl</code> fields using double-bracket syntax.</p>
-<h3 id="output-state">Output State</h3>
-<p>When executed, the step records its execution status in the pipeline state for downstream steps:</p>
-<ul>
-<li><code>{{slack_1.status}}</code>: String result (<code>&quot;sent&quot;</code> upon success).</li>
-<li><code>{{slack_1.timestamp}}</code>: Epoch timestamp (in milliseconds) when the message was dispatched.</li>
-</ul>
-<hr>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<ul>
-<li><strong>Open Slack Channel</strong>: Displays a action button in the extension sidebar if <code>channelUrl</code> is provided, allowing users to jump directly to the target Slack channel.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="slack-notification-slack">Slack Notification (<code>slack</code>)</h1>
+      <p>Send messages to Slack using an Incoming Webhook. The plugin can use dynamic template tokens in its configuration.</p>
+      <h2 id="simple-examples">Simple Examples</h2>
+      <ul>
+        <li>Send a simple message to a Slack channel using an Incoming Webhook.</li>
+        <li>Share a webpage summary with its title and URL.</li>
+        <li>Notify a team when a monitored value is found, such as <code>Price found: {{extract_1.price}}</code>.</li>
+      </ul>
+      <h2 id="configuration">Configuration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: left">Field</th>
+            <th style="text-align: left">Required</th>
+            <th style="text-align: left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left"><code>webhookUrl</code></td>
+            <td style="text-align: left">Yes</td>
+            <td style="text-align: left">Slack Incoming Webhook URL, such as <code>https://hooks.slack.com/services/...</code>. Can use a global variable, for example
+              <code>{{globals.slack_webhook_url}}</code>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><code>message</code></td>
+            <td style="text-align: left">Yes</td>
+            <td style="text-align: left">Message body. Supports multiline text and template tokens.</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><code>channelUrl</code></td>
+            <td style="text-align: left">No</td>
+            <td style="text-align: left">Slack channel link. When provided, displays an <strong>Open Slack Channel</strong> button in the sidebar.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Use double-bracket tokens in <code>webhookUrl</code>, <code>message</code>, and <code>channelUrl</code>, such as <code>{{llm_1}}</code>.</p>
+      <p>After execution, the step records:</p>
+      <ul>
+        <li><code>{{slack_1.status}}</code>: <code>&quot;sent&quot;</code> on success.</li>
+        <li><code>{{slack_1.timestamp}}</code>: Dispatch time in milliseconds.</li>
+      </ul>
+      <h2 id="example">Example</h2>
+      <pre><code class="language-json">{
 	&quot;id&quot;: &quot;slack_1&quot;,
 	&quot;type&quot;: &quot;slack&quot;,
 	&quot;config&quot;: {
@@ -130,16 +86,16 @@
 	}
 }
 </code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

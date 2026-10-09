@@ -1,96 +1,80 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/integrations.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="integration-steps">Integration Steps</h1>
-<p>The integrations listed below are built-in to the extension and have their own UI for editing steps.</p>
-<p><strong><a href="../plugins/api">API/Webhook</a></strong></p>
-<p>Executes an HTTP request to an API endpoint or webhooks
-(api)</p>
-<p><strong><a href="../plugins/openai">OpenAI/LLM</a></strong></p>
-<p>Send a prompt to an OpenAI-compatible API and return the completion text
-(openai)</p>
-<p><strong><a href="../plugins/trello_card">Trello Create Card</a></strong></p>
-<p>Creates a new card on a Trello board list.
-(trello_card)</p>
-<p><strong><a href="../plugins/confluence">Confluence Page</a></strong></p>
-<p>Updates Confluence page via the REST API
-(confluence)</p>
-<p><strong><a href="../plugins/gmail">Gmail</a></strong></p>
-<p>Sends emails or saves drafts to Gmail.
-(gmail)</p>
-<p><strong><a href="../plugins/google_docs">Google Docs</a></strong></p>
-<p>Append text to or reads content from a Google Doc
-(google_docs)</p>
-<p><strong><a href="../plugins/google_sheets">Google Sheets</a></strong></p>
-<p>Append a row to or reads content from a Google Sheet
-(google_sheets)</p>
-<p><strong><a href="../plugins/hubspot">HubSpot Blog Post</a></strong></p>
-<p>Update HubSpot CMS blog posts via the CMS API
-(hubspot)</p>
-<p><strong><a href="../plugins/jira_comment">Jira Comment</a></strong></p>
-<p>Adds a comment to the Jira issue.
-(jira_comment)</p>
-<p><strong><a href="../plugins/jira_issue">Jira Create Issue</a></strong></p>
-<p>Creates a new issue in Jira (e.g. Task, Bug, Story).
-(jira_issue)</p>
-<p><strong><a href="../plugins/ms_excel">Microsoft Excel</a></strong></p>
-<p>Append rows to an Excel table/worksheet and retrieve cell/range content.
-(ms_excel)</p>
-<p><strong><a href="../plugins/ms_email">Microsoft Outlook Email</a></strong></p>
-<p>Sends an email or saves a draft using Microsoft Outlook.
-(ms_email)</p>
-<p><strong><a href="../plugins/ms_teams">Microsoft Teams</a></strong></p>
-<p>Send messages to Microsoft Teams.
-(ms_teams)</p>
-<p><strong><a href="../plugins/ms_word">Microsoft Word</a></strong></p>
-<p>Append or read content from a Microsoft Word document.
-(ms_word)</p>
-<p><strong><a href="../plugins/slack">Slack Notification</a></strong></p>
-<p>Sends webhook messages to Slack channels
-(slack)</p>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="integration-steps">Integration Steps</h1>
+      <p>The integrations listed below are built-in to the extension and have their own UI for editing steps.</p>
+      <p><strong><a href="../plugins/api">API/Webhook</a></strong></p>
+      <p>Executes an HTTP request to an API endpoint or webhooks (api)</p>
+      <p><strong><a href="../plugins/openai">OpenAI/LLM</a></strong></p>
+      <p>Send a prompt to an OpenAI-compatible API and return the completion text (openai)</p>
+      <p><strong><a href="../plugins/trello_card">Trello Create Card</a></strong></p>
+      <p>Creates a new card on a Trello board list. (trello_card)</p>
+      <p><strong><a href="../plugins/confluence">Confluence Page</a></strong></p>
+      <p>Updates Confluence page via the REST API (confluence)</p>
+      <p><strong><a href="../plugins/gmail">Gmail</a></strong></p>
+      <p>Sends emails or saves drafts to Gmail. (gmail)</p>
+      <p><strong><a href="../plugins/google_docs">Google Docs</a></strong></p>
+      <p>Append text to or reads content from a Google Doc (google_docs)</p>
+      <p><strong><a href="../plugins/google_sheets">Google Sheets</a></strong></p>
+      <p>Append a row to or reads content from a Google Sheet (google_sheets)</p>
+      <p><strong><a href="../plugins/hubspot">HubSpot Blog Post</a></strong></p>
+      <p>Update HubSpot CMS blog posts via the CMS API (hubspot)</p>
+      <p><strong><a href="../plugins/jira_comment">Jira Comment</a></strong></p>
+      <p>Adds a comment to the Jira issue. (jira_comment)</p>
+      <p><strong><a href="../plugins/jira_issue">Jira Create Issue</a></strong></p>
+      <p>Creates a new issue in Jira (e.g. Task, Bug, Story). (jira_issue)</p>
+      <p><strong><a href="../plugins/ms_excel">Microsoft Excel</a></strong></p>
+      <p>Append rows to an Excel table/worksheet and retrieve cell/range content. (ms_excel)</p>
+      <p><strong><a href="../plugins/ms_email">Microsoft Outlook Email</a></strong></p>
+      <p>Sends an email or saves a draft using Microsoft Outlook. (ms_email)</p>
+      <p><strong><a href="../plugins/ms_teams">Microsoft Teams</a></strong></p>
+      <p>Send messages to Microsoft Teams. (ms_teams)</p>
+      <p><strong><a href="../plugins/ms_word">Microsoft Word</a></strong></p>
+      <p>Append or read content from a Microsoft Word document. (ms_word)</p>
+      <p><strong><a href="../plugins/slack">Slack Notification</a></strong></p>
+      <p>Sends webhook messages to Slack channels (slack)</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

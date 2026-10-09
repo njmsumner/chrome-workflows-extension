@@ -1,108 +1,74 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/run_workflow.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="run-workflow-runworkflow">Run Workflow (<code>runWorkflow</code>)</h1>
-<p>The <strong>Run Workflow</strong> step executes another saved workflow, passing the current workflow state into it and merging the sub-workflow's results back into the current pipeline. Use it to compose workflows; nested execution is limited to three levels.</p>
-<img src="../../img/Sub Workflow.png" alt="Run Sub-Workflow Step" />
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Run Workflow</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>runWorkflow</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>run_workflow</code> (e.g., <code>run_workflow_1</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left"><code>system</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">None</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>targetWorkflowName</code></td>
-<td style="text-align:left"><strong>Sub-Workflow</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Select a saved workflow other than the one currently being edited. The selected name must still exist at runtime. The workflow runner resolves template tokens before execution, so a token resolving to a saved workflow name can also be used.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The workflow runner resolves template tokens throughout the step configuration before execution. <code>targetWorkflowName</code> must resolve to the exact name of a saved workflow. The selector lists other saved workflows; it does not provide token suggestions.</p>
-<p>The selected workflow receives the current workflow state, including values from earlier steps, as its initial state.</p>
-<h3 id="output-state">Output State</h3>
-<p>On success, the sub-workflow's state is merged into the current workflow state, so its step outputs can be referenced downstream by their step IDs (for example, <code>{{extract_1.title}}</code>). The <code>run_workflow_1</code> state entry contains the output of the sub-workflow's final step; it has no plugin-defined properties. Internal nesting-depth metadata is not merged into the parent state. If the sub-workflow has no steps, the step output is <code>undefined</code>.</p>
-<hr>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<p>No sidebar action is provided.</p>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="run-workflow-runworkflow">Run Workflow (<code>runWorkflow</code>)</h1>
+      <p>Run another saved workflow as a step in the current workflow. The selected workflow receives the current state, and its results are merged back into
+        the current workflow. Workflows can be nested up to three levels.</p>
+      <img src="../../img/Sub Workflow.png" alt="Run Sub-Workflow Step" >
+      <h2 id="use-cases">Use Cases</h2>
+      <ul>
+        <li>When a workflow completes successfully, run another workflow.</li>
+        <li>Use a re-usable workflow in other workflows.</li>
+        <li>Conditionally decide which workflow to run</li>
+      </ul>
+      <h2 id="configuration">Configuration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: left">Field</th>
+            <th style="text-align: left">Required</th>
+            <th style="text-align: left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left"><strong>Sub-Workflow</strong> (<code>targetWorkflowName</code>)</td>
+            <td style="text-align: left">Yes</td>
+            <td style="text-align: left">Select another saved workflow. The name must exist at runtime. Template tokens are resolved before execution, so a token can provide the workflow
+              name.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 id="state-and-output">State and Output</h2>
+      <p>The selected workflow starts with the current workflow state, including outputs from earlier steps. On success, its state is merged into the current
+        workflow, and its step outputs can be referenced downstream by step ID (for example, <code>{{extract_1.title}}</code>).</p>
+      <p>The <code>run_workflow_1</code> state entry contains the final step’s output and has no plugin-defined properties. If the selected workflow has no
+        steps, the output is <code>undefined</code>. Internal nesting-depth metadata is not merged into the parent state.</p>
+      <p>No sidebar action is provided.</p>
+      <h2 id="example">Example</h2>
+      <pre><code class="language-json">{
 	&quot;id&quot;: &quot;run_workflow_1&quot;,
 	&quot;type&quot;: &quot;runWorkflow&quot;,
 	&quot;config&quot;: {
@@ -110,17 +76,17 @@
 	}
 }
 </code></pre>
-<p><code>Summarize page</code> must be the exact name of another saved workflow.</p>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+      <p><code>Summarize page</code> must be the exact name of another saved workflow.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

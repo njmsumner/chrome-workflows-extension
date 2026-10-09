@@ -1,70 +1,71 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/ms_excel.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="microsoft-excel">Microsoft Excel</h1>
-<h2 id="overview">Overview</h2>
-<p>Use <strong>Microsoft Excel</strong> to add a row to a table or read values from a worksheet in an Excel workbook stored in OneDrive or SharePoint.</p>
-<h2 id="simple-examples">Simple examples</h2>
-<ul>
-<li>Add a workflow result to a table, such as logging a completed task.</li>
-<li>Read a set of cells and use their contents in later workflow steps.</li>
-<li>Read a worksheet's used range when you want to work with its existing data.</li>
-</ul>
-<h2 id="set-up-microsoft-sign-in">Set up Microsoft sign-in</h2>
-<p>Before using this step, add your Microsoft app registration's client ID under <strong>Settings &gt; Global Variables</strong>. You can also add a tenant ID if your organization requires one; otherwise, the extension uses the default Microsoft sign-in option. The first time the workflow runs, sign in to Microsoft and approve the requested access.</p>
-<h2 id="add-and-configure-the-step">Add and configure the step</h2>
-<ol>
-<li>Add <strong>Microsoft Excel</strong> to your workflow.</li>
-<li>Under <strong>Action</strong>, choose <strong>Append Row</strong> to add a row, or <strong>Get Cell / Range Content</strong> to read data.</li>
-<li>Enter the workbook's file item ID in <strong>Workbook Item ID</strong>. This is the ID for the file in OneDrive or SharePoint. You can insert a saved value using the token picker.</li>
-<li>Under <strong>Sheet Name / Cell Range</strong>, enter the worksheet name. To read specific cells, add <code>!</code> and the cell range, for example <code>Sheet1!A1:C5</code>. To read the worksheet's used range, enter only its name. The cell range applies when reading; new rows are added to a table.</li>
-<li>For <strong>Append Row</strong>, enter the name of an existing table under <strong>Table Name</strong>. If you leave it blank, the step uses <code>Table1</code>. Enter the new row's values under <strong>Row Values (JSON Array)</strong>, in the same order as the table's columns. Keep the values in a valid list format, such as <code>[&quot;Task&quot;, &quot;Complete&quot;]</code>.</li>
-<li>Use the token picker in the available fields to include information from earlier workflow steps.</li>
-</ol>
-<p>Choose <strong>View Excel File</strong> to open the configured workbook in OneDrive.</p>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="microsoft-excel">Microsoft Excel</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use <strong>Microsoft Excel</strong> to add a row to a table or read values from a worksheet in an Excel workbook stored in OneDrive or SharePoint.</p>
+      <h2 id="use-cases">Use Cases</h2>
+      <ul>
+        <li>Add a workflow result to a table, such as logging a completed task.</li>
+        <li>Read a set of cells and use their contents in later workflow steps.</li>
+        <li>Read a worksheet's used range when you want to work with its existing data.</li>
+      </ul>
+      <h2 id="set-up-microsoft-sign-in">Set up Microsoft sign-in</h2>
+      <p>Add your Microsoft app registration's client ID under <strong>Settings &gt; Global Variables</strong>. Add a tenant ID if your organization requires
+        one. The first time the workflow runs, sign in and approve access.</p>
+      <h2 id="configure-the-step">Configure the step</h2>
+      <ol>
+        <li>Add <strong>Microsoft Excel</strong> to your workflow and choose <strong>Append Row</strong> or <strong>Get Cell / Range Content</strong>.</li>
+        <li>Enter the workbook's file item ID in <strong>Workbook Item ID</strong>.</li>
+        <li>Under <strong>Sheet Name / Cell Range</strong>, enter a worksheet name. To read specific cells, add <code>!</code> and a range, such as
+          <code>Sheet1!A1:C5</code>. Enter only the worksheet name to read its used range.</li>
+        <li>For <strong>Append Row</strong>, enter an existing table name under <strong>Table Name</strong> (defaults to <code>Table1</code>) and provide
+          <strong>Row Values (JSON Array)</strong> in the table's column order, such as <code>[&quot;Task&quot;, &quot;Complete&quot;]</code>.</li>
+        <li>Use the token picker to include values from earlier workflow steps.</li>
+      </ol>
+      <p>Choose <strong>View Excel File</strong> to open the workbook in OneDrive.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

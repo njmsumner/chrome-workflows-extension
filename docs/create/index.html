@@ -1,102 +1,107 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/create.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="create-a-workflow">Create a workflow</h1>
-<p>Use the <strong>Create Workflow</strong> screen to make a workflow that automates tasks in your browser. You can describe what you want, start from a sample, or build one yourself.</p>
-<img src="../img/Create Workflow.png" alt="Create Workflow" />
-<h2 id="overview">Overview</h2>
-<p>There are three ways to get started:</p>
-<ul>
-<li>Describe the task and let AI prepare a workflow. Open the webpage where you want to use it first.</li>
-<li>Choose a sample workflow and adjust it to suit your needs.</li>
-<li>Start with a blank workflow and add steps yourself.</li>
-</ul>
-<h2 id="simple-examples">Simple examples</h2>
-<ul>
-<li>Summarize a webpage and send the summary to Slack.</li>
-<li>Save selected webpage details to a Google Doc or Google Sheet.</li>
-<li>Create a Gmail draft with details from the current webpage.</li>
-<li>Show information from a webpage in the sidebar when the page opens.</li>
-</ul>
-<hr>
-<h2 id="header-buttons">Header buttons</h2>
-<ul>
-<li><strong>Workflows</strong> opens your saved workflows.</li>
-<li><strong>Settings</strong> lets you set up AI services and manage information reused by workflows.</li>
-<li><strong>Back</strong> returns to the previous screen when available.</li>
-</ul>
-<p>If something goes wrong, an error message appears at the top of the screen.</p>
-<hr>
-<h2 id="choose-a-starting-point">Choose a starting point</h2>
-<h3 id="start-from-a-blank-workflow">Start from a blank workflow</h3>
-<p>Select <strong>Configure</strong> to open the workflow editor and add the steps you need.</p>
-<h3 id="use-a-sample-workflow">Use a sample workflow</h3>
-<p>Choose a sample from the list, then select <strong>Use Sample</strong>. The workflow opens so you can review it, make changes, or run it. Samples include workflows for answering questions about a webpage, saving details to Google Docs or Sheets, drafting an email in Gmail, and sending a summary to Trello.</p>
-<hr>
-<h2 id="ask-ai-to-create-a-workflow">Ask AI to create a workflow</h2>
-<ol>
-<li>Open the webpage where you want the workflow to run.</li>
-<li>Enter a short description of what you want to do in the instructions box. For example: “Find a product, add it to the basket, and open the basket.”</li>
-<li>Select <strong>Generate</strong> and wait for the workflow to appear.</li>
-</ol>
-<p>Start with a simple task. You can add more steps or adjust the workflow afterward. AI features require an AI service to be configured in <strong>Settings</strong>.</p>
-<hr>
-<h2 id="example-prompt">Example prompt</h2>
-<blockquote>
-<p>Find the product title and price on this page, summarize the product, and send the summary to Slack.</p>
-</blockquote>
-<p>The generated workflow can use details from the open webpage, create a summary, and send it to Slack. You can review and adjust the workflow before running it.</p>
-<hr>
-<h2 id="if-something-goes-wrong">If something goes wrong</h2>
-<ul>
-<li><strong>AI setup message:</strong> Set up an AI service in <strong>Settings</strong> before using AI features.</li>
-<li><strong>Instructions are missing:</strong> Enter a description before selecting <strong>Generate</strong>.</li>
-<li><strong>The workflow could not be created:</strong> Make your instructions clearer or break the task into smaller steps.</li>
-<li><strong>The extension cannot reach the webpage:</strong> Refresh the webpage and try again.</li>
-</ul>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="create-a-workflow">Create a workflow</h1>
+      <p>Use the <strong>Create Workflow</strong> screen to make a workflow that automates tasks in your browser. You can describe what you want, start from a
+        sample, or build one yourself.</p>
+      <img src="../img/Create Workflow.png" alt="Create Workflow" >
+      <h2 id="overview">Overview</h2>
+      <p>There are three ways to get started:</p>
+      <ul>
+        <li>Describe the task and let AI prepare a workflow. Open the webpage where you want to use it first.</li>
+        <li>Choose a sample workflow and adjust it to suit your needs.</li>
+        <li>Start with a blank workflow and add steps yourself.</li>
+      </ul>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Summarize a webpage and send the summary to Slack.</li>
+        <li>Save selected webpage details to a Google Doc or Google Sheet.</li>
+        <li>Create a Gmail draft with details from the current webpage.</li>
+        <li>Show information from a webpage in the sidebar when the page opens.</li>
+      </ul>
+      <hr >
+      <h2 id="header-buttons">Header buttons</h2>
+      <ul>
+        <li><strong>Workflows</strong> opens your saved workflows.</li>
+        <li><strong>Settings</strong> lets you set up AI services and manage information reused by workflows.</li>
+        <li><strong>Back</strong> returns to the previous screen when available.</li>
+      </ul>
+      <p>If something goes wrong, an error message appears at the top of the screen.</p>
+      <hr >
+      <h2 id="choose-a-starting-point">Choose a starting point</h2>
+      <h3 id="start-from-a-blank-workflow">Start from a blank workflow</h3>
+      <p>Select <strong>Configure</strong> to open the workflow editor and add the steps you need.</p>
+      <h3 id="use-a-sample-workflow">Use a sample workflow</h3>
+      <p>Choose a sample from the list, then select <strong>Use Sample</strong>. The workflow opens so you can review it, make changes, or run it. Samples
+        include workflows for answering questions about a webpage, saving details to Google Docs or Sheets, drafting an email in Gmail, and sending a summary to
+        Trello.</p>
+      <hr >
+      <h2 id="ask-ai-to-create-a-workflow">Ask AI to create a workflow</h2>
+      <ol>
+        <li>Open the webpage where you want the workflow to run.</li>
+        <li>Enter a short description of what you want to do in the instructions box. For example: “Find a product, add it to the basket, and open the
+          basket.”</li>
+        <li>Select <strong>Generate</strong> and wait for the workflow to appear.</li>
+      </ol>
+      <p>Start with a simple task. You can add more steps or adjust the workflow afterward. AI features require an AI service to be configured in
+        <strong>Settings</strong>.</p>
+      <hr >
+      <h2 id="example-prompt">Example prompt</h2>
+      <blockquote>
+        <p>Find the product title and price on this page, summarize the product, and send the summary to Slack.</p>
+      </blockquote>
+      <p>The generated workflow can use details from the open webpage, create a summary, and send it to Slack. You can review and adjust the workflow before
+        running it.</p>
+      <hr >
+      <h2 id="if-something-goes-wrong">If something goes wrong</h2>
+      <ul>
+        <li><strong>AI setup message:</strong> Set up an AI service in <strong>Settings</strong> before using AI features.</li>
+        <li><strong>Instructions are missing:</strong> Enter a description before selecting <strong>Generate</strong>.</li>
+        <li><strong>The workflow could not be created:</strong> Make your instructions clearer or break the task into smaller steps.</li>
+        <li><strong>The extension cannot reach the webpage:</strong> Refresh the webpage and try again.</li>
+      </ul>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

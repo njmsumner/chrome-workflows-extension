@@ -1,133 +1,71 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/ms_word.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="microsoft-word-microsoftword">Microsoft Word (<code>microsoftWord</code>)</h1>
-<p>The <strong>Microsoft Word</strong> plugin reads text from a Word document or appends templated text to an existing document through Microsoft Graph. It supports documents stored in OneDrive or SharePoint.</p>
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Microsoft Word</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>microsoftWord</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>ms_word</code> (e.g., <code>ms_word_1</code>, <code>ms_word_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Microsoft</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Microsoft OAuth 2.0; uses global <code>ms_client_id</code> and optional <code>ms_tenant_id</code> (defaults to <code>common</code>)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>action</code></td>
-<td style="text-align:left"><strong>Action</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left">No (defaults to <code>append</code>)</td>
-<td style="text-align:left">Choose <strong>Append Text</strong> (<code>append</code>) or <strong>Get Document Content</strong> (<code>read</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>documentId</code></td>
-<td style="text-align:left"><strong>OneDrive File ID / Document ID</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">OneDrive or SharePoint document item ID. Supports tokens such as <code>{{globals.word_document_id}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>textTemplate</code></td>
-<td style="text-align:left"><strong>Text to Append</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left"><strong>Yes for append</strong></td>
-<td style="text-align:left">Text appended to the document; defaults to a template containing <code>{{llm_1}}</code>. Supports workflow tokens. Hidden and disabled in read mode.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The form exposes token insertion for <strong>OneDrive File ID / Document ID</strong> and <strong>Text to Append</strong>. For example, use <code>{{globals.word_document_id}}</code> for the document ID or <code>{{llm_1}}</code> in the appended text.</p>
-<h3 id="output-state">Output State</h3>
-<p>For <strong>Get Document Content</strong>, the step returns:</p>
-<ul>
-<li><code>{{ms_word_1.status}}</code>: <code>success</code>.</li>
-<li><code>{{ms_word_1.documentId}}</code>: Configured document ID.</li>
-<li><code>{{ms_word_1.text}}</code>: Document content returned by Microsoft Graph as text.</li>
-</ul>
-<p>For <strong>Append Text</strong>, the step returns:</p>
-<ul>
-<li><code>{{ms_word_1.status}}</code>: <code>success</code>.</li>
-<li><code>{{ms_word_1.documentId}}</code>: Configured document ID.</li>
-<li><code>{{ms_word_1.appendedTextLength}}</code>: Length of the appended template text.</li>
-<li><code>{{ms_word_1.result}}</code>: Parsed response from Microsoft Graph, or an empty object if the response body is not valid JSON.</li>
-</ul>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<ul>
-<li><strong>View Doc</strong>: Opens the Word document in OneDrive when the configured document ID resolves without an unresolved template token.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="microsoft-word-microsoftword">Microsoft Word (<code>microsoftWord</code>)</h1>
+      <p>Use <strong>Microsoft Word</strong> to read text from a Word document or append templated text to an existing document stored in OneDrive or
+        SharePoint.</p>
+      <h2 id="use-cases">Use Cases</h2>
+      <ul>
+        <li>Append a workflow result to a Word document.</li>
+        <li>Read the content of a Word document for further processing in the workflow.</li>
+      </ul>
+      <h2 id="configuration">Configuration</h2>
+      <ul>
+        <li><strong>Action</strong> (<code>action</code>): <code>append</code> (default) or <code>read</code>.</li>
+        <li><strong>Document ID</strong> (<code>documentId</code>): Required OneDrive or SharePoint item ID. Supports workflow tokens, such as
+          <code>{{globals.word_document_id}}</code>.</li>
+        <li><strong>Text to Append</strong> (<code>textTemplate</code>): Required for <code>append</code>; supports workflow tokens such as
+          <code>{{llm_1}}</code>. Hidden and disabled for <code>read</code>.</li>
+      </ul>
+      <h2 id="output">Output</h2>
+      <p>For <strong>Get Document Content</strong> (<code>read</code>):</p>
+      <ul>
+        <li><code>{{ms_word_1.status}}</code>: <code>success</code></li>
+        <li><code>{{ms_word_1.documentId}}</code>: Configured document ID</li>
+        <li><code>{{ms_word_1.text}}</code>: Document content as text</li>
+      </ul>
+      <p>For <strong>Append Text</strong> (<code>append</code>):</p>
+      <ul>
+        <li><code>{{ms_word_1.status}}</code>: <code>success</code></li>
+        <li><code>{{ms_word_1.documentId}}</code>: Configured document ID</li>
+        <li><code>{{ms_word_1.appendedTextLength}}</code>: Length of the appended text</li>
+        <li><code>{{ms_word_1.result}}</code>: Parsed Microsoft Graph response, or an empty object if the response is not valid JSON</li>
+      </ul>
+      <p><strong>View Doc</strong> opens the document in OneDrive when the configured ID contains no unresolved template tokens.</p>
+      <h2 id="example">Example</h2>
+      <pre><code class="language-json">{
 	&quot;id&quot;: &quot;ms_word_1&quot;,
 	&quot;type&quot;: &quot;microsoftWord&quot;,
 	&quot;config&quot;: {
@@ -137,16 +75,16 @@
 	}
 }
 </code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

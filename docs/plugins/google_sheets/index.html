@@ -1,71 +1,74 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/google_sheets.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="google-sheets">Google Sheets</h1>
-<p>Use <strong>Google Sheets</strong> to add rows to a spreadsheet or read information from it in a workflow.</p>
-<img src="../../img/Google Sheets.png" alt="Google Sheets Step" />
-<h2 id="overview">Overview</h2>
-<p>Choose <strong>Append Row</strong> to add a new row, or <strong>Get Cell / Range Content</strong> to read existing cells. When reading, you can optionally find rows containing an exact value.</p>
-<h2 id="simple-examples">Simple examples</h2>
-<ul>
-<li>Save a webpage title, link, and summary as a new row.</li>
-<li>Read a list of tasks from a sheet for use in a workflow.</li>
-<li>Find a row containing a particular project or issue name.</li>
-</ul>
-<h2 id="set-up-the-spreadsheet">Set up the spreadsheet</h2>
-<ul>
-<li><strong>Action:</strong> Choose <strong>Append Row</strong> or <strong>Get Cell / Range Content</strong>.</li>
-<li><strong>Spreadsheet ID:</strong> Enter the ID from the spreadsheet’s web address.</li>
-<li><strong>Sheet Name / Cell Range:</strong> Enter the sheet name and, if needed, the cells to use. For example, <code>Sheet1!A:C</code> selects columns A through C on a sheet named Sheet1.</li>
-<li><strong>Row Values (JSON Array):</strong> For <strong>Append Row</strong>, enter the values in column order, such as <code>[&quot;Page title&quot;, &quot;Page link&quot;, &quot;Summary&quot;]</code>.</li>
-<li><strong>Find Row Value:</strong> When reading, enter a value to find. Only rows containing that exact value are returned.</li>
-</ul>
-<h2 id="google-account-access">Google account access</h2>
-<p>When prompted, sign in to the Google account you want to use and allow access. That account must be able to edit the spreadsheet to add rows, or view it to read cells.</p>
-<p>Use <strong>View Sheet</strong> to open the configured spreadsheet in Google Sheets.</p>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="google-sheets">Google Sheets</h1>
+      <p>Use <strong>Google Sheets</strong> to add rows to a spreadsheet or read information from it in a workflow.</p>
+      <img src="../../img/Google Sheets.png" alt="Google Sheets Step" >
+      <h2 id="overview">Overview</h2>
+      <p>Choose <strong>Append Row</strong> to add a new row, or <strong>Get Cell / Range Content</strong> to read existing cells. When reading, you can
+        optionally find rows containing an exact value.</p>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Save a webpage title, link, and summary as a new row.</li>
+        <li>Read a list of tasks from a sheet for use in a workflow.</li>
+        <li>Find a row containing a particular project or issue name.</li>
+      </ul>
+      <h2 id="set-up-the-spreadsheet">Set up the spreadsheet</h2>
+      <ul>
+        <li><strong>Action:</strong> Choose <strong>Append Row</strong> or <strong>Get Cell / Range Content</strong>.</li>
+        <li><strong>Spreadsheet ID:</strong> Enter the ID from the spreadsheet’s web address.</li>
+        <li><strong>Sheet Name / Cell Range:</strong> Enter the sheet name and, if needed, the cells to use. For example, <code>Sheet1!A:C</code> selects columns
+          A through C on a sheet named Sheet1.</li>
+        <li><strong>Row Values (JSON Array):</strong> For <strong>Append Row</strong>, enter the values in column order, such as
+          <code>[&quot;Page title&quot;, &quot;Page link&quot;, &quot;Summary&quot;]</code>.</li>
+        <li><strong>Find Row Value:</strong> When reading, enter a value to find. Only rows containing that exact value are returned.</li>
+      </ul>
+      <h2 id="google-account-access">Google account access</h2>
+      <p>When prompted, sign in to the Google account you want to use and allow access. That account must be able to edit the spreadsheet to add rows, or view
+        it to read cells.</p>
+      <p>Use <strong>View Sheet</strong> to open the configured spreadsheet in Google Sheets.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,362 +1,82 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/extract.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="extract-step-extract">Extract Step (<code>extract</code>)</h1>
-<p>The <strong>Extract</strong> step (<code>extract</code>) is the core web scraping engine of the AI Workflow Chrome Extension. It executes inside the active browser tab to retrieve page metadata, user selection, visible body text, sanitized HTML, headings, links, form inputs, buttons, or targeted CSS selector elements for processing in downstream workflow steps.</p>
-<img src="../../img/Extract.png" alt="Extract Step" />
-<hr>
-<h2 id="step-overview">Step Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Step Label</strong></td>
-<td style="text-align:left"><code>Extract</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>extract</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>extract</code> (e.g., <code>extract_1</code>, <code>extract_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Core System Step</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Execution Context</strong></td>
-<td style="text-align:left">Active Tab Content Script (<code>content.js</code> / <code>context-provider.ts</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">None (Uses active tab DOM access)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="extraction-options-schema-options">Extraction Options Schema (<code>options.*</code>)</h2>
-<p>The Extract step configuration uses boolean flags and selector settings under the <code>options</code> object:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>options.*</code>)</th>
-<th style="text-align:left">Form / UI Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description &amp; Token Mapping</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>includeTitle</code></td>
-<td style="text-align:left"><strong>Title</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>true</code></td>
-<td style="text-align:left">Extracts the browser tab title (<code>document.title</code>). Reference token: <code>{{extract_1.title}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeSelection</code></td>
-<td style="text-align:left"><strong>Selection</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>true</code></td>
-<td style="text-align:left">Extracts text currently highlighted/selected by the user. Reference token: <code>{{extract_1.selection}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeHeadings</code></td>
-<td style="text-align:left"><strong>Headings</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>true</code></td>
-<td style="text-align:left">Scrapes primary heading text (<code>h1</code>, <code>h2</code>). Reference token: <code>{{extract_1.heading}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includePageText</code></td>
-<td style="text-align:left"><strong>Full Text</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Scrapes normalized, visible text across the entire page body. Reference token: <code>{{extract_1.content}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeCleanHtml</code></td>
-<td style="text-align:left"><strong>Clean HTML</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Scrapes sanitized page HTML with scripts, styles, and events removed. Reference token: <code>{{extract_1.content}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includePageHtml</code></td>
-<td style="text-align:left"><strong>Full HTML</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Scrapes raw <code>document.documentElement.outerHTML</code>. Reference token: <code>{{extract_1.content}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeElement</code></td>
-<td style="text-align:left"><strong>Element Content</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Enables targeted CSS selector extraction. Reference token: <code>{{extract_1.content}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>contentSelector</code></td>
-<td style="text-align:left"><strong>CSS Selector</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><code>&quot;&quot;</code></td>
-<td style="text-align:left">Valid CSS selector targeting a specific page element (e.g. <code>[data-testid='price']</code>, <code>h1.title</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>contentValueSource</code></td>
-<td style="text-align:left"><strong>Value Source</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left"><code>&quot;textContent&quot;</code></td>
-<td style="text-align:left">Method for reading element data: <code>textContent</code>, <code>value</code>, or <code>attribute</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>contentAttribute</code></td>
-<td style="text-align:left"><strong>Attribute Name</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><code>&quot;&quot;</code></td>
-<td style="text-align:left">Specific DOM attribute name to read when <code>contentValueSource</code> is set to <code>attribute</code> (e.g. <code>src</code>, <code>href</code>, <code>data-id</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeLinks</code></td>
-<td style="text-align:left"><strong>Links</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Scrapes all anchor link URLs (<code>&lt;a href&gt;</code>) on the page separated by newlines. Reference token: <code>{{extract_1.links}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeButtons</code></td>
-<td style="text-align:left"><strong>Buttons</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Scrapes clickable button selectors and text/value labels. Reference token: <code>{{extract_1.buttons}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>includeFields</code></td>
-<td style="text-align:left"><strong>Fields</strong></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>false</code></td>
-<td style="text-align:left">Scrapes input, textarea, and select elements with selectors, labels, and placeholders. Reference token: <code>{{extract_1.fields}}</code>.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="targeted-element-scraping-includeelement">Targeted Element Scraping (<code>includeElement</code>)</h2>
-<p>When extracting specific components rather than full pages, set <code>includeElement: true</code> and configure <code>contentSelector</code>, <code>contentValueSource</code>, and <code>contentAttribute</code>:</p>
-<pre><code>[Extract Content Source: Element Content]
-  ├── CSS Selector: &quot;a.download-link&quot;
-  ├── Value Source: &quot;attribute&quot;
-  └── Attribute Name: &quot;href&quot;
-</code></pre>
-<h3 id="supported-value-sources">Supported Value Sources</h3>
-<ol>
-<li><strong><code>textContent</code> (Default)</strong>:
-<ul>
-<li>Clones the target element tree, strips blacklisted tags (<code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>, <code>&lt;noscript&gt;</code>, <code>&lt;iframe&gt;</code>), and extracts normalized, visible text content from the element and all child nodes.</li>
-</ul>
-</li>
-<li><strong><code>value</code></strong>:
-<ul>
-<li>Reads the interactive <code>.value</code> property of form input fields (<code>HTMLInputElement</code>, <code>HTMLTextAreaElement</code>, or <code>HTMLSelectElement</code>).</li>
-</ul>
-</li>
-<li><strong><code>attribute</code></strong>:
-<ul>
-<li>Calls <code>element.getAttribute(contentAttribute)</code> to read specific DOM attribute strings, such as image sources (<code>src</code>), link destinations (<code>href</code>), or custom datasets (<code>data-*</code>).</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="dynamic-token-detection-detectextractoptionsfromtokens">Dynamic Token Detection (<code>detectExtractOptionsFromTokens</code>)</h2>
-<p>To streamline workflow creation, the extension runner automatically inspects downstream workflow steps for tokens referencing an Extract step (e.g. <code>{{extract_1.fields}}</code> or <code>{{extract_1.title}}</code>).</p>
-<p>During execution, <code>detectExtractOptionsFromTokens()</code> computes and enables required extraction options automatically:</p>
-<ul>
-<li><strong><code>{{extract_1.title}}</code></strong> &gt; Automatically sets <code>includeTitle: true</code>.</li>
-<li><strong><code>{{extract_1.selection}}</code></strong> &gt; Automatically sets <code>includeSelection: true</code>.</li>
-<li><strong><code>{{extract_1.heading}}</code></strong> &gt; Automatically sets <code>includeHeadings: true</code>.</li>
-<li><strong><code>{{extract_1.links}}</code></strong> &gt; Automatically sets <code>includeLinks: true</code>.</li>
-<li><strong><code>{{extract_1.buttons}}</code></strong> &gt; Automatically sets <code>includeButtons: true</code>.</li>
-<li><strong><code>{{extract_1.fields}}</code></strong> &gt; Automatically sets <code>includeFields: true</code>.</li>
-<li><strong><code>{{extract_1.content}}</code></strong> &gt; Automatically sets <code>includeElement: true</code> (or page content flag).</li>
-<li><strong><code>{{extract_1}}</code> (Whole Object)</strong> &gt; Enables all standard metadata flags (<code>title</code>, <code>selection</code>, <code>heading</code>, <code>links</code>, <code>buttons</code>, <code>fields</code>, <code>content</code>).</li>
-</ul>
-<hr>
-<h2 id="interactive-visual-element-picker">Interactive Visual Element Picker</h2>
-<p>In the step card editor, clicking the <strong>Pick / View Element</strong> button (<code>open-preview.svg</code>) activates an interactive picker overlay on the live web page:</p>
-<ol>
-<li>Hovering over webpage elements highlights them with a blue bounding box.</li>
-<li>Clicking an element automatically generates a stable, minimal CSS selector (e.g., <code>button#submit</code> or <code>div.article-title</code>) and populates the <code>contentSelector</code> input field.</li>
-<li>Pressing <strong>Escape</strong> cancels element picking safely without modifying fields.</li>
-</ol>
-<hr>
-<h2 id="template-tokens-state-output-map">Template Tokens &amp; State Output Map</h2>
-<p>When an Extract step executes, its results are stored under <code>state[step.id]</code>. Downstream steps can access individual properties using standard double-bracket notation:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Token</th>
-<th style="text-align:left">Data Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>{{extract_1.title}}</code></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">Page tab title (<code>document.title</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>{{extract_1.selection}}</code></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">User's currently highlighted/selected text.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>{{extract_1.heading}}</code></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">First primary heading found (<code>h1</code> or <code>h2</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>{{extract_1.content}}</code></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">Extracted page content (Full Text, Clean HTML, or targeted element text/attribute).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>{{extract_1.links}}</code></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">Newline-separated list of all link URLs on the page.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>{{extract_1.buttons}}</code></td>
-<td style="text-align:left"><code>array</code></td>
-<td style="text-align:left">List of clickable buttons with selectors and text labels (<code>[{ selector, value }]</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>{{extract_1.fields}}</code></td>
-<td style="text-align:left"><code>array</code></td>
-<td style="text-align:left">List of input fields with selectors, labels, and placeholders (<code>[{ selector, label, placeholder }]</code>).</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="example-workflow-configurations-json">Example Workflow Configurations (JSON)</h2>
-<h3 id="example-1-basic-page-metadata-selection-extraction">Example 1: Basic Page Metadata &amp; Selection Extraction</h3>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;extract_1&quot;,
-	&quot;type&quot;: &quot;extract&quot;,
-	&quot;options&quot;: {
-		&quot;includeTitle&quot;: true,
-		&quot;includeHeadings&quot;: true,
-		&quot;includeSelection&quot;: true,
-		&quot;includePageText&quot;: false,
-		&quot;includeCleanHtml&quot;: false,
-		&quot;includePageHtml&quot;: false,
-		&quot;includeLinks&quot;: false,
-		&quot;includeButtons&quot;: false,
-		&quot;includeFields&quot;: false,
-		&quot;includeElement&quot;: false,
-		&quot;contentSelector&quot;: &quot;&quot;,
-		&quot;contentValueSource&quot;: &quot;textContent&quot;,
-		&quot;contentAttribute&quot;: &quot;&quot;
-	},
-	&quot;config&quot;: {}
-}
-</code></pre>
-<hr>
-<h3 id="example-2-targeted-element-attribute-extraction-extract-hero-image-url">Example 2: Targeted Element Attribute Extraction (Extract Hero Image URL)</h3>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;extract_hero_image&quot;,
-	&quot;type&quot;: &quot;extract&quot;,
-	&quot;options&quot;: {
-		&quot;includeTitle&quot;: true,
-		&quot;includeSelection&quot;: false,
-		&quot;includeHeadings&quot;: false,
-		&quot;includePageText&quot;: false,
-		&quot;includeCleanHtml&quot;: false,
-		&quot;includePageHtml&quot;: false,
-		&quot;includeLinks&quot;: false,
-		&quot;includeButtons&quot;: false,
-		&quot;includeFields&quot;: false,
-		&quot;includeElement&quot;: true,
-		&quot;contentSelector&quot;: &quot;img.hero-banner&quot;,
-		&quot;contentValueSource&quot;: &quot;attribute&quot;,
-		&quot;contentAttribute&quot;: &quot;src&quot;
-	},
-	&quot;config&quot;: {}
-}
-</code></pre>
-<hr>
-<h3 id="example-3-full-web-page-text-scraping-for-ai-context">Example 3: Full Web Page Text Scraping for AI Context</h3>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;extract_full_article&quot;,
-	&quot;type&quot;: &quot;extract&quot;,
-	&quot;options&quot;: {
-		&quot;includeTitle&quot;: true,
-		&quot;includeHeadings&quot;: true,
-		&quot;includeSelection&quot;: false,
-		&quot;includePageText&quot;: true,
-		&quot;includeCleanHtml&quot;: false,
-		&quot;includePageHtml&quot;: false,
-		&quot;includeLinks&quot;: false,
-		&quot;includeButtons&quot;: false,
-		&quot;includeFields&quot;: false,
-		&quot;includeElement&quot;: false,
-		&quot;contentSelector&quot;: &quot;&quot;,
-		&quot;contentValueSource&quot;: &quot;textContent&quot;,
-		&quot;contentAttribute&quot;: &quot;&quot;
-	},
-	&quot;config&quot;: {}
-}
-</code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="extract">Extract</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use <strong>Extract</strong> to collect information from the webpage in your active browser tab. You can use the page title, headings, links, buttons,
+        form fields, highlighted text, or page content in later workflow steps. No separate sign-in is needed. Only regular websites can be read; built-in
+        browser pages and local files are not supported.</p>
+      <img src="../../img/Extract.png" alt="Extract Step" >
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Collect an article's visible text so a later step can summarize it.</li>
+        <li>Use text you highlighted on the page as input for another step.</li>
+        <li>Pick a particular page element to capture its text, a form value, or a link or image address.</li>
+      </ul>
+      <h2 id="add-and-configure-the-step">Add and configure the step</h2>
+      <ol>
+        <li>Open the webpage you want to use and make its tab active.</li>
+        <li>Add <strong>Extract</strong> to your workflow.</li>
+        <li>Under <strong>Extract content</strong>, choose what you need:
+          <ul>
+            <li><strong>Selection</strong> uses text you highlighted on the page.</li>
+            <li><strong>Full Text</strong> collects visible text from across the page.</li>
+            <li><strong>Clean HTML</strong> collects page content with scripts and styles removed.</li>
+            <li><strong>Element Content</strong> collects information from one part of the page.</li>
+          </ul>
+        </li>
+        <li>For <strong>Element Content</strong>, click <strong>Pick / View Element</strong>, then click the item on the webpage. Under
+          <strong>Value source</strong>, choose what to collect:
+          <ul>
+            <li><strong>Text content</strong> collects the visible text in the selected item.</li>
+            <li><strong>Value</strong> collects the current value of a form field.</li>
+            <li><strong>Attribute</strong> collects a detail such as a link or image address. Enter the detail's name under <strong>Attribute name</strong>.</li>
+          </ul>
+        </li>
+        <li>In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.</li>
+      </ol>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

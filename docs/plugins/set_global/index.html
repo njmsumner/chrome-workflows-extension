@@ -1,52 +1,55 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/set_global.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="set-variable-setglobal">Set Variable (<code>setGlobal</code>)</h1>
-<p>Use <strong>Set Variable</strong> to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow.</p>
-<img src="../../img/Set Variable.png" alt="Set Variable Step" />
-<h2 id="configure">Configure</h2>
-<ul>
-<li><strong>Variable Key</strong> (<code>key</code>): Required. Use only letters, numbers, and underscores, such as <code>workflow_title</code>.</li>
-<li><strong>Variable Value / Template</strong> (<code>value</code>): Required in the form; accepts workflow tokens such as <code>{{extract_1.title}}</code>. Although the form requires a value, the step can save an empty string.</li>
-</ul>
-<p>The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is. Available Jexl functions: <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code>.</p>
-<h2 id="use-the-saved-value">Use the saved value</h2>
-<p>For a step with ID <code>global_1</code>, use <code>{{global_1.key}}</code> and <code>{{global_1.value}}</code> to access its output. To reuse the saved value as a global variable, use <code>{{globals.workflow_title}}</code>, replacing <code>workflow_title</code> with your configured key.</p>
-<h2 id="example">Example</h2>
-<pre><code class="language-json">{
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="set-variable-setglobal">Set Variable (<code>setGlobal</code>)</h1>
+      <p>Use <strong>Set Variable</strong> to save a value that this and later workflows can reuse. The value is saved in extension storage and is available
+        immediately to later steps in the current workflow.</p>
+      <img src="../../img/Set Variable.png" alt="Set Variable Step" >
+      <h2 id="configure">Configure</h2>
+      <ul>
+        <li><strong>Variable Key</strong> (<code>key</code>): Required. Use only letters, numbers, and underscores, such as <code>workflow_title</code>.</li>
+        <li><strong>Variable Value / Template</strong> (<code>value</code>): Required in the form; accepts workflow tokens such as
+          <code>{{extract_1.title}}</code>. Although the form requires a value, the step can save an empty string.</li>
+      </ul>
+      <p>The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is.
+        Available Jexl functions: <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code>.</p>
+      <h2 id="use-the-saved-value">Use the saved value</h2>
+      <p>For a step with ID <code>global_1</code>, use <code>{{global_1.key}}</code> and <code>{{global_1.value}}</code> to access its output. To reuse the
+        saved value as a global variable, use <code>{{globals.workflow_title}}</code>, replacing <code>workflow_title</code> with your configured key.</p>
+      <h2 id="example">Example</h2>
+      <pre><code class="language-json">{
 	&quot;id&quot;: &quot;global_1&quot;,
 	&quot;type&quot;: &quot;setGlobal&quot;,
 	&quot;config&quot;: {
@@ -55,16 +58,16 @@
 	}
 }
 </code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

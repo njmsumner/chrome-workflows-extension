@@ -81,6 +81,16 @@ body {
 	padding: 1.25rem 0;
 }
 
+.footer-left {
+	color: var(--muted);
+	float: left;
+}
+
+.footer-right {
+	color: var(--muted);
+	float: right;
+}
+
 .site-title {
 	color: var(--text);
 	font-size: 1.1rem;

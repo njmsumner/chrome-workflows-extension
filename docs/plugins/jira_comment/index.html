@@ -1,179 +1,76 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/jira_comment.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="jira-comment-jiracomment">Jira Comment (<code>jiraComment</code>)</h1>
-<p>The <strong>Jira Comment</strong> plugin posts a comment to a Jira issue using the Jira REST API. It supports Jira Cloud and Server/Data Center, with v3 rich-text or v2 plain-text comment formats and Basic or personal-access-token authentication.</p>
-<img src="../../img/Jira Comment.png" alt="Jira Comment Step" />
-<h2 id="plugin-overview">Plugin Overview</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Plugin Label</strong></td>
-<td style="text-align:left"><code>Jira Comment</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Step Type (<code>type</code>)</strong></td>
-<td style="text-align:left"><code>jiraComment</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Variable ID Prefix</strong></td>
-<td style="text-align:left"><code>jira</code> (e.g., <code>jira_1</code>, <code>jira_2</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Group / Category</strong></td>
-<td style="text-align:left">Atlassian</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left">Basic (email and API token) or personal access token</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="configuration-fields">Configuration Fields</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>domainUrl</code></td>
-<td style="text-align:left"><strong>Jira Base URL</strong></td>
-<td style="text-align:left"><code>url</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Jira site base URL, such as <code>https://your-domain.atlassian.net</code>; trailing slashes are removed before the API request.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>issueKey</code></td>
-<td style="text-align:left"><strong>Issue Key</strong></td>
-<td style="text-align:left"><code>text</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Issue key or ID to comment on, such as <code>PROJ-123</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>email</code></td>
-<td style="text-align:left"><strong>Email Address</strong></td>
-<td style="text-align:left"><code>email</code></td>
-<td style="text-align:left"><strong>Yes for Basic authentication</strong></td>
-<td style="text-align:left">Jira account email; shown and required at execution only when <strong>Basic</strong> authentication is selected. Supports tokens such as <code>{{globals.jira_email}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>apiToken</code></td>
-<td style="text-align:left"><strong>API Token / Secret Key</strong></td>
-<td style="text-align:left"><code>password</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">API token for Basic authentication or a personal access token for Server/Data Center. Supports <code>{{globals.jira_api_token}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>commentText</code></td>
-<td style="text-align:left"><strong>Comment Text</strong></td>
-<td style="text-align:left"><code>textarea</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Comment content. Supports workflow tokens, such as <code>{{llm_1}}</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>apiVers</code></td>
-<td style="text-align:left"><strong>API Version</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left"><strong>Yes</strong> (defaults to <code>v3</code>)</td>
-<td style="text-align:left"><code>v3</code> uses Jira Cloud ADF rich text; <code>v2</code> uses Server/classic plain text.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>authMethod</code></td>
-<td style="text-align:left"><strong>Authentication</strong></td>
-<td style="text-align:left"><code>select</code></td>
-<td style="text-align:left">No (defaults to <code>basic</code>)</td>
-<td style="text-align:left">Choose Basic (email and API token) or a personal access token. Email is only needed for Basic authentication.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="template-tokens-state-output">Template Tokens &amp; State Output</h2>
-<h3 id="available-input-tokens">Available Input Tokens</h3>
-<p>The workflow runner resolves template tokens before execution. The form exposes token insertion for <strong>Email Address</strong>, <strong>API Token / Secret Key</strong>, and <strong>Comment Text</strong>; for example, use <code>{{globals.jira_api_token}}</code> for the credential or <code>{{llm_1}}</code> in the comment.</p>
-<h3 id="output-state">Output State</h3>
-<p>On success, the step returns the Jira API's parsed JSON response object directly when one is available. Downstream steps can reference returned properties, for example:</p>
-<ul>
-<li><code>{{jira_1.id}}</code>: Comment ID, when included in the API response.</li>
-<li><code>{{jira_1.author}}</code>: Author details, when included in the API response.</li>
-<li><code>{{jira_1.created}}</code>: Creation timestamp, when included in the API response.</li>
-<li><code>{{jira_1.status}}</code>: <code>success</code> when JSON parsing fails or the parsed value is <code>null</code> or a primitive.</li>
-</ul>
-<h2 id="sidebar-ui-actions">Sidebar UI Actions</h2>
-<ul>
-<li><strong>View Issue</strong>: Opens the Jira issue in the browser when both the base URL and issue key are configured and resolve without unresolved template tokens.</li>
-</ul>
-<hr>
-<h2 id="example-workflow-configuration-json">Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-	&quot;id&quot;: &quot;jira_1&quot;,
-	&quot;type&quot;: &quot;jiraComment&quot;,
-	&quot;config&quot;: {
-		&quot;domainUrl&quot;: &quot;https://your-domain.atlassian.net&quot;,
-		&quot;issueKey&quot;: &quot;PROJ-123&quot;,
-		&quot;commentText&quot;: &quot;Workflow update: {{llm_1}}&quot;,
-		&quot;apiVers&quot;: &quot;v3&quot;,
-		&quot;authMethod&quot;: &quot;basic&quot;,
-		&quot;email&quot;: &quot;{{globals.jira_email}}&quot;,
-		&quot;apiToken&quot;: &quot;{{globals.jira_api_token}}&quot;
-	}
-}
-</code></pre>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="jira-comment">Jira Comment</h1>
+      <h2 id="overview">Overview</h2>
+      <p>Use <strong>Jira Comment</strong> to add a comment to an existing Jira issue in Jira Cloud or Jira Server/Data Center. You can include information from
+        earlier workflow steps in the comment.</p>
+      <img src="../../img/Jira Comment.png" alt="Jira Comment Step" >
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Post a workflow-generated progress update to a Jira issue.</li>
+        <li>Add a note with details collected from a webpage or another workflow step.</li>
+      </ul>
+      <h2 id="set-up-jira-access">Set up Jira access</h2>
+      <p>You need your Jira site address, the issue key, and credentials with permission to comment on that issue.</p>
+      <ul>
+        <li>For <strong>Jira Cloud</strong>, you need your Jira account email and an API token.</li>
+        <li>For <strong>Jira Server/Data Center</strong>, you need a personal access token.</li>
+      </ul>
+      <p>You can save credentials under <strong>Settings &gt; Global Variables</strong> and select them with the token picker. This avoids entering them again
+        in each workflow.</p>
+      <h2 id="add-and-configure-the-step">Add and configure the step</h2>
+      <ol>
+        <li>Add <strong>Jira Comment</strong> to your workflow.</li>
+        <li>Enter the Jira site address under <strong>Jira Base URL</strong> and the target issue under <strong>Issue Key</strong>.</li>
+        <li>Enter the required message under <strong>Comment Text</strong>. Use the token picker to include information from earlier steps.</li>
+        <li>Under <strong>Advanced</strong>, set <strong>Authentication</strong> to <strong>Basic (Email &amp; API Token - Cloud)</strong> for Jira Cloud or
+          <strong>Personal Access Token - Server</strong> for Server/Data Center.</li>
+        <li>Under <strong>API Version</strong>, choose <strong>v3</strong> for Jira Cloud or <strong>v2</strong> for Server/Data Center.</li>
+      </ol>
+      <p>Choose <strong>View Issue</strong> to open the configured issue in Jira.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

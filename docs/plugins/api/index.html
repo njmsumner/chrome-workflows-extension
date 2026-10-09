@@ -1,69 +1,73 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light dark">
-		<title>AI Workflows Chrome Extension</title>
-		<link rel="stylesheet" href="/chrome-workflows-extension/css/site.css">
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
-				<nav class="site-nav" aria-label="Main navigation">
-					<ul>
-						<li>
-							<a href="/chrome-workflows-extension/">Home</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/steps/">Steps</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/integrations/">Integrations</a>
-						</li>
-						<li>
-							<a href="/chrome-workflows-extension/settings/">Settings</a>
-						</li>
-						<li class="hidden">
-							<a href="/chrome-workflows-extension/plain/plugins/api.md">Plain</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<main class="content">
-			<h1 id="apiwebhook">API/Webhook</h1>
-<p>Use <strong>API/Webhook</strong> to send information from a workflow to another online service, or to retrieve information from one. You can start with a ready-made template or enter the service details yourself.</p>
-<h2 id="overview">Overview</h2>
-<p>Choose the service and information you want to send. The step contacts that service and makes its reply available to later steps in your workflow. Some services require an address or access details that you provide.</p>
-<h2 id="simple-examples">Simple examples</h2>
-<ul>
-<li>Send an AI-generated summary of a webpage to a Discord channel.</li>
-<li>Create a GitHub issue using a webpage’s title and summary.</li>
-<li>Add a Todoist task with a webpage link and a short description.</li>
-</ul>
-<h2 id="get-started">Get started</h2>
-<img src="../../img/Api.png" alt="API/Webhook Step" />
-<ol>
-<li>Choose a ready-made option from <strong>Use Template</strong>, or set up the connection yourself.</li>
-<li>Enter the service’s address in <strong>API Endpoint</strong>. The address must begin with <code>http://</code> or <code>https://</code>.</li>
-<li>Choose a <strong>Method</strong>. For example, <strong>GET</strong> retrieves information, while <strong>POST</strong> usually sends information or creates something. <strong>PUT</strong> and <strong>PATCH</strong> update information; <strong>DELETE</strong> removes it.</li>
-<li>If the service requires access details, add them under <strong>HTTP Headers (JSON)</strong>. This step does not sign in to services for you.</li>
-<li>Use <strong>Payload Body (JSON)</strong> to choose what information to send. You can include results from earlier workflow steps. Leave it empty to send the previous step’s result automatically.</li>
-</ol>
-<p>Templates fill in example settings for services such as Discord, GitHub, Notion, Todoist, Telegram, ClickUp, and n8n. Review the settings and supply any service-specific address or access details before running the workflow.</p>
-
-		</main>
-
-		<footer class="site-footer">
-			<div class="footer-inner">
-				AI Workflows Chrome Extension				
-				&copy; Nick Sumner
-				2026
-				<a href="#top">Top</a>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="color-scheme" content="light dark" >
+    <title>AI Workflows Chrome Extension</title>
+    <link rel="stylesheet" href="/chrome-workflows-extension/css/site.css" >
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="/chrome-workflows-extension/">Home</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/steps/">Steps</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/settings/">Settings</a>
+            </li>
+            <li>
+              <a href="/chrome-workflows-extension/create/">Create</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <h1 id="apiwebhook">API/Webhook</h1>
+      <p>Use <strong>API/Webhook</strong> to send information from a workflow to another online service, or to retrieve information from one. You can start with
+        a ready-made template or enter the service details yourself.</p>
+      <h2 id="overview">Overview</h2>
+      <p>Choose the service and information you want to send. The step contacts that service and makes its reply available to later steps in your workflow. Some
+        services require an address or access details that you provide.</p>
+      <h2 id="simple-examples">Simple examples</h2>
+      <ul>
+        <li>Send an AI-generated summary of a webpage to a Discord channel.</li>
+        <li>Create a GitHub issue using a webpage’s title and summary.</li>
+        <li>Add a Todoist task with a webpage link and a short description.</li>
+      </ul>
+      <h2 id="get-started">Get started</h2>
+      <img src="../../img/Api.png" alt="API/Webhook Step" >
+      <ol>
+        <li>Choose a ready-made option from <strong>Use Template</strong>, or set up the connection yourself.</li>
+        <li>Enter the service’s address in <strong>API Endpoint</strong>. The address must begin with <code>http://</code> or <code>https://</code>.</li>
+        <li>Choose a <strong>Method</strong>. For example, <strong>GET</strong> retrieves information, while <strong>POST</strong> usually sends information or
+          creates something. <strong>PUT</strong> and <strong>PATCH</strong> update information; <strong>DELETE</strong> removes it.</li>
+        <li>If the service requires access details, add them under <strong>HTTP Headers (JSON)</strong>. This step does not sign in to services for you.</li>
+        <li>Use <strong>Payload Body (JSON)</strong> to choose what information to send. You can include results from earlier workflow steps. Leave it empty to
+          send the previous step’s result automatically.</li>
+      </ol>
+      <p>Templates fill in example settings for services such as Discord, GitHub, Notion, Todoist, Telegram, ClickUp, and n8n. Review the settings and supply
+        any service-specific address or access details before running the workflow.</p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left"> AI Workflows Chrome Extension &copy; Nick Sumner 2026 </div>
+        <div class="footer-right">
+          <a href="#top">Top of Page</a>
+          <a href="plain.md">Plain Version</a>
+          <a href="/chrome-workflows-extension/all-site-content">LLM Content</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
