@@ -645,14 +645,21 @@ Title: AI Workflows Chrome Extension</p>
 <p><code>Summarize page</code> must be the exact name of another saved workflow.</p>
 <hr>
 <h1>Set Variable (<code>setGlobal</code>)</h1>
-<p>Use <strong>Set Variable</strong> to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow.</p>
+<p>Use <strong>Set Variable</strong> to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow. You can also choose to copy the value to the clipboard automatically.</p>
 <p>&lt;img src=&quot;../../img/Set Variable.png&quot; alt=&quot;Set Variable Step&quot; /&gt;</p>
 <h2>Configure</h2>
 <ul>
-<li><strong>Variable Key</strong> (<code>key</code>): Required. Use only letters, numbers, and underscores, such as <code>workflow_title</code>.</li>
-<li><strong>Variable Value / Template</strong> (<code>value</code>): Required in the form; accepts workflow tokens such as <code>{{extract_1.title}}</code>. Although the form requires a value, the step can save an empty string.</li>
+<li>
+<p><strong>Variable Key</strong> (<code>key</code>): Required. Use only letters, numbers, and underscores, such as <code>workflow_title</code>.</p>
+</li>
+<li>
+<p><strong>Variable Value / Template</strong> (<code>value</code>): Required in the form; accepts workflow tokens such as <code>{{extract_1.title}}</code>. Although the form requires a value, the step can save an empty string.</p>
+</li>
 </ul>
 <p>The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is. Available Jexl functions: <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code>.</p>
+<ul>
+<li><strong>Copy to Clipboard</strong>: Optional. If enabled, the saved value will be automatically copied to the clipboard after being set.</li>
+</ul>
 <h2>Use the saved value</h2>
 <p>For a step with ID <code>global_1</code>, use <code>{{global_1.key}}</code> and <code>{{global_1.value}}</code> to access its output. To reuse the saved value as a global variable, use <code>{{globals.workflow_title}}</code>, replacing <code>workflow_title</code> with your configured key.</p>
 <h2>Example</h2>

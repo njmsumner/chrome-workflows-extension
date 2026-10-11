@@ -854,16 +854,19 @@ No sidebar action is provided.
 
 # Set Variable (`setGlobal`)
 
-Use **Set Variable** to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow.
+Use **Set Variable** to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow. You can also choose to copy the value to the clipboard automatically.
 
 <img src="../../img/Set Variable.png" alt="Set Variable Step" />
 
 ## Configure
 
 - **Variable Key** (`key`): Required. Use only letters, numbers, and underscores, such as `workflow_title`.
+
 - **Variable Value / Template** (`value`): Required in the form; accepts workflow tokens such as `{{extract_1.title}}`. Although the form requires a value, the step can save an empty string.
 
 The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is. Available Jexl functions: `substring`, `lower`, `upper`, `trim`, and `replace`.
+
+- **Copy to Clipboard**: Optional. If enabled, the saved value will be automatically copied to the clipboard after being set.
 
 ## Use the saved value
 
