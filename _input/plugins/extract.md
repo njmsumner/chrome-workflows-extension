@@ -25,5 +25,5 @@ Use **Extract** to collect information from the webpage in your active browser t
    - **Text content** collects the visible text in the selected item.
    - **Value** collects the current value of a form field.
    - **Attribute** collects a detail such as a link or image address. Enter the detail's name under **Attribute name**.
-5. In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.
+5. In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content. Referencing downstream tokens such as `{{extract_1.fields}}` or `{{extract_1.title}}` automatically enables the corresponding extraction flags.
 

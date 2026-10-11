@@ -341,7 +341,7 @@ Use **Extract** to collect information from the webpage in your active browser t
    - **Text content** collects the visible text in the selected item.
    - **Value** collects the current value of a form field.
    - **Attribute** collects a detail such as a link or image address. Enter the detail's name under **Attribute name**.
-5. In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.
+5. In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content. Referencing downstream tokens such as `{{extract_1.fields}}` or `{{extract_1.title}}` automatically enables the corresponding extraction flags.
 
 ---
 
@@ -688,71 +688,44 @@ For **Append Text** (`append`):
 
 ## Overview
 
-Use this step to add a page to a Notion database. The page title is required; you can also add optional body text.
+This step creates a new page in a Notion database. It is useful when you want to save a title and optional notes from your workflow.
 
 ## Simple examples
 
-- Save a webpage title and link in a research database.
-- Add an AI-generated summary to a new page for later review.
-- Save details gathered by a workflow in a Notion database.
+- Save a page title and link in a research tracker.
+- Add a short AI summary to a project database.
+- Record details gathered by a workflow in a Notion database.
 
 ## Before you start
 
-You need a Notion internal integration secret and the ID of the database where the page should be created. Make sure the integration has access to that database; you can find the database ID in its URL.
+You need:
 
----
+- A Notion internal integration secret
+- Access to the database where the page should be added
+- The database ID from the database's link in Notion
 
-## Page details
+Your integration must be allowed to edit that database.
 
-| Field Key (`config.*`) | Form Label | Type | Required | Description & Token Examples |
-| :-- | :-- | :-- | :-- | :-- |
-| `apiToken` | **Internal Integration Secret** | `string` | **Yes** | Notion Internal Integration Token starting with `ntn_...` or `secret_...` (e.g., `{{globals.notion_api_token}}`). |
-| `databaseId` | **Database ID** | `string` | **Yes** | The 32-character ID of your target Notion database (e.g., `a1b2c3d4e5f678901234567890abcdef` or `{{globals.notion_database_id}}`). |
-| `title` | **Page Title** | `string` | **Yes** | The title string for the newly created page (e.g., `Research: {{extract_1.title}}`). Maps to the database's primary `Name` title property. |
-| `content` | **Page Content (Body)** | `string` | No | Body text or markdown content inserted into the page as a paragraph block (e.g., `URL: {{url.href}}\n\nSummary:\n{{llm_1}}`). |
+## What to fill in
 
----
+- **Internal Integration Secret**: Paste the token from your Notion integration.
+- **Database ID**: Copy the ID from the Notion database URL.
+- **Page Title**: This is the title shown on the new page.
+- **Page Content (optional)**: Add notes, a summary, or simple markdown text.
 
-## Template Tokens & State Output
+## What the workflow can use afterward
 
-### Available Input Tokens
+After the page is created, later steps can use details such as:
 
-Dynamic workflow variables can be injected into any configuration field using double-bracket token syntax:
+- The new page link
+- The page ID
+- The date and time it was created
 
-- **Workflow Outputs:** `{{extract_1.title}}`, `{{llm_1}}`
-- **Global Variables & Secrets:** `{{globals.notion_api_token}}`, `{{globals.notion_database_id}}`
-- **System Metadata:** `{{url.href}}`, `{{userInput}}`, `{{datetime}}`
+## Sidebar action
 
-### Output State (`{{notion_page_1.*}}`)
+- **View Notion DB**: Opens the target database in Notion so you can check where the new page was added.
 
-When executed successfully, downstream steps can reference properties of the created page:
-
-- `{{notion_page_1.id}}`: The unique Notion page ID (e.g., `page_1234567890`).
-- `{{notion_page_1.url}}`: The direct web link to open the created page in Notion.
-- `{{notion_page_1.createdTime}}`: ISO 8601 creation timestamp.
-
----
-
-## Sidebar UI Actions
-
-- **View Notion DB**: Displays an action button in the sidebar panel that opens the target database in your browser (`https://notion.so/${cleanDatabaseId}`).
-
----
-
-## Example Workflow Configuration (JSON)
-
-```json
-{
-  "id": "notion_page_1",
-  "type": "notionCreatePage",
-  "config": {
-    "apiToken": "{{globals.notion_api_token}}",
-    "databaseId": "{{globals.notion_database_id}}",
-    "title": "Article: {{extract_1.title}}",
-    "content": "Source URL: {{url.href}}\nCaptured: {{datetime}}\n\nAI Executive Summary:\n{{llm_1}}"
-  }
-}
-```
+This step works best when the database is already shared with your integration and you want to store a simple page entry from your workflow.
 
 ---
 
@@ -814,7 +787,7 @@ Select an action from the **Action** menu:
 
 - **Show in Sidebar** displays text or workflow results in the sidebar's **Result** area.
 - **Append Content** saves text in **View Content**, where you can review, copy, or download saved clippings.
-- **Navigate to URL** opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; a path can be relative to the current website.
+- **Navigate to URL** opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; relative URLs must start with a leading slash (`/`), such as `/dashboard`, to resolve against the active tab's base domain.
 - **Switch to Tab** activates a tab by its web address or title. If you provide a web address that is not already open, it opens in a new tab.
 - **Close Tab** closes a tab that matches the address or title you enter.
 - **Refresh Tab** reloads the active tab.
@@ -825,7 +798,7 @@ Select an action from the **Action** menu:
 - **Wait for Selector** waits up to 10 seconds for a page element to appear.
 - **Key Press** sends a supported key, such as Enter or Tab, to the active field or selected page item.
 
-**Auto** is also listed in the menu, but it does not currently perform an action.
+**Auto** uses a JSON action payload provided by the immediately preceding workflow step to determine and perform an action. It requires that step to output a valid JSON action payload.
 
 ## Configure the selected action
 

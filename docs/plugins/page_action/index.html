@@ -52,8 +52,8 @@
       <ul>
         <li><strong>Show in Sidebar</strong> displays text or workflow results in the sidebar's <strong>Result</strong> area.</li>
         <li><strong>Append Content</strong> saves text in <strong>View Content</strong>, where you can review, copy, or download saved clippings.</li>
-        <li><strong>Navigate to URL</strong> opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; a path can be relative to the
-          current website.</li>
+        <li><strong>Navigate to URL</strong> opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; relative URLs must start with a
+          leading slash (<code>/</code>), such as <code>/dashboard</code>, to resolve against the active tab's base domain.</li>
         <li><strong>Switch to Tab</strong> activates a tab by its web address or title. If you provide a web address that is not already open, it opens in a new
           tab.</li>
         <li><strong>Close Tab</strong> closes a tab that matches the address or title you enter.</li>
@@ -65,7 +65,8 @@
         <li><strong>Wait for Selector</strong> waits up to 10 seconds for a page element to appear.</li>
         <li><strong>Key Press</strong> sends a supported key, such as Enter or Tab, to the active field or selected page item.</li>
       </ul>
-      <p><strong>Auto</strong> is also listed in the menu, but it does not currently perform an action.</p>
+      <p><strong>Auto</strong> uses a JSON action payload provided by the immediately preceding workflow step to determine and perform an action. It requires
+        that step to output a valid JSON action payload.</p>
       <h2 id="configure-the-selected-action">Configure the selected action</h2>
       <ol>
         <li>Choose the action you want to perform.</li>

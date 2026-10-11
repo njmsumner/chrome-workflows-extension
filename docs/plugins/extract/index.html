@@ -64,7 +64,9 @@
             <li><strong>Attribute</strong> collects a detail such as a link or image address. Enter the detail's name under <strong>Attribute name</strong>.</li>
           </ul>
         </li>
-        <li>In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.</li>
+        <li>In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.
+          Referencing downstream tokens such as <code>{{extract_1.fields}}</code> or <code>{{extract_1.title}}</code> automatically enables the corresponding
+          extraction flags.</li>
       </ol>
     </main>
     <footer class="site-footer">

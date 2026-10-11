@@ -241,7 +241,7 @@ Title: AI Workflows Chrome Extension</p>
 <li><strong>Attribute</strong> collects a detail such as a link or image address. Enter the detail's name under <strong>Attribute name</strong>.</li>
 </ul>
 </li>
-<li>In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.</li>
+<li>In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content. Referencing downstream tokens such as <code>{{extract_1.fields}}</code> or <code>{{extract_1.title}}</code> automatically enables the corresponding extraction flags.</li>
 </ol>
 <hr>
 <h1>Gmail</h1>
@@ -504,92 +504,40 @@ Title: AI Workflows Chrome Extension</p>
 <hr>
 <h1>Create a Notion page</h1>
 <h2>Overview</h2>
-<p>Use this step to add a page to a Notion database. The page title is required; you can also add optional body text.</p>
+<p>This step creates a new page in a Notion database. It is useful when you want to save a title and optional notes from your workflow.</p>
 <h2>Simple examples</h2>
 <ul>
-<li>Save a webpage title and link in a research database.</li>
-<li>Add an AI-generated summary to a new page for later review.</li>
-<li>Save details gathered by a workflow in a Notion database.</li>
+<li>Save a page title and link in a research tracker.</li>
+<li>Add a short AI summary to a project database.</li>
+<li>Record details gathered by a workflow in a Notion database.</li>
 </ul>
 <h2>Before you start</h2>
-<p>You need a Notion internal integration secret and the ID of the database where the page should be created. Make sure the integration has access to that database; you can find the database ID in its URL.</p>
-<hr>
-<h2>Page details</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Field Key (<code>config.*</code>)</th>
-<th style="text-align:left">Form Label</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Description &amp; Token Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>apiToken</code></td>
-<td style="text-align:left"><strong>Internal Integration Secret</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">Notion Internal Integration Token starting with <code>ntn_...</code> or <code>secret_...</code> (e.g., <code>{{globals.notion_api_token}}</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>databaseId</code></td>
-<td style="text-align:left"><strong>Database ID</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">The 32-character ID of your target Notion database (e.g., <code>a1b2c3d4e5f678901234567890abcdef</code> or <code>{{globals.notion_database_id}}</code>).</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>title</code></td>
-<td style="text-align:left"><strong>Page Title</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left"><strong>Yes</strong></td>
-<td style="text-align:left">The title string for the newly created page (e.g., <code>Research: {{extract_1.title}}</code>). Maps to the database's primary <code>Name</code> title property.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>content</code></td>
-<td style="text-align:left"><strong>Page Content (Body)</strong></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Body text or markdown content inserted into the page as a paragraph block (e.g., <code>URL: {{url.href}}\n\nSummary:\n{{llm_1}}</code>).</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2>Template Tokens &amp; State Output</h2>
-<h3>Available Input Tokens</h3>
-<p>Dynamic workflow variables can be injected into any configuration field using double-bracket token syntax:</p>
+<p>You need:</p>
 <ul>
-<li><strong>Workflow Outputs:</strong> <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code></li>
-<li><strong>Global Variables &amp; Secrets:</strong> <code>{{globals.notion_api_token}}</code>, <code>{{globals.notion_database_id}}</code></li>
-<li><strong>System Metadata:</strong> <code>{{url.href}}</code>, <code>{{userInput}}</code>, <code>{{datetime}}</code></li>
+<li>A Notion internal integration secret</li>
+<li>Access to the database where the page should be added</li>
+<li>The database ID from the database's link in Notion</li>
 </ul>
-<h3>Output State (<code>{{notion_page_1.*}}</code>)</h3>
-<p>When executed successfully, downstream steps can reference properties of the created page:</p>
+<p>Your integration must be allowed to edit that database.</p>
+<h2>What to fill in</h2>
 <ul>
-<li><code>{{notion_page_1.id}}</code>: The unique Notion page ID (e.g., <code>page_1234567890</code>).</li>
-<li><code>{{notion_page_1.url}}</code>: The direct web link to open the created page in Notion.</li>
-<li><code>{{notion_page_1.createdTime}}</code>: ISO 8601 creation timestamp.</li>
+<li><strong>Internal Integration Secret</strong>: Paste the token from your Notion integration.</li>
+<li><strong>Database ID</strong>: Copy the ID from the Notion database URL.</li>
+<li><strong>Page Title</strong>: This is the title shown on the new page.</li>
+<li><strong>Page Content (optional)</strong>: Add notes, a summary, or simple markdown text.</li>
 </ul>
-<hr>
-<h2>Sidebar UI Actions</h2>
+<h2>What the workflow can use afterward</h2>
+<p>After the page is created, later steps can use details such as:</p>
 <ul>
-<li><strong>View Notion DB</strong>: Displays an action button in the sidebar panel that opens the target database in your browser (<code>https://notion.so/${cleanDatabaseId}</code>).</li>
+<li>The new page link</li>
+<li>The page ID</li>
+<li>The date and time it was created</li>
 </ul>
-<hr>
-<h2>Example Workflow Configuration (JSON)</h2>
-<pre><code class="language-json">{
-  &quot;id&quot;: &quot;notion_page_1&quot;,
-  &quot;type&quot;: &quot;notionCreatePage&quot;,
-  &quot;config&quot;: {
-    &quot;apiToken&quot;: &quot;{{globals.notion_api_token}}&quot;,
-    &quot;databaseId&quot;: &quot;{{globals.notion_database_id}}&quot;,
-    &quot;title&quot;: &quot;Article: {{extract_1.title}}&quot;,
-    &quot;content&quot;: &quot;Source URL: {{url.href}}\nCaptured: {{datetime}}\n\nAI Executive Summary:\n{{llm_1}}&quot;
-  }
-}
-</code></pre>
+<h2>Sidebar action</h2>
+<ul>
+<li><strong>View Notion DB</strong>: Opens the target database in Notion so you can check where the new page was added.</li>
+</ul>
+<p>This step works best when the database is already shared with your integration and you want to store a simple page entry from your workflow.</p>
 <hr>
 <h1>OpenAI/LLM</h1>
 <h2>Overview</h2>
@@ -635,7 +583,7 @@ Title: AI Workflows Chrome Extension</p>
 <ul>
 <li><strong>Show in Sidebar</strong> displays text or workflow results in the sidebar's <strong>Result</strong> area.</li>
 <li><strong>Append Content</strong> saves text in <strong>View Content</strong>, where you can review, copy, or download saved clippings.</li>
-<li><strong>Navigate to URL</strong> opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; a path can be relative to the current website.</li>
+<li><strong>Navigate to URL</strong> opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; relative URLs must start with a leading slash (<code>/</code>), such as <code>/dashboard</code>, to resolve against the active tab's base domain.</li>
 <li><strong>Switch to Tab</strong> activates a tab by its web address or title. If you provide a web address that is not already open, it opens in a new tab.</li>
 <li><strong>Close Tab</strong> closes a tab that matches the address or title you enter.</li>
 <li><strong>Refresh Tab</strong> reloads the active tab.</li>
@@ -646,7 +594,7 @@ Title: AI Workflows Chrome Extension</p>
 <li><strong>Wait for Selector</strong> waits up to 10 seconds for a page element to appear.</li>
 <li><strong>Key Press</strong> sends a supported key, such as Enter or Tab, to the active field or selected page item.</li>
 </ul>
-<p><strong>Auto</strong> is also listed in the menu, but it does not currently perform an action.</p>
+<p><strong>Auto</strong> uses a JSON action payload provided by the immediately preceding workflow step to determine and perform an action. It requires that step to output a valid JSON action payload.</p>
 <h2>Configure the selected action</h2>
 <ol>
 <li>Choose the action you want to perform.</li>

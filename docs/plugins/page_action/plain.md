@@ -22,7 +22,7 @@ Select an action from the **Action** menu:
 
 - **Show in Sidebar** displays text or workflow results in the sidebar's **Result** area.
 - **Append Content** saves text in **View Content**, where you can review, copy, or download saved clippings.
-- **Navigate to URL** opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; a path can be relative to the current website.
+- **Navigate to URL** opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; relative URLs must start with a leading slash (`/`), such as `/dashboard`, to resolve against the active tab's base domain.
 - **Switch to Tab** activates a tab by its web address or title. If you provide a web address that is not already open, it opens in a new tab.
 - **Close Tab** closes a tab that matches the address or title you enter.
 - **Refresh Tab** reloads the active tab.
@@ -33,7 +33,7 @@ Select an action from the **Action** menu:
 - **Wait for Selector** waits up to 10 seconds for a page element to appear.
 - **Key Press** sends a supported key, such as Enter or Tab, to the active field or selected page item.
 
-**Auto** is also listed in the menu, but it does not currently perform an action.
+**Auto** uses a JSON action payload provided by the immediately preceding workflow step to determine and perform an action. It requires that step to output a valid JSON action payload.
 
 ## Configure the selected action
 
