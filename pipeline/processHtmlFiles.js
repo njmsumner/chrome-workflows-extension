@@ -2,10 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const prettier = require('prettier');
 const { removeBlankLines, extractText, prettifyMd, prettifyHtml, pageFromFile } = require('./utils');
 const { exportPlain } = require('./exportMarkdown');
 const { SITE_DIR, excludeFolders } = require('../app-cfg');
+const markdownIt = require('markdown-it')();
 
 const siteDir = path.join(__dirname, SITE_DIR);
 
@@ -40,6 +40,14 @@ const saveAllContent = async (allMarkdown) => {
 
 	const filePath = path.join(siteDir, 'all-site-content.md');
 	fs.writeFileSync(filePath, allMarkdownStr);
+
+	// convert all-site-content.md to htm and save as .htm
+	const htmlFilePath = path.join(siteDir, 'all-site-content.htm');
+
+	// convert markdown to html
+	let htmlPlain = markdownIt.render(allMarkdownStr);
+
+	fs.writeFileSync(htmlFilePath, htmlPlain);
 };
 
 const processHtmlFiles = async () => {

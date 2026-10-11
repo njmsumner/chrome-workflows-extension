@@ -1,0 +1,900 @@
+<p>Page: <a href="/">/</a><br>
+Title: AI Workflows Chrome Extension</p>
+<p><a href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a></p>
+<h1>AI Workflows Chrome Extension Documentation</h1>
+<h2>Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#what-is-a-workflow">What is a Workflow</a></li>
+<li><a href="#get-started">Get Started</a></li>
+<li><a href="steps">Steps</a></li>
+<li><a href="integrations">Integrations</a></li>
+<li><a href="settings">Settings</a></li>
+<li><a href="create">Create a new Workflow</a></li>
+</ul>
+<h2>Overview</h2>
+<p>The Chrome Workflows Extension allows you to automate repetitive tasks within your browser by creating workflows composed of various steps. These workflows can interact with web pages, LLMs, APIs, and popular services like Google Workspace, Microsoft Office, Slack, and more.</p>
+<h2>What is a Workflow</h2>
+<p>A workflow is a sequence of steps that automate tasks within the Chrome Workflows Extension. Each step performs a specific action, such as updating fields or clicking elements in the current tab, making an API or LLM request, updating a Google Doc or sending an email. Workflows allow you to streamline repetitive tasks and integrate various services seamlessly.</p>
+<h2>Get Started</h2>
+<p>To get started with the AI Workflows Chrome Extension:</p>
+<ol>
+<li>Install the extension from the Chrome Web Store.</li>
+<li>Click on the extension icon in the Chrome toolbar to open the extension sidebar.</li>
+<li>A default workflow will be displayed, and you can start configuring it according to your needs.</li>
+<li>You can use sample Workflow templates by clicking 'Create' in the top menu.</li>
+</ol>
+<hr>
+<h1>Create a workflow</h1>
+<p>Use the <strong>Create Workflow</strong> screen to make a workflow that automates tasks in your browser. You can describe what you want, start from a sample, or build one yourself.</p>
+<p>&lt;img src=&quot;../img/Create Workflow.png&quot; alt=&quot;Create Workflow&quot; /&gt;</p>
+<h2>Overview</h2>
+<p>There are three ways to get started:</p>
+<ul>
+<li>Describe the task and let AI prepare a workflow. Open the webpage where you want to use it first.</li>
+<li>Choose a sample workflow and adjust it to suit your needs.</li>
+<li>Start with a blank workflow and add steps yourself.</li>
+</ul>
+<h2>Simple examples</h2>
+<ul>
+<li>Summarize a webpage and send the summary to Slack.</li>
+<li>Save selected webpage details to a Google Doc or Google Sheet.</li>
+<li>Create a Gmail draft with details from the current webpage.</li>
+<li>Show information from a webpage in the sidebar when the page opens.</li>
+</ul>
+<hr>
+<h2>Header buttons</h2>
+<ul>
+<li><strong>Workflows</strong> opens your saved workflows.</li>
+<li><strong>Settings</strong> lets you set up AI services and manage information reused by workflows.</li>
+<li><strong>Back</strong> returns to the previous screen when available.</li>
+</ul>
+<p>If something goes wrong, an error message appears at the top of the screen.</p>
+<hr>
+<h2>Choose a starting point</h2>
+<h3>Start from a blank workflow</h3>
+<p>Select <strong>Configure</strong> to open the workflow editor and add the steps you need.</p>
+<h3>Use a sample workflow</h3>
+<p>Choose a sample from the list, then select <strong>Use Sample</strong>. The workflow opens so you can review it, make changes, or run it. Samples include workflows for answering questions about a webpage, saving details to Google Docs or Sheets, drafting an email in Gmail, and sending a summary to Trello.</p>
+<hr>
+<h2>Ask AI to create a workflow</h2>
+<ol>
+<li>Open the webpage where you want the workflow to run.</li>
+<li>Enter a short description of what you want to do in the instructions box. For example: “Find a product, add it to the basket, and open the basket.”</li>
+<li>Select <strong>Generate</strong> and wait for the workflow to appear.</li>
+</ol>
+<p>Start with a simple task. You can add more steps or adjust the workflow afterward. AI features require an AI service to be configured in <strong>Settings</strong>.</p>
+<hr>
+<h2>Example prompt</h2>
+<blockquote>
+<p>Find the product title and price on this page, summarize the product, and send the summary to Slack.</p>
+</blockquote>
+<p>The generated workflow can use details from the open webpage, create a summary, and send it to Slack. You can review and adjust the workflow before running it.</p>
+<hr>
+<h2>If something goes wrong</h2>
+<ul>
+<li><strong>AI setup message:</strong> Set up an AI service in <strong>Settings</strong> before using AI features.</li>
+<li><strong>Instructions are missing:</strong> Enter a description before selecting <strong>Generate</strong>.</li>
+<li><strong>The workflow could not be created:</strong> Make your instructions clearer or break the task into smaller steps.</li>
+<li><strong>The extension cannot reach the webpage:</strong> Refresh the webpage and try again.</li>
+</ul>
+<hr>
+<p>Page: <a href="/integrations">/integrations</a><br>
+Title: AI Workflows Chrome Extension</p>
+<p><a href="/chrome-workflows-extension/">AI Workflows Chrome Extension</a></p>
+<h1>Integration Steps</h1>
+<p>The integrations listed below are built-in to the extension and have their own UI for editing steps.</p>
+<p><strong><a href="../plugins/api">API/Webhook</a></strong></p>
+<p>Executes an HTTP request to an API endpoint or webhooks (api)</p>
+<p><strong><a href="../plugins/openai">OpenAI/LLM</a></strong></p>
+<p>Send a prompt to an OpenAI-compatible API and return the completion text (openai)</p>
+<p><strong><a href="../plugins/trello_card">Trello Create Card</a></strong></p>
+<p>Creates a new card on a Trello board list. (trello_card)</p>
+<p><strong><a href="../plugins/airtable">Airtable Create Record</a></strong></p>
+<p>Creates a new record/row in an Airtable base table. (airtable)</p>
+<p><strong><a href="../plugins/notion_page">Notion Create Page</a></strong></p>
+<p>Creates a new page or record in a Notion database. (notion_page)</p>
+<p><strong><a href="../plugins/confluence">Confluence Page</a></strong></p>
+<p>Updates Confluence page via the REST API (confluence)</p>
+<p><strong><a href="../plugins/gmail">Gmail</a></strong></p>
+<p>Sends emails or saves drafts to Gmail. (gmail)</p>
+<p><strong><a href="../plugins/google_docs">Google Docs</a></strong></p>
+<p>Append text to or reads content from a Google Doc (google_docs)</p>
+<p><strong><a href="../plugins/google_sheets">Google Sheets</a></strong></p>
+<p>Append a row to or reads content from a Google Sheet (google_sheets)</p>
+<p><strong><a href="../plugins/hubspot">HubSpot Blog Post</a></strong></p>
+<p>Update HubSpot CMS blog posts via the CMS API (hubspot)</p>
+<p><strong><a href="../plugins/jira_comment">Jira Comment</a></strong></p>
+<p>Adds a comment to the Jira issue. (jira_comment)</p>
+<p><strong><a href="../plugins/jira_issue">Jira Create Issue</a></strong></p>
+<p>Creates a new issue in Jira (e.g. Task, Bug, Story). (jira_issue)</p>
+<p><strong><a href="../plugins/ms_excel">Microsoft Excel</a></strong></p>
+<p>Append rows to an Excel table/worksheet and retrieve cell/range content. (ms_excel)</p>
+<p><strong><a href="../plugins/ms_email">Microsoft Outlook Email</a></strong></p>
+<p>Sends an email or saves a draft using Microsoft Outlook. (ms_email)</p>
+<p><strong><a href="../plugins/ms_teams">Microsoft Teams</a></strong></p>
+<p>Send messages to Microsoft Teams. (ms_teams)</p>
+<p><strong><a href="../plugins/ms_word">Microsoft Word</a></strong></p>
+<p>Append or read content from a Microsoft Word document. (ms_word)</p>
+<p><strong><a href="../plugins/slack">Slack Notification</a></strong></p>
+<p>Sends webhook messages to Slack channels (slack)</p>
+<hr>
+<h1>Add a record to Airtable</h1>
+<h2>Overview</h2>
+<p>Use this step to add information from a workflow to a table in Airtable. It can save details such as a webpage title, link, or AI-generated summary.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Save a webpage title, link, and summary in an Airtable research table.</li>
+<li>Store details gathered during a workflow in Airtable so they are easy to review later.</li>
+</ul>
+<h2>Before you start</h2>
+<p>You need an Airtable Personal Access Token, the ID of your base, and the name or ID of the table where the record should be added. Make sure your token can access that base.</p>
+<hr>
+<h2>Record details</h2>
+<p>Enter the following details:</p>
+<ul>
+<li><strong>Personal Access Token</strong>: Paste a token from Airtable. Keep it private, and make sure it can access the base you want to use.</li>
+<li><strong>Base ID</strong>: Enter the ID of the Airtable base that should receive the record.</li>
+<li><strong>Table Name or ID</strong>: Enter the name or ID of the destination table.</li>
+<li><strong>Record Fields (JSON)</strong>: List the Airtable column names and the values to save in valid JSON format. In supported fields, use <strong>Insert workflow token</strong> to add information from earlier steps, such as a page title or summary.</li>
+</ul>
+<hr>
+<h2>After the record is added</h2>
+<p>Later workflow steps can use the new record's ID, creation time, Airtable link, and saved values.</p>
+<hr>
+<h2>View the Airtable base</h2>
+<p>When a valid base ID is provided, the step shows a <strong>View Airtable Base</strong> button in the sidebar. Select it to open the base in your browser.</p>
+<hr>
+<h1>API/Webhook</h1>
+<p>Use <strong>API/Webhook</strong> to send information from a workflow to another online service, or to retrieve information from one. You can start with a ready-made template or enter the service details yourself.</p>
+<h2>Overview</h2>
+<p>Choose the service and information you want to send. The step contacts that service and makes its reply available to later steps in your workflow. Some services require an address or access details that you provide.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Send an AI-generated summary of a webpage to a Discord channel.</li>
+<li>Create a GitHub issue using a webpage’s title and summary.</li>
+<li>Add a Todoist task with a webpage link and a short description.</li>
+</ul>
+<h2>Get started</h2>
+<p>&lt;img src=&quot;../../img/Api.png&quot; alt=&quot;API/Webhook Step&quot; /&gt;</p>
+<ol>
+<li>Choose a ready-made option from <strong>Use Template</strong>, or set up the connection yourself.</li>
+<li>Enter the service’s address in <strong>API Endpoint</strong>. The address must begin with <code>http://</code> or <code>https://</code>.</li>
+<li>Choose a <strong>Method</strong>. For example, <strong>GET</strong> retrieves information, while <strong>POST</strong> usually sends information or creates something. <strong>PUT</strong> and <strong>PATCH</strong> update information; <strong>DELETE</strong> removes it.</li>
+<li>If the service requires access details, add them under <strong>HTTP Headers (JSON)</strong>. This step does not sign in to services for you.</li>
+<li>Use <strong>Payload Body (JSON)</strong> to choose what information to send. You can include results from earlier workflow steps. Leave it empty to send the previous step’s result automatically.</li>
+</ol>
+<p>Templates fill in example settings for services such as Discord, GitHub, Notion, Todoist, Telegram, ClickUp, and n8n. Review the settings and supply any service-specific address or access details before running the workflow.</p>
+<hr>
+<h1>Condition</h1>
+<p>Use <strong>Condition</strong> to check information in a workflow before it continues. By default, the workflow stops when the check does not pass. Turn off <strong>Stop Workflow</strong> if it should continue instead.</p>
+<h2>Overview</h2>
+<p>Choose a value to check and select what should be true about it. For many checks, you can also enter text to compare it with.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Continue only when a page title contains “Release notes.”</li>
+<li>Check that a status matches “Published” before continuing.</li>
+<li>Make sure a required detail is present before sending a message.</li>
+</ul>
+<h2>Set up a condition</h2>
+<ul>
+<li><strong>Value:</strong> Choose the information to check. It can come from an earlier step in the workflow.</li>
+<li><strong>Condition:</strong> Choose <strong>Is empty</strong>, <strong>Is not empty</strong>, <strong>Contains</strong>, <strong>Does not contain</strong>, <strong>Equals</strong>, <strong>Does not equal</strong>, <strong>Starts with</strong>, or <strong>Ends with</strong>.</li>
+<li><strong>Comparison value:</strong> For most conditions, enter the text to check for. You do not need this for <strong>Is empty</strong> or <strong>Is not empty</strong>.</li>
+<li><strong>Stop Workflow:</strong> Checked by default. When checked, a failed condition stops the workflow. When unchecked, the workflow continues after a failed condition.</li>
+</ul>
+<p>A value is always required. If you choose a condition that compares text, the comparison value is required too.</p>
+<p>&lt;img src=&quot;../../img/Condition.png&quot; alt=&quot;Condition Step&quot; /&gt;</p>
+<hr>
+<h1>Update a Confluence page</h1>
+<p>Use <strong>Confluence Page</strong> to replace the content of an existing Confluence page with information from a workflow. You can also change the page title.</p>
+<h2>Overview</h2>
+<p>Provide the address of your Confluence site and the ID of the page to update. The page body is replaced when the workflow runs. If <strong>Page Title (Optional)</strong> is left blank, the current title stays as it is.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Replace a project page with the latest summary created by a workflow.</li>
+<li>Update an existing page with information gathered from a webpage.</li>
+<li>Change a page’s title and replace its content with a workflow report.</li>
+</ul>
+<h2>Set up the page</h2>
+<ul>
+<li><strong>Confluence Base URL:</strong> Enter your Confluence site address, such as <code>https://your-domain.atlassian.net/wiki</code>.</li>
+<li><strong>Page ID (Content ID):</strong> Enter the ID of the existing page you want to update.</li>
+<li><strong>Page Title (Optional):</strong> Enter a new title, or leave this blank to keep the current title.</li>
+<li><strong>Page Body (XHTML Storage Format):</strong> Enter the new page content. Confluence requires its own format for page content; information from earlier workflow steps can be included.</li>
+</ul>
+<h2>Set up authentication</h2>
+<p>Choose the method that matches your Confluence account:</p>
+<ul>
+<li><strong>Basic Auth (Cloud API Token):</strong> Enter your account email or username and its API token or password.</li>
+<li><strong>Personal Access Token (PAT):</strong> Choose this option and enter your Confluence personal access token. You do not need to enter an email address or username.</li>
+</ul>
+<p>The token must be valid for the selected authentication method, and the account must be able to edit the page.</p>
+<p>Once the site address and page ID are set, use <strong>View Page</strong> to open the page in Confluence.</p>
+<hr>
+<h1>Extract</h1>
+<h2>Overview</h2>
+<p>Use <strong>Extract</strong> to collect information from the webpage in your active browser tab. You can use the page title, headings, links, buttons, form fields, highlighted text, or page content in later workflow steps. No separate sign-in is needed. Only regular websites can be read; built-in browser pages and local files are not supported.</p>
+<p>&lt;img src=&quot;../../img/Extract.png&quot; alt=&quot;Extract Step&quot; /&gt;</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Collect an article's visible text so a later step can summarize it.</li>
+<li>Use text you highlighted on the page as input for another step.</li>
+<li>Pick a particular page element to capture its text, a form value, or a link or image address.</li>
+</ul>
+<h2>Add and configure the step</h2>
+<ol>
+<li>Open the webpage you want to use and make its tab active.</li>
+<li>Add <strong>Extract</strong> to your workflow.</li>
+<li>Under <strong>Extract content</strong>, choose what you need:
+<ul>
+<li><strong>Selection</strong> uses text you highlighted on the page.</li>
+<li><strong>Full Text</strong> collects visible text from across the page.</li>
+<li><strong>Clean HTML</strong> collects page content with scripts and styles removed.</li>
+<li><strong>Element Content</strong> collects information from one part of the page.</li>
+</ul>
+</li>
+<li>For <strong>Element Content</strong>, click <strong>Pick / View Element</strong>, then click the item on the webpage. Under <strong>Value source</strong>, choose what to collect:
+<ul>
+<li><strong>Text content</strong> collects the visible text in the selected item.</li>
+<li><strong>Value</strong> collects the current value of a form field.</li>
+<li><strong>Attribute</strong> collects a detail such as a link or image address. Enter the detail's name under <strong>Attribute name</strong>.</li>
+</ul>
+</li>
+<li>In a later workflow step, use the token picker to insert the Extract information you need, such as the page title, links, or selected content.</li>
+</ol>
+<hr>
+<h1>Gmail</h1>
+<p>Use <strong>Gmail</strong> to send an email from a workflow or save it as a draft.</p>
+<h2>Overview</h2>
+<p>Choose <strong>Send Email</strong> to send the message right away, or <strong>Save as Draft</strong> to review it before sending. Messages are sent from the Google account you authorize.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Save a webpage summary as a draft so you can review it before sending.</li>
+<li>Email a webpage title and summary to a colleague.</li>
+<li>Send a notification when a workflow finishes a task.</li>
+</ul>
+<h2>Set up the message</h2>
+<ul>
+<li><strong>Action:</strong> Choose <strong>Send Email</strong> or <strong>Save as Draft</strong>. Draft is selected by default.</li>
+<li><strong>Recipient (To):</strong> Enter the recipient’s email address.</li>
+<li><strong>Subject:</strong> Enter a subject for the message.</li>
+<li><strong>Content Type:</strong> Choose <strong>Plain Text</strong> for a simple message or <strong>HTML</strong> for formatted content.</li>
+<li><strong>Email Body:</strong> Write the message. You can include information from earlier workflow steps.</li>
+</ul>
+<h2>Google account access</h2>
+<p>When prompted, sign in to the Google account that should send the email and allow Gmail access. The workflow uses this account to send messages or save drafts.</p>
+<p>Use <strong>View Drafts</strong> to open your drafts or <strong>Open Gmail</strong> to view your inbox.</p>
+<hr>
+<h1>Google Docs</h1>
+<p>Use <strong>Google Docs</strong> to add information to an existing document or read its text in a workflow.</p>
+<p>&lt;img src=&quot;../../img/Google Docs.png&quot; alt=&quot;Google Docs Step&quot; /&gt;</p>
+<h2>Overview</h2>
+<p>Choose <strong>Append Text</strong> to add content to the end of a document, or <strong>Get Document Content</strong> to read its text for use in later workflow steps. Appending does not replace the existing content.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Add a webpage title and link to the end of a research document.</li>
+<li>Read instructions from a Google Doc and use them in a workflow.</li>
+<li>Add an AI-generated summary to an existing document.</li>
+</ul>
+<h2>Set up the document</h2>
+<ul>
+<li><strong>Action:</strong> Choose <strong>Append Text</strong> or <strong>Get Document Content</strong>.</li>
+<li><strong>Google Document ID:</strong> Enter the document’s ID. You can find it in the document’s web address.</li>
+<li><strong>Text to Append:</strong> For <strong>Append Text</strong>, enter the content to add. You can include information from earlier workflow steps.</li>
+</ul>
+<h2>Google account access</h2>
+<p>When prompted, sign in to the Google account you want to use and allow access. That account must be able to view the document to read it, or edit it to append text.</p>
+<p>Use <strong>View Doc</strong> to open the configured document in Google Docs.</p>
+<hr>
+<h1>Google Sheets</h1>
+<p>Use <strong>Google Sheets</strong> to add rows to a spreadsheet or read information from it in a workflow.</p>
+<p>&lt;img src=&quot;../../img/Google Sheets.png&quot; alt=&quot;Google Sheets Step&quot; /&gt;</p>
+<h2>Overview</h2>
+<p>Choose <strong>Append Row</strong> to add a new row, or <strong>Get Cell / Range Content</strong> to read existing cells. When reading, you can optionally find rows containing an exact value.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Save a webpage title, link, and summary as a new row.</li>
+<li>Read a list of tasks from a sheet for use in a workflow.</li>
+<li>Find a row containing a particular project or issue name.</li>
+</ul>
+<h2>Set up the spreadsheet</h2>
+<ul>
+<li><strong>Action:</strong> Choose <strong>Append Row</strong> or <strong>Get Cell / Range Content</strong>.</li>
+<li><strong>Spreadsheet ID:</strong> Enter the ID from the spreadsheet’s web address.</li>
+<li><strong>Sheet Name / Cell Range:</strong> Enter the sheet name and, if needed, the cells to use. For example, <code>Sheet1!A:C</code> selects columns A through C on a sheet named Sheet1.</li>
+<li><strong>Row Values (JSON Array):</strong> For <strong>Append Row</strong>, enter the values in column order, such as <code>[&quot;Page title&quot;, &quot;Page link&quot;, &quot;Summary&quot;]</code>.</li>
+<li><strong>Find Row Value:</strong> When reading, enter a value to find. Only rows containing that exact value are returned.</li>
+</ul>
+<h2>Google account access</h2>
+<p>When prompted, sign in to the Google account you want to use and allow access. That account must be able to edit the spreadsheet to add rows, or view it to read cells.</p>
+<p>Use <strong>View Sheet</strong> to open the configured spreadsheet in Google Sheets.</p>
+<hr>
+<h1>HubSpot Blog Post</h1>
+<h2>Overview</h2>
+<p>Use <strong>HubSpot Blog Post</strong> to create a new post in your HubSpot blog. You can save it as a draft or publish it immediately. The post body accepts HTML formatting, such as paragraphs and links.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Save a workflow-generated article as a draft so you can review it in HubSpot.</li>
+<li>Publish a prepared announcement to your blog immediately.</li>
+<li>Add a featured image and a short description for search results.</li>
+</ul>
+<h2>Set up HubSpot access</h2>
+<p>Create a HubSpot private app and enable its content access permission. Use the app's access token in <strong>App Access Token</strong>. You also need the <strong>Blog ID</strong> for the blog where the post should appear.</p>
+<p>You can store the access token and Blog ID under <strong>Settings &gt; Global Variables</strong>, then select them with the token picker. This keeps you from entering the same values in every workflow.</p>
+<h2>Add and configure the step</h2>
+<ol>
+<li>Add <strong>HubSpot Blog Post</strong> to your workflow.</li>
+<li>Enter the <strong>App Access Token</strong> and <strong>Blog ID</strong>.</li>
+<li>Enter a <strong>Post Title</strong> and <strong>Post Body</strong>. Both are required. Format the body as HTML; you can use the token picker to include information from earlier workflow steps.</li>
+<li>Under <strong>Post State</strong>, choose <strong>Draft</strong> (the default) or <strong>Published Immediately</strong>.</li>
+<li>Optionally add a <strong>Featured Image URL</strong>, <strong>Meta Description</strong>, or <strong>Author ID</strong>.</li>
+<li>Optionally enter a <strong>Custom Slug</strong> for the post's web address. HubSpot uses lowercase letters and hyphens between words.</li>
+</ol>
+<p>Choose <strong>View Blog</strong> to open the HubSpot blog.</p>
+<hr>
+<h1>Jira Comment</h1>
+<h2>Overview</h2>
+<p>Use <strong>Jira Comment</strong> to add a comment to an existing Jira issue in Jira Cloud or Jira Server/Data Center. You can include information from earlier workflow steps in the comment.</p>
+<p>&lt;img src=&quot;../../img/Jira Comment.png&quot; alt=&quot;Jira Comment Step&quot; /&gt;</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Post a workflow-generated progress update to a Jira issue.</li>
+<li>Add a note with details collected from a webpage or another workflow step.</li>
+</ul>
+<h2>Set up Jira access</h2>
+<p>You need your Jira site address, the issue key, and credentials with permission to comment on that issue.</p>
+<ul>
+<li>For <strong>Jira Cloud</strong>, you need your Jira account email and an API token.</li>
+<li>For <strong>Jira Server/Data Center</strong>, you need a personal access token.</li>
+</ul>
+<p>You can save credentials under <strong>Settings &gt; Global Variables</strong> and select them with the token picker. This avoids entering them again in each workflow.</p>
+<h2>Add and configure the step</h2>
+<ol>
+<li>Add <strong>Jira Comment</strong> to your workflow.</li>
+<li>Enter the Jira site address under <strong>Jira Base URL</strong> and the target issue under <strong>Issue Key</strong>.</li>
+<li>Enter the required message under <strong>Comment Text</strong>. Use the token picker to include information from earlier steps.</li>
+<li>Under <strong>Advanced</strong>, set <strong>Authentication</strong> to <strong>Basic (Email &amp; API Token - Cloud)</strong> for Jira Cloud or <strong>Personal Access Token - Server</strong> for Server/Data Center.</li>
+<li>Under <strong>API Version</strong>, choose <strong>v3</strong> for Jira Cloud or <strong>v2</strong> for Server/Data Center.</li>
+</ol>
+<p>Choose <strong>View Issue</strong> to open the configured issue in Jira.</p>
+<hr>
+<h1>Jira Create Issue</h1>
+<h2>Overview</h2>
+<p>Use <strong>Jira Create Issue</strong> to create a new issue in a Jira project. It works with Jira Cloud and Jira Server/Data Center. You can write the issue details yourself or use information from earlier workflow steps.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Create a task with a summary and details generated by a workflow.</li>
+<li>Create a bug report using information collected from a webpage.</li>
+</ul>
+<h2>Set up Jira access</h2>
+<p>You need your Jira site address, the project key, and credentials that can create issues in that project.</p>
+<ul>
+<li>For <strong>Jira Cloud</strong>, you need your Jira account email and an API token.</li>
+<li>For <strong>Jira Server/Data Center</strong>, you need a personal access token.</li>
+</ul>
+<p>You can save credentials under <strong>Settings &gt; Global Variables</strong> and select them with the token picker. This avoids entering them again in each workflow.</p>
+<h2>Add and configure the step</h2>
+<ol>
+<li>Add <strong>Jira Create Issue</strong> to your workflow.</li>
+<li>Enter the <strong>Jira Base URL</strong> and <strong>Project Key</strong>.</li>
+<li>Enter an <strong>Issue Type</strong>, such as Task or Bug. The default is <strong>Task</strong>.</li>
+<li>Enter the required <strong>Summary / Title</strong>. Add a <strong>Description</strong> if you want to include more details. Use the token picker to include information from earlier workflow steps.</li>
+<li>Under <strong>Advanced</strong>, set <strong>Authentication</strong> to <strong>Basic (Email &amp; API Token - Cloud)</strong> for Jira Cloud or <strong>Personal Access Token - Server</strong> for Server/Data Center.</li>
+<li>Under <strong>API Version</strong>, choose <strong>v3</strong> for Jira Cloud or <strong>v2</strong> for Server/Data Center.</li>
+</ol>
+<p>Choose <strong>View Project</strong> to open the configured project in Jira.</p>
+<hr>
+<h1>Microsoft Outlook Email</h1>
+<h2>Overview</h2>
+<p>Use <strong>Microsoft Outlook Email</strong> to send an email or save it to your Outlook drafts. You can fill in the recipient, subject, and message yourself, or add information from earlier workflow steps. Messages can be plain text or HTML.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Send a workflow-generated summary to an email recipient.</li>
+<li>Save a prepared update as an Outlook draft so you can review it before sending.</li>
+<li>Use an email address or subject gathered earlier in the workflow.</li>
+</ul>
+<h2>Set up Microsoft sign-in</h2>
+<p>Before using this step, add your Microsoft app registration's client ID under <strong>Settings &gt; Global Variables</strong>. You can also add a tenant ID if your organization requires one; otherwise, the extension uses the default Microsoft sign-in option. The first time the workflow runs, sign in to Microsoft and approve the requested access.</p>
+<h2>Add and configure the step</h2>
+<ol>
+<li>Add <strong>Microsoft Outlook Email</strong> to your workflow.</li>
+<li>Under <strong>Action</strong>, choose <strong>Send Email</strong> or <strong>Save as Draft</strong>.</li>
+<li>Enter one or more addresses under <strong>Recipient (To)</strong>. Separate multiple addresses with commas or semicolons.</li>
+<li>Enter a <strong>Subject</strong> and <strong>Email Body</strong>. These fields are required.</li>
+<li>Under <strong>Body Content Type</strong>, choose <strong>Plain Text</strong> or <strong>HTML</strong> to match your message.</li>
+<li>If you want to use information from earlier workflow steps, insert it with the token picker in the recipient, subject, or message fields.</li>
+</ol>
+<p>After saving a draft, choose <strong>View Drafts</strong> to open the Outlook drafts folder. For a send action, <strong>Open Outlook</strong> opens Outlook Mail.</p>
+<hr>
+<h1>Microsoft Excel</h1>
+<h2>Overview</h2>
+<p>Use <strong>Microsoft Excel</strong> to add a row to a table or read values from a worksheet in an Excel workbook stored in OneDrive or SharePoint.</p>
+<h2>Use Cases</h2>
+<ul>
+<li>Add a workflow result to a table, such as logging a completed task.</li>
+<li>Read a set of cells and use their contents in later workflow steps.</li>
+<li>Read a worksheet's used range when you want to work with its existing data.</li>
+</ul>
+<h2>Set up Microsoft sign-in</h2>
+<p>Add your Microsoft app registration's client ID under <strong>Settings &gt; Global Variables</strong>. Add a tenant ID if your organization requires one. The first time the workflow runs, sign in and approve access.</p>
+<h2>Configure the step</h2>
+<ol>
+<li>Add <strong>Microsoft Excel</strong> to your workflow and choose <strong>Append Row</strong> or <strong>Get Cell / Range Content</strong>.</li>
+<li>Enter the workbook's file item ID in <strong>Workbook Item ID</strong>.</li>
+<li>Under <strong>Sheet Name / Cell Range</strong>, enter a worksheet name. To read specific cells, add <code>!</code> and a range, such as <code>Sheet1!A1:C5</code>. Enter only the worksheet name to read its used range.</li>
+<li>For <strong>Append Row</strong>, enter an existing table name under <strong>Table Name</strong> (defaults to <code>Table1</code>) and provide <strong>Row Values (JSON Array)</strong> in the table's column order, such as <code>[&quot;Task&quot;, &quot;Complete&quot;]</code>.</li>
+<li>Use the token picker to include values from earlier workflow steps.</li>
+</ol>
+<p>Choose <strong>View Excel File</strong> to open the workbook in OneDrive.</p>
+<hr>
+<h1>Microsoft Teams (<code>microsoftTeams</code>)</h1>
+<p>Send a message to Microsoft Teams using an incoming webhook, a team channel, or a group/direct chat.</p>
+<h2>Use Cases</h2>
+<ul>
+<li>Send a message to a Microsoft Teams channel using a webhook.</li>
+<li>Post a message to a team channel with a web page analysis.</li>
+<li>Add a message to a group chat when the web page issue is high-priority.</li>
+</ul>
+<h2>Configuration</h2>
+<ul>
+<li><strong>Integration Mode</strong> (<code>sendMode</code>): <code>webhook</code> (default), <code>channel</code>, or <code>chat</code>.</li>
+<li><strong>Webhook URL</strong> (<code>webhookUrl</code>): Required for webhook mode. Supports workflow tokens, such as <code>{{globals.teams_webhook_url}}</code>.</li>
+<li><strong>Team ID</strong> (<code>teamId</code>) and <strong>Channel ID</strong> (<code>channelId</code>): Both required for channel mode.</li>
+<li><strong>Chat ID</strong> (<code>chatId</code>): Required for chat mode.</li>
+<li><strong>Content Format</strong> (<code>contentType</code>): <code>text</code> (default) or <code>html</code>. Applies to Graph channel and chat messages. Webhook messages are sent as text.</li>
+<li><strong>Message Content</strong> (<code>message</code>): Required. Supports workflow tokens, such as <code>{{llm_1}}</code>.</li>
+</ul>
+<h2>Output</h2>
+<p>On success, the step returns a <code>status</code>, <code>sendMode</code>, and <code>timestamp</code>. Webhook mode also returns <code>messageLength</code>; Graph modes may return <code>messageId</code>.</p>
+<p>For example, use <code>{{ms_teams_1.status}}</code> to access the status of the first Microsoft Teams step.</p>
+<h2>Example</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;ms_teams_1&quot;,
+  &quot;type&quot;: &quot;microsoftTeams&quot;,
+  &quot;config&quot;: {
+    &quot;sendMode&quot;: &quot;webhook&quot;,
+    &quot;webhookUrl&quot;: &quot;{{globals.teams_webhook_url}}&quot;,
+    &quot;message&quot;: &quot;Automated update: {{llm_1}}&quot;,
+    &quot;contentType&quot;: &quot;text&quot;
+  }
+}
+</code></pre>
+<p><strong>Open Teams</strong> opens the Microsoft Teams web app.</p>
+<hr>
+<h1>Microsoft Word (<code>microsoftWord</code>)</h1>
+<p>Use <strong>Microsoft Word</strong> to read text from a Word document or append templated text to an existing document stored in OneDrive or SharePoint.</p>
+<h2>Use Cases</h2>
+<ul>
+<li>Append a workflow result to a Word document.</li>
+<li>Read the content of a Word document for further processing in the workflow.</li>
+</ul>
+<h2>Configuration</h2>
+<ul>
+<li><strong>Action</strong> (<code>action</code>): <code>append</code> (default) or <code>read</code>.</li>
+<li><strong>Document ID</strong> (<code>documentId</code>): Required OneDrive or SharePoint item ID. Supports workflow tokens, such as <code>{{globals.word_document_id}}</code>.</li>
+<li><strong>Text to Append</strong> (<code>textTemplate</code>): Required for <code>append</code>; supports workflow tokens such as <code>{{llm_1}}</code>. Hidden and disabled for <code>read</code>.</li>
+</ul>
+<h2>Output</h2>
+<p>For <strong>Get Document Content</strong> (<code>read</code>):</p>
+<ul>
+<li><code>{{ms_word_1.status}}</code>: <code>success</code></li>
+<li><code>{{ms_word_1.documentId}}</code>: Configured document ID</li>
+<li><code>{{ms_word_1.text}}</code>: Document content as text</li>
+</ul>
+<p>For <strong>Append Text</strong> (<code>append</code>):</p>
+<ul>
+<li><code>{{ms_word_1.status}}</code>: <code>success</code></li>
+<li><code>{{ms_word_1.documentId}}</code>: Configured document ID</li>
+<li><code>{{ms_word_1.appendedTextLength}}</code>: Length of the appended text</li>
+<li><code>{{ms_word_1.result}}</code>: Parsed Microsoft Graph response, or an empty object if the response is not valid JSON</li>
+</ul>
+<p><strong>View Doc</strong> opens the document in OneDrive when the configured ID contains no unresolved template tokens.</p>
+<h2>Example</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;ms_word_1&quot;,
+  &quot;type&quot;: &quot;microsoftWord&quot;,
+  &quot;config&quot;: {
+    &quot;action&quot;: &quot;append&quot;,
+    &quot;documentId&quot;: &quot;{{globals.word_document_id}}&quot;,
+    &quot;textTemplate&quot;: &quot;Document entry generated by AI:\n{{llm_1}}\n\n&quot;
+  }
+}
+</code></pre>
+<hr>
+<h1>Create a Notion page</h1>
+<h2>Overview</h2>
+<p>Use this step to add a page to a Notion database. The page title is required; you can also add optional body text.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Save a webpage title and link in a research database.</li>
+<li>Add an AI-generated summary to a new page for later review.</li>
+<li>Save details gathered by a workflow in a Notion database.</li>
+</ul>
+<h2>Before you start</h2>
+<p>You need a Notion internal integration secret and the ID of the database where the page should be created. Make sure the integration has access to that database; you can find the database ID in its URL.</p>
+<hr>
+<h2>Page details</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field Key (<code>config.*</code>)</th>
+<th style="text-align:left">Form Label</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description &amp; Token Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>apiToken</code></td>
+<td style="text-align:left"><strong>Internal Integration Secret</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">Notion Internal Integration Token starting with <code>ntn_...</code> or <code>secret_...</code> (e.g., <code>{{globals.notion_api_token}}</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>databaseId</code></td>
+<td style="text-align:left"><strong>Database ID</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">The 32-character ID of your target Notion database (e.g., <code>a1b2c3d4e5f678901234567890abcdef</code> or <code>{{globals.notion_database_id}}</code>).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>title</code></td>
+<td style="text-align:left"><strong>Page Title</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left"><strong>Yes</strong></td>
+<td style="text-align:left">The title string for the newly created page (e.g., <code>Research: {{extract_1.title}}</code>). Maps to the database's primary <code>Name</code> title property.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>content</code></td>
+<td style="text-align:left"><strong>Page Content (Body)</strong></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Body text or markdown content inserted into the page as a paragraph block (e.g., <code>URL: {{url.href}}\n\nSummary:\n{{llm_1}}</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Template Tokens &amp; State Output</h2>
+<h3>Available Input Tokens</h3>
+<p>Dynamic workflow variables can be injected into any configuration field using double-bracket token syntax:</p>
+<ul>
+<li><strong>Workflow Outputs:</strong> <code>{{extract_1.title}}</code>, <code>{{llm_1}}</code></li>
+<li><strong>Global Variables &amp; Secrets:</strong> <code>{{globals.notion_api_token}}</code>, <code>{{globals.notion_database_id}}</code></li>
+<li><strong>System Metadata:</strong> <code>{{url.href}}</code>, <code>{{userInput}}</code>, <code>{{datetime}}</code></li>
+</ul>
+<h3>Output State (<code>{{notion_page_1.*}}</code>)</h3>
+<p>When executed successfully, downstream steps can reference properties of the created page:</p>
+<ul>
+<li><code>{{notion_page_1.id}}</code>: The unique Notion page ID (e.g., <code>page_1234567890</code>).</li>
+<li><code>{{notion_page_1.url}}</code>: The direct web link to open the created page in Notion.</li>
+<li><code>{{notion_page_1.createdTime}}</code>: ISO 8601 creation timestamp.</li>
+</ul>
+<hr>
+<h2>Sidebar UI Actions</h2>
+<ul>
+<li><strong>View Notion DB</strong>: Displays an action button in the sidebar panel that opens the target database in your browser (<code>https://notion.so/${cleanDatabaseId}</code>).</li>
+</ul>
+<hr>
+<h2>Example Workflow Configuration (JSON)</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;notion_page_1&quot;,
+  &quot;type&quot;: &quot;notionCreatePage&quot;,
+  &quot;config&quot;: {
+    &quot;apiToken&quot;: &quot;{{globals.notion_api_token}}&quot;,
+    &quot;databaseId&quot;: &quot;{{globals.notion_database_id}}&quot;,
+    &quot;title&quot;: &quot;Article: {{extract_1.title}}&quot;,
+    &quot;content&quot;: &quot;Source URL: {{url.href}}\nCaptured: {{datetime}}\n\nAI Executive Summary:\n{{llm_1}}&quot;
+  }
+}
+</code></pre>
+<hr>
+<h1>OpenAI/LLM</h1>
+<h2>Overview</h2>
+<p>Use <strong>OpenAI/LLM</strong> to send instructions and context to an AI provider and make its response available to later workflow steps. You can use the default provider settings or enter different settings for this step.</p>
+<p>&lt;img src=&quot;../../img/OpenAI.png&quot; alt=&quot;OpenAI/LLM Step&quot; /&gt;</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Summarize text collected from a webpage.</li>
+<li>Draft a response using information someone enters when the workflow runs.</li>
+<li>Rewrite or organize information from earlier workflow steps.</li>
+</ul>
+<h2>Set up an AI provider</h2>
+<p>You need an API key for the provider you want to use.</p>
+<ul>
+<li>To use saved default settings, open <strong>Settings &gt; General &gt; Default LLM</strong>, choose a <strong>Provider</strong>, enter its <strong>OpenAI endpoint</strong>, <strong>API Key</strong>, and <strong>Model</strong>, then save. In the workflow step, leave <strong>Use Default LLM Config</strong> selected.</li>
+<li>To use different settings for this step, clear <strong>Use Default LLM Config</strong>, then choose a <strong>Provider</strong> and enter its endpoint, API key, and model in the step.</li>
+</ul>
+<p>The provider menu includes presets and an option for a custom endpoint.</p>
+<h2>Add and configure the step</h2>
+<ol>
+<li>Add <strong>OpenAI/LLM</strong> to your workflow.</li>
+<li>Under <strong>Input/Context</strong>, enter the information you want the AI to use. By default, this includes workflow user input and content from an earlier <strong>Extract</strong> step.</li>
+<li>Under <strong>System prompt</strong>, give optional instructions for how the AI should respond.</li>
+<li>Use the token picker in these fields to include information from earlier workflow steps.</li>
+<li>To let someone enter information each time the workflow runs, add the user-input value from the token picker to <strong>Input/Context</strong>. A text field then appears on the workflow's run page.</li>
+<li>Use the AI response in later steps by selecting it with the token picker.</li>
+</ol>
+<hr>
+<h1>Page Action</h1>
+<h2>Overview</h2>
+<p>Use <strong>Action</strong> to control a webpage, manage browser tabs, or display and save workflow results. Some actions work with the active webpage; others work with browser tabs or the extension sidebar.</p>
+<p>&lt;img src=&quot;../../img/Action.png&quot; alt=&quot;Page Action Step&quot; /&gt;</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Fill a webpage's search box and press Enter.</li>
+<li>Wait for search results to appear, then save a summary in <strong>View Content</strong>.</li>
+<li>Show a workflow result in the sidebar.</li>
+</ul>
+<h2>Before you start</h2>
+<p>Actions that interact with webpage content need an active website tab. Chrome's built-in pages and blank tabs cannot be controlled this way. For <strong>Click Element</strong>, <strong>Update Field</strong>, <strong>Wait for Selector</strong>, or <strong>Key Press</strong>, click <strong>View Element</strong> and select the page item instead of typing its CSS selector yourself.</p>
+<h2>Choose an action</h2>
+<p>Select an action from the <strong>Action</strong> menu:</p>
+<ul>
+<li><strong>Show in Sidebar</strong> displays text or workflow results in the sidebar's <strong>Result</strong> area.</li>
+<li><strong>Append Content</strong> saves text in <strong>View Content</strong>, where you can review, copy, or download saved clippings.</li>
+<li><strong>Navigate to URL</strong> opens a web address in the active tab. Only HTTP or HTTPS addresses are supported; a path can be relative to the current website.</li>
+<li><strong>Switch to Tab</strong> activates a tab by its web address or title. If you provide a web address that is not already open, it opens in a new tab.</li>
+<li><strong>Close Tab</strong> closes a tab that matches the address or title you enter.</li>
+<li><strong>Refresh Tab</strong> reloads the active tab.</li>
+<li><strong>Click Element</strong> clicks a selected page item, such as a button or link.</li>
+<li><strong>Update Field</strong> enters text into one page field.</li>
+<li><strong>Update Multiple Fields</strong> enters text into several fields at once. This option requires a structured list of fields and values.</li>
+<li><strong>Wait/Delay</strong> pauses the workflow for the number of seconds you enter.</li>
+<li><strong>Wait for Selector</strong> waits up to 10 seconds for a page element to appear.</li>
+<li><strong>Key Press</strong> sends a supported key, such as Enter or Tab, to the active field or selected page item.</li>
+</ul>
+<p><strong>Auto</strong> is also listed in the menu, but it does not currently perform an action.</p>
+<h2>Configure the selected action</h2>
+<ol>
+<li>Choose the action you want to perform.</li>
+<li>If the form shows <strong>CSS Selector</strong>, use <strong>View Element</strong> to select the page item. This is needed for actions such as clicking an item, updating a field, or waiting for an item to appear.</li>
+<li>If the form shows <strong>Value Template</strong>, enter the text, web address, delay, or key required by that action. You can include results from earlier workflow steps.</li>
+</ol>
+<p>When you use <strong>Append Content</strong>, choose <strong>View Content</strong> to open the saved clippings.</p>
+<hr>
+<h1>Run Workflow (<code>runWorkflow</code>)</h1>
+<p>Run another saved workflow as a step in the current workflow. The selected workflow receives the current state, and its results are merged back into the current workflow. Workflows can be nested up to three levels.</p>
+<p>&lt;img src=&quot;../../img/Sub Workflow.png&quot; alt=&quot;Run Sub-Workflow Step&quot; /&gt;</p>
+<h2>Use Cases</h2>
+<ul>
+<li>When a workflow completes successfully, run another workflow.</li>
+<li>Use a re-usable workflow in other workflows.</li>
+<li>Conditionally decide which workflow to run</li>
+</ul>
+<h2>Configuration</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Sub-Workflow</strong> (<code>targetWorkflowName</code>)</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Select another saved workflow. The name must exist at runtime. Template tokens are resolved before execution, so a token can provide the workflow name.</td>
+</tr>
+</tbody>
+</table>
+<h2>State and Output</h2>
+<p>The selected workflow starts with the current workflow state, including outputs from earlier steps. On success, its state is merged into the current workflow, and its step outputs can be referenced downstream by step ID (for example, <code>{{extract_1.title}}</code>).</p>
+<p>The <code>run_workflow_1</code> state entry contains the final step’s output and has no plugin-defined properties. If the selected workflow has no steps, the output is <code>undefined</code>. Internal nesting-depth metadata is not merged into the parent state.</p>
+<p>No sidebar action is provided.</p>
+<h2>Example</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;run_workflow_1&quot;,
+  &quot;type&quot;: &quot;runWorkflow&quot;,
+  &quot;config&quot;: {
+    &quot;targetWorkflowName&quot;: &quot;Summarize page&quot;
+  }
+}
+</code></pre>
+<p><code>Summarize page</code> must be the exact name of another saved workflow.</p>
+<hr>
+<h1>Set Variable (<code>setGlobal</code>)</h1>
+<p>Use <strong>Set Variable</strong> to save a value that this and later workflows can reuse. The value is saved in extension storage and is available immediately to later steps in the current workflow.</p>
+<p>&lt;img src=&quot;../../img/Set Variable.png&quot; alt=&quot;Set Variable Step&quot; /&gt;</p>
+<h2>Configure</h2>
+<ul>
+<li><strong>Variable Key</strong> (<code>key</code>): Required. Use only letters, numbers, and underscores, such as <code>workflow_title</code>.</li>
+<li><strong>Variable Value / Template</strong> (<code>value</code>): Required in the form; accepts workflow tokens such as <code>{{extract_1.title}}</code>. Although the form requires a value, the step can save an empty string.</li>
+</ul>
+<p>The value's tokens are resolved first, then the result is evaluated as a Jexl expression. If evaluation fails, the resolved text is saved as-is. Available Jexl functions: <code>substring</code>, <code>lower</code>, <code>upper</code>, <code>trim</code>, and <code>replace</code>.</p>
+<h2>Use the saved value</h2>
+<p>For a step with ID <code>global_1</code>, use <code>{{global_1.key}}</code> and <code>{{global_1.value}}</code> to access its output. To reuse the saved value as a global variable, use <code>{{globals.workflow_title}}</code>, replacing <code>workflow_title</code> with your configured key.</p>
+<h2>Example</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;global_1&quot;,
+  &quot;type&quot;: &quot;setGlobal&quot;,
+  &quot;config&quot;: {
+    &quot;key&quot;: &quot;workflow_title&quot;,
+    &quot;value&quot;: &quot;{{extract_1.title}}&quot;
+  }
+}
+</code></pre>
+<hr>
+<h1>Slack Notification (<code>slack</code>)</h1>
+<p>Send messages to Slack using an Incoming Webhook. The plugin can use dynamic template tokens in its configuration.</p>
+<h2>Simple Examples</h2>
+<ul>
+<li>Send a simple message to a Slack channel using an Incoming Webhook.</li>
+<li>Share a webpage summary with its title and URL.</li>
+<li>Notify a team when a monitored value is found, such as <code>Price found: {{extract_1.price}}</code>.</li>
+</ul>
+<h2>Configuration</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>webhookUrl</code></td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Slack Incoming Webhook URL, such as <code>https://hooks.slack.com/services/...</code>. Can use a global variable, for example <code>{{globals.slack_webhook_url}}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>message</code></td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Message body. Supports multiline text and template tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>channelUrl</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Slack channel link. When provided, displays an <strong>Open Slack Channel</strong> button in the sidebar.</td>
+</tr>
+</tbody>
+</table>
+<p>Use double-bracket tokens in <code>webhookUrl</code>, <code>message</code>, and <code>channelUrl</code>, such as <code>{{llm_1}}</code>.</p>
+<p>After execution, the step records:</p>
+<ul>
+<li><code>{{slack_1.status}}</code>: <code>&quot;sent&quot;</code> on success.</li>
+<li><code>{{slack_1.timestamp}}</code>: Dispatch time in milliseconds.</li>
+</ul>
+<h2>Example</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;slack_1&quot;,
+  &quot;type&quot;: &quot;slack&quot;,
+  &quot;config&quot;: {
+    &quot;webhookUrl&quot;: &quot;{{globals.slack_webhook_url}}&quot;,
+    &quot;channelUrl&quot;: &quot;https://app.slack.com/client/T00000000/C00000000&quot;,
+    &quot;message&quot;: &quot;🤖 *AI Web Summary*\n\n*Page:* {{extract_1.title}}\n*URL:* {{url.href}}\n\n*Summary:*\n{{llm_1}}&quot;
+  }
+}
+</code></pre>
+<hr>
+<h1>Trello Create Card (<code>trelloCreateCard</code>)</h1>
+<p>Creates a card in a Trello list using the Trello REST API.</p>
+<h2>Overview</h2>
+<p>The Trello Create Card plugin allows you to create a new card in a specified Trello list. You need to provide your Trello API key, OAuth token, and the destination list ID. You can also specify the card's title, description, and position within the list.</p>
+<h2>Use Cases</h2>
+<ul>
+<li>Automate the creation of Trello cards from extracted research data.</li>
+<li>Quickly add new tasks or ideas to a Trello list without leaving your workflow.</li>
+<li>Maintain a structured project management system by programmatically adding cards with relevant details.</li>
+</ul>
+<h2>Configuration</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>apiKey</code></td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Trello API key. Supports tokens, such as <code>{{globals.trello_api_key}}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>apiToken</code></td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Trello OAuth token. Supports tokens, such as <code>{{globals.trello_oauth_token}}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>idList</code></td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Destination list ID. Supports tokens, such as <code>{{globals.trello_list_id}}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>name</code></td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Card title. Supports tokens, such as <code>Research: {{extract_1.title}}</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>desc</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Card description. Defaults to an empty string and supports tokens.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pos</code></td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Card position: <code>top</code> or <code>bottom</code>. Defaults to <code>top</code>; does not support tokens.</td>
+</tr>
+</tbody>
+</table>
+<h2>Output</h2>
+<p>After the card is created, its data is available to downstream steps. For example:</p>
+<ul>
+<li><code>{{trello_card_1.id}}</code></li>
+<li><code>{{trello_card_1.name}}</code></li>
+<li><code>{{trello_card_1.url}}</code></li>
+<li><code>{{trello_card_1.shortUrl}}</code></li>
+<li><code>{{trello_card_1.idList}}</code></li>
+<li><code>{{trello_card_1.idBoard}}</code></li>
+</ul>
+<h2>Sidebar Action</h2>
+<p><strong>View Trello</strong> opens <code>https://trello.com</code> when the list ID is configured and contains no unresolved template token.</p>
+<h2>Example</h2>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;trello_card_1&quot;,
+  &quot;type&quot;: &quot;trelloCreateCard&quot;,
+  &quot;config&quot;: {
+    &quot;apiKey&quot;: &quot;{{globals.trello_api_key}}&quot;,
+    &quot;apiToken&quot;: &quot;{{globals.trello_oauth_token}}&quot;,
+    &quot;idList&quot;: &quot;{{globals.trello_list_id}}&quot;,
+    &quot;name&quot;: &quot;Research: {{extract_1.title}}&quot;,
+    &quot;desc&quot;: &quot;Source URL: {{url.href}}\n\nAI summary: {{llm_1}}&quot;,
+    &quot;pos&quot;: &quot;top&quot;
+  }
+}
+</code></pre>
+<hr>
+<h1>Settings</h1>
+<p>Use Settings to choose your default AI service, adjust the sidebar, and manage reusable values for your workflows.</p>
+<p>&lt;img src=&quot;../img/Settings General.png&quot; alt=&quot;Settings - General&quot; /&gt;</p>
+<hr>
+<h2>Overview</h2>
+<p>Open <strong>Settings</strong> from the sidebar header, workflow list, or agent creation panel. Use it to choose your default AI service, adjust text size, and manage reusable workflow values. Choose <strong>Save</strong> to keep your changes or <strong>Cancel</strong> to discard them.</p>
+<h2>Simple examples</h2>
+<ul>
+<li>Set up your AI service once, then use it for workflow steps that are set to use the default AI settings.</li>
+<li>Save a webhook address or API key as a reusable value instead of entering it in every workflow.</li>
+<li>Make the sidebar text larger or smaller to suit your screen.</li>
+<li>Review or export text saved by an <strong>Append Content</strong> action in the Content Viewer.</li>
+</ul>
+<hr>
+<h2>Default AI settings</h2>
+<p>In the <strong>General</strong> tab, choose a provider and enter the connection details it requires:</p>
+<ul>
+<li><strong>Provider</strong>: Choose your AI service. The endpoint is filled in for supported providers; choose a custom endpoint if needed.</li>
+<li><strong>OpenAI Endpoint</strong>: The service address. Check your provider's instructions if you use a custom endpoint.</li>
+<li><strong>API Key</strong>: Enter the key supplied by your AI service. You may need to create an account with that service to get a key.</li>
+<li><strong>Model</strong>: Enter the model name provided by your service.</li>
+</ul>
+<p>These settings power the extension's AI helper features. Workflow AI steps can also use them when <strong>Use Default LLM Config</strong> is selected, so you do not have to enter the same connection details in each step.</p>
+<hr>
+<h2>General settings</h2>
+<ul>
+<li><strong>Sidebar text size</strong>: Use the size slider to make text in the sidebar smaller or larger. Changes take effect as you move the slider.</li>
+<li><strong>View Content</strong>: Open the Content Viewer in a browser tab to inspect, copy, export, or clear text saved by <strong>Append Content</strong> actions.</li>
+</ul>
+<hr>
+<h2>Global Variables</h2>
+<p>Use this tab to save values you reuse in workflows, such as API keys, webhook addresses, and document IDs. You can add, edit, or delete saved values. Values are hidden when displayed to help protect them from being seen on screen.</p>
+<p>&lt;img src=&quot;../img/Settings Global.png&quot; alt=&quot;Settings - Global Variables&quot; /&gt;</p>
+<p>(Bearer Token in API/Webhook headers)</p>
+<p>To add a value, enter a name and its value, then save it. Names can contain letters, numbers, and underscores. In a workflow, choose a saved value from the <strong>Insert workflow token</strong> menu in a supported field.</p>
+<hr>
+<h1>Standard Steps</h1>
+<p>The following are the types of steps you can include in a workflow:</p>
+<p><strong><a href="../plugins/page_action.md">Action</a></strong> - Perform an action on the current browser page.</p>
+<p><strong><a href="../plugins/extract.md">Extract</a></strong> - Extracts data from the current browser page, such as text content or attribute values.</p>
+<p><strong><a href="../plugins/condition.md">Condition</a></strong> - Evaluates the specified value against a chosen operator and halts the workflow if the condition is not met.</p>
+<p><strong><a href="../plugins/set_global.md">Set Variable</a></strong> - Set a global variable that can be accessed across workflows using the syntax {{globals.key}}.</p>
+<p><strong><a href="../plugins/run_workflow.md">Run Workflow</a></strong> - Executes another saved workflow and merges its results into the current pipeline.</p>
+<h3>Integrations and API Steps</h3>
+<p>See the <a href="../integrations.md">Integrations</a> documentation for details on available integrations and how to configure them.</p>
+<h3>New Step Screen</h3>
+<p>&lt;img src=&quot;../img/New Step.png&quot; alt=&quot;New Step&quot; /&gt;
+&lt;br /&gt;</p>
